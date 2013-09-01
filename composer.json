@@ -1,0 +1,17 @@
+{
+	"name": "tolkien/tolkien",
+	"description": "Simple Blogging Engine inspired by Jekyll",
+	"license": "Sembarangmu",
+	"authors": [
+		{
+			"name": "Glend Maatita",
+			"email": "glend@beenarylab.com"
+		}
+	],
+	"autoload": {
+		"psr-0": { "Tolkien": "src" } 
+	},
+	"require": {
+		"phpunit/phpunit": "3.7.*"
+	}
+}

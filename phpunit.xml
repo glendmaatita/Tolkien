@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit 
+	bootstrap="src/Tolkien/Test/bootstrap.php"
+	colors="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	stopOnError="false"
+	stopOnFailure="false"
+	stopOnIncomplete="false"
+	stopOnSkipped="false">
+	<testsuites>
+		<testsuite name="Tolkoen Blog Engine">
+			<directory suffix="Test.php">src/Tolkien/Test</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+        <whitelist addUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">src</directory>
+		    <exclude>
+		      <directory suffix=".php">src/Tolkien/Test</directory>
+		    </exclude>
+        </whitelist>
+	</filter>
+</phpunit>
