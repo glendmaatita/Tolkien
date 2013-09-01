@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit 
-	bootstrap="src/Tolkien/Test/bootstrap.php"
+	bootstrap="tests/bootstrap.php"
 	colors="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
@@ -11,15 +11,15 @@
 	stopOnSkipped="false">
 	<testsuites>
 		<testsuite name="Tolkoen Blog Engine">
-			<directory suffix="Test.php">src/Tolkien/Test</directory>
+			<directory suffix="Test.php">tests/Tolkien</directory>
 		</testsuite>
 	</testsuites>
 	<filter>
-        <whitelist addUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">src</directory>
-		    <exclude>
-		      <directory suffix=".php">src/Tolkien/Test</directory>
-		    </exclude>
-        </whitelist>
+    <whitelist addUncoveredFilesFromWhitelist="false">
+        <directory suffix=".php">src</directory>
+    <exclude>
+      <directory suffix=".php">src/Tolkien/Test</directory>
+    </exclude>
+    </whitelist>
 	</filter>
 </phpunit>
