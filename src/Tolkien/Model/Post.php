@@ -99,7 +99,7 @@ class Post extends Node
 
 	public function setUrl()
 	{
-		$this->url = implode('/', explode('-', $this->file, 4));
+		$this->url = implode('/', explode('-', $this->getFileName(), 4)) . '.html';
 	}
 
 	public function getUrl()

@@ -5,100 +5,42 @@ use Tolkien\Model\Category;
 use Michelf\Markdown;
 use Symfony\Component\Yaml\Parser;
 
+// build draft : draft become post on _post
+
 class BuildDraft implements BuildNode
 {
 	private $config;
-	private $drafts = array();
+	private $files = array();
 	private $parser;
 
-	public function __construct($config, $parser)
+	public function __construct($config, $parser, $files)
 	{
 		$this->config = $config;
 		$this->parser = $parser;
+		$this->files = $files;
 	}
 
 	public function build()
 	{
-		// get all post files under _posts/
-		$files = scandir($this->config['dir']['draft']);
-		foreach ($files as $file) 
+		foreach ($files as $file)
 		{
-			if(is_file( $this->config['dir']['draft'] . '/' . $file ))
-			{
-				$this->drafts[] = $this->read( $this->config['dir']['draft'] . '/' . $file, $file );
-			}
+			$draft = explode('.', $file);
+			$ext = array_pop($draft);
+
+			if( $ext == 'page')
+				$this->generatePost(implode('.', $draft), $file);
+			else if( $ext == 'page')
+				$this->generatePage(implode('.', $draft), $file);
 		}
 	}
 
-	public function read($path, $file)
+	public function generatePost($draft, $file)
 	{
-		$content = fopen( $path, "r" );
-		$iterator = 1;
-		$header_parsed = "";
-		$header_parsed_flag = true;
-		$body = "";
-
-		while (!feof($content)) 
-		{
-			if($iterator == 1)
-			{
-				if( rtrim(fgets($content)) == "---" )
-				{
-					$iterator++;
-					continue;
-				}					
-				else break;
-			}
-			else
-			{
-				$current = rtrim(fgets($content));
-				while(  $current != '---' &&  $header_parsed_flag == true)
-				{
-					$header_parsed .= $current . "\n";
-					$iterator++;
-
-					$current = rtrim(fgets($content));
-				}
-
-				if($current == '---' && $header_parsed_flag == true )
-				{
-					$header_parsed_flag = false;
-					continue;
-				}
-				
-				$body .= $current . "\n";
-			}			
-		}
-
-		//parse header
-		$header = $this->parser->parse($header_parsed);
-
-		$draft = new Draft( $file, $header['title'], $body, $this->defineAuthor($header), $this->defineCategories($header) );
-
-		$draft->setUrl();
-		$draft->setLayout($header['layout']);
-
-		return $draft;
+		file_put_contents( $this->config['dir']['post'] . '/' . Date('Y-m-d') . '-' . $draft, file_get_contents( $this->config['dir']['draft'] . '/' . $file));
 	}
 
-	public function defineAuthor($header)
+	public function generatePage($draft, $file)
 	{
-		return new Author($header['author']['name'], $header['author']['email'], $header['author']['signature'], $header['author']['facebook'], $header['author']['twitter'], $header['author']['github']);
-	}
-
-	public function defineCategories($header)
-	{
-		$categories = array();
-		$cats = explode(',', $header['categories']);
-		foreach ($cats as $category) 
-		{
-			$categories[] = new Category($category);
-		}
-		return $categories;
-	}
-
-	public function getDrafts()
-	{
-		return $this->drafts;
+		file_put_contents( $this->config['dir']['page'] . '/' . $draft, file_get_contents( $this->config['dir']['draft'] . '/' . $file));
 	}
 }

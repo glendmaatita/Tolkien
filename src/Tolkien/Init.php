@@ -52,10 +52,10 @@ class Init
 		file_put_contents( $this->config['dir']['layout'] . '/index.html.tpl', file_get_contents(__DIR__ . '/../tpl/index.html.tpl'));
 
 		// post layout
-		file_put_contents( $this->config['dir']['layout'] . '/post.html.tpl', file_get_contents(__DIR__ . '/../tpl/node.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/post.html.tpl', file_get_contents(__DIR__ . '/../tpl/post.html.tpl'));
 		
 		// page layout
-		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/../tpl/node.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/../tpl/page.html.tpl'));
 
 		// sidebar layout
 		file_put_contents( $this->config['dir']['layout'] . '/sidebar.html.tpl', file_get_contents(__DIR__ . '/../tpl/sidebar.html.tpl'));

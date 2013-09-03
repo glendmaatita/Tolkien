@@ -73,13 +73,21 @@ class BuildPost implements BuildNode
 		//parse header
 		$header = $this->parser->parse($header_parsed);
 
-		$post = new Post( $file, $header['title'], $body, $this->defineAuthor($header), $this->defineCategories($header) );
+		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $this->defineAuthor($header), $this->defineCategories($header) );
 
 		$post->setPublishDate();
 		$post->setUrl();
 		$post->setLayout($header['layout']);
 
 		return $post;
+	}
+
+	public function setBody($file, $body)
+	{
+		if(array_pop(explode('.', $file)) == 'markdown')
+			return Markdown::defaultTransform($body);
+		else
+			return $body;
 	}
 
 	public function defineAuthor($header)

@@ -16,7 +16,7 @@ class TolkienCompilePostTest extends \PHPUnit_Framework_TestCase
 	public function testCompilePost()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'blog' . '/config.yml' ));
 
 		$build_post = new BuildPost($config, $parser);
 		$build_post->build();

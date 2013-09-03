@@ -16,22 +16,6 @@
         {% include "sidebar.html.tpl" %}        
 
   			{% block content %}{% endblock %}
-
-  			<div class="footer">
-  				<div class="contact">
-  					<p>
-  						Your Name<br />
-  						What You Are<br />
-  						your@email.com
-  					</p>
-  				</div>
-  				<div class="contact">
-  					<p>
-  						<a href="http://github.com/yourusername/">github.com/yourusername</a><br />
-  						<a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
-  					</p>
-  				</div>
-  			</div>
   		</div>
   	</div> 
   </body>

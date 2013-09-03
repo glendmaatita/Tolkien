@@ -7,4 +7,12 @@ abstract class Node
 	protected $body;
 	protected $url;
 	protected $layout;
+
+	public function getFileName()
+	{
+
+		$file = explode('.', $this->file);
+		$pop = array_pop($file);
+		return implode('.', $file);
+	}
 }

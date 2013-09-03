@@ -6,9 +6,9 @@
 	<div class="main">
 		{% for posts in post %}
 			<h2>{{ post.title }}</h2>
-				<p class="meta">{{ page.date }}</p>\
+				<p class="meta">{{ page.date }} by {{ post.author.name }}</p>
 				<div class="post">
-				{{ post.body }}
+				{{ post.body | raw }}
 			</div>
 		{% endfor %}
 	</div>

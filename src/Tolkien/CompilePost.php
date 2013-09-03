@@ -16,11 +16,20 @@ class CompilePost implements CompileNode
 		$loader = new \Twig_Loader_Filesystem( $this->config['dir']['layout'] );
 		$twig = new \Twig_Environment($loader);
 
-		//var_dump($this->posts);die();
+		foreach ($this->posts as $post) 
+		{
+			// define template
+			$template = $twig->loadTemplate( $post->getLayout() . '.html.tpl');
+			$content = $template->render(array('post' => $post));
+			$this->createFile($content, $post);
+		}
+	}
 
-		$template = $twig->loadTemplate('index.html.tpl');
-		echo $template->render(array('posts' => $this->posts, 'categories' => array('cat1', 'cat2')));
-		die();
+	public function createFile($content, $post)
+	{
+		if(!file_exists(dirname($this->config['dir']['site'] . '/' . $post->getUrl())))
+    	mkdir(dirname($this->config['dir']['site'] . '/' . $post->getUrl()), 0777, true);
 
+    file_put_contents($this->config['dir']['site'] . '/' . $post->getUrl(), $content);
 	}
 }
