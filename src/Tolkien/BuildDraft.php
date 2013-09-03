@@ -1,15 +1,14 @@
 <?php namespace Tolkien;
 
-use Tolkien\Model\Post;
-use Tolkien\Model\Author;
+use Tolkien\Model\Draft;
 use Tolkien\Model\Category;
 use Michelf\Markdown;
 use Symfony\Component\Yaml\Parser;
 
-class BuildPost implements BuildNode
+class BuildDraft implements BuildNode
 {
 	private $config;
-	private $posts = array();
+	private $drafts = array();
 	private $parser;
 
 	public function __construct($config, $parser)
@@ -21,12 +20,12 @@ class BuildPost implements BuildNode
 	public function build()
 	{
 		// get all post files under _posts/
-		$files = scandir($this->config['dir']['post']);
+		$files = scandir($this->config['dir']['draft']);
 		foreach ($files as $file) 
 		{
-			if(is_file( $this->config['dir']['post'] . '/' . $file ))
+			if(is_file( $this->config['dir']['draft'] . '/' . $file ))
 			{
-				$this->posts[] = $this->read( $this->config['dir']['post'] . '/' . $file, $file );
+				$this->drafts[] = $this->read( $this->config['dir']['draft'] . '/' . $file, $file );
 			}
 		}
 	}
@@ -66,6 +65,7 @@ class BuildPost implements BuildNode
 					$header_parsed_flag = false;
 					continue;
 				}
+				
 				$body .= $current . "\n";
 			}			
 		}
@@ -73,13 +73,12 @@ class BuildPost implements BuildNode
 		//parse header
 		$header = $this->parser->parse($header_parsed);
 
-		$post = new Post( $file, $header['title'], $body, $this->defineAuthor($header), $this->defineCategories($header) );
+		$draft = new Draft( $file, $header['title'], $body, $this->defineAuthor($header), $this->defineCategories($header) );
 
-		$post->setPublishDate();
-		$post->setUrl();
-		$post->setLayout($header['layout']);
+		$draft->setUrl();
+		$draft->setLayout($header['layout']);
 
-		return $post;
+		return $draft;
 	}
 
 	public function defineAuthor($header)
@@ -98,8 +97,8 @@ class BuildPost implements BuildNode
 		return $categories;
 	}
 
-	public function getPosts()
+	public function getDrafts()
 	{
-		return $this->posts;
+		return $this->drafts;
 	}
 }

@@ -2,7 +2,7 @@
 
 use Symfony\Component\Yaml\Parser;
 
-class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
+class TolkienCompilePostTest extends \PHPUnit_Framework_TestCase
 {
 
 	private $init;
@@ -13,14 +13,16 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$this->init->create();
 	}
 
-	public function testBuildPost()
+	public function testCompilePost()
 	{
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
 
-		$initDraft = new BuildPost($config, $parser);
-		$initDraft->build();
+		$build_post = new BuildPost($config, $parser);
+		$build_post->build();
+		$posts = $build_post->getPosts();
 
-
+		$compile_post = new CompilePost($config, $posts);
+		$compile_post->compile();
 	}		
 }

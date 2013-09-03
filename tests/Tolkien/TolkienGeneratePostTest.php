@@ -2,14 +2,14 @@
 
 use Symfony\Component\Yaml\Parser;
 
-class TolkienInitPostTest extends \PHPUnit_Framework_TestCase
+class TolkienGeneratePostTest extends \PHPUnit_Framework_TestCase
 {
 
 	private $init;
 
 	public function __construct()
 	{
-		$this->init = new Init('blog1');
+		$this->init = new Init('blog');
 		$this->init->create();
 	}
 
@@ -18,14 +18,14 @@ class TolkienInitPostTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
 
-		$post = new InitPost( "Latest Android Release", Date('Y-m-d'), $config );
+		$post = new GeneratePost( $config, "Latest Android Release" );
 
-		$post->create();
+		$post->generate();
 
 		// cek if file created
-		$this->assertFileExists( $post->setFileName() );
+		$this->assertFileExists( $post->setPath() );
 
 		// cek file is written by config
-		$this->assertNotEmpty(file_get_contents($post->setFileName()));
+		$this->assertNotEmpty(file_get_contents($post->setPath()));
 	}
 }

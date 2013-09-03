@@ -8,12 +8,13 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 
 	public function __construct()
 	{
-		$this->init = new Init('blog1');
+		$this->init = new Init('blog');
+		rmdir( ROOT_DIR . $this->init->getName() );
 		$this->init->create();
 	}
 
 	public function testCreateBlog()
-	{		
+	{	
 		// cek if directory created
 		$this->assertFileExists( ROOT_DIR . $this->init->getName() );
 
@@ -29,6 +30,9 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		// create draft sites
 		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_drafts' );
 
+		// create page sites
+		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_pages' );
+
 		// create layouts
 		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_layouts' );
 
@@ -36,7 +40,7 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/config.yml' );
 
 		//cek if index.html
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/index.html' );
+		//$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/index.html' );
 
 		// validate configfile
 		$this->assertContains('config', file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml'));

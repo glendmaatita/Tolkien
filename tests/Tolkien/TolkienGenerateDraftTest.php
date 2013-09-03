@@ -9,7 +9,7 @@ class TolkienInitDraftTest extends \PHPUnit_Framework_TestCase
 
 	public function __construct()
 	{
-		$this->init = new Init('blog1');
+		$this->init = new Init('blog');
 		$this->init->create();
 	}
 
@@ -18,15 +18,15 @@ class TolkienInitDraftTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
 
-		$draft = new InitPost( "Latest Android Release - Draft", 'draft', $config, $draft = true );
+		$draft = new GenerateDraft( $config, "Latest Android Release" );
 
-		$draft->create();
+		$draft->generate();
 
 		// cek if file created
-		$this->assertFileExists( $draft->setFileName() );
+		$this->assertFileExists( $draft->setPath() );
 
 		// cek file is written by config
-		$this->assertNotEmpty(file_get_contents($draft->setFileName()));
+		$this->assertNotEmpty(file_get_contents($draft->setPath()));
 	}
 
 }
