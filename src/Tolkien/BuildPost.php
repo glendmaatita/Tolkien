@@ -6,31 +6,78 @@ use Tolkien\Model\Category;
 use Michelf\Markdown;
 use Symfony\Component\Yaml\Parser;
 
+/**
+ * Extract Meta data from post file under _posts/
+ */
 class BuildPost implements BuildNode
 {
+
+	/**
+	 * @var array $config Result from parsing config.yml
+	 */
 	private $config;
+
+	/**
+	 * @var array(Model\Post) $posts 
+	 */
 	private $posts = array();
+
+	/**
+	 * @var Parser $parser Symfony YAML Parser
+	 */
 	private $parser;
 
+	/**
+	 * Construct
+	 *
+	 * @param array $config
+	 * @param Parser $parser
+	 */
 	public function __construct($config, $parser)
 	{
 		$this->config = $config;
 		$this->parser = $parser;
 	}
 
+	/**
+	 * Set extracted metadata to Post object and put into array $posts
+	 *
+	 * @return void
+	 */
 	public function build()
-	{
-		// get all post files under _posts/
-		$files = scandir($this->config['dir']['post']);
+	{		
+		$files = scandir($this->config['dir']['post']); // get all post files under _posts/
 		foreach ($files as $file) 
 		{
 			if(is_file( $this->config['dir']['post'] . '/' . $file ))
-			{
 				$this->posts[] = $this->read( $this->config['dir']['post'] . '/' . $file, $file );
-			}
 		}
-	}
-
+	}	
+	
+	/**
+	 * Read Meta data from post file under _posts/
+	 * Post file structure
+	 * ---
+	 * type: post
+	 * layout: __layout__ default is post (_layouts/post.html.tpl). Create your own layout ! 
+	 * title: __your_post_title__
+	 * date: __date__ generated. you should not change this
+	 * author:
+	 *   name: __your_name__
+	 *   email: __your_email__
+	 *   facebook: __your_facebook__
+	 *   twitter: __your_twitter__
+	 *   github: __your_github__
+	 *   signature: __signature__
+	 * categories: __categories__  Semicolon separated, example category_1, category_2, category_3
+	 * ---
+ 	 *
+ 	 * [__body__] markdown or html format
+ 	 *
+ 	 * @param string $path post file path. Must be _/posts/xyz.markdown
+ 	 * @param string $file File Name
+ 	 * @return Model\Post $post
+ 	 */
 	public function read($path, $file)
 	{
 		$content = fopen( $path, "r" );
@@ -82,6 +129,13 @@ class BuildPost implements BuildNode
 		return $post;
 	}
 
+	/**
+	 * Set body of Post. If body is markdown text formatted, then it must be transform first to HTML
+	 * 
+	 * @param string $file file name
+	 * @param string $body
+	 * @return string $body
+	 */
 	public function setBody($file, $body)
 	{
 		if(array_pop(explode('.', $file)) == 'markdown')
@@ -90,11 +144,23 @@ class BuildPost implements BuildNode
 			return $body;
 	}
 
+	/**
+	 * Create new Author object instance for Post object
+	 *
+	 * @param array $header Metadata
+	 * @return Model\Author
+	 */
 	public function defineAuthor($header)
 	{
 		return new Author($header['author']['name'], $header['author']['email'], $header['author']['signature'], $header['author']['facebook'], $header['author']['twitter'], $header['author']['github']);
 	}
 
+	/**
+	 * Create a list of category from header metadata
+	 *
+	 * @param array $header
+	 * @return array(Model\Category)
+	 */
 	public function defineCategories($header)
 	{
 		$categories = array();
@@ -106,6 +172,11 @@ class BuildPost implements BuildNode
 		return $categories;
 	}
 
+	/**
+	 * Get all posts
+	 *
+	 * @return array(Model\Posts)
+	 */
 	public function getPosts()
 	{
 		return $this->posts;

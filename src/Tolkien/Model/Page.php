@@ -1,7 +1,17 @@
 <?php namespace Tolkien\Model;
 
+/**
+ * Page is Node, has no Author, Published Date, Excerpt, or etc. Just a page of web
+ */
 class Page extends Node
 {
+	/**
+	 * Construct
+	 *
+	 * @param string $file File Name of Page in folder _pages/
+	 * @param string title Title of Page
+	 * @param string body Body of Page
+	 */
 	public function __construct($file, title, $body)
 	{
 		$this->file = $file;
@@ -9,43 +19,21 @@ class Page extends Node
 		$this->body = $body;
 	}
 
-	public function setFile($file)
+	/**
+	 * Set URL for page. URL must be only SITENAME.com/page_name.html
+	 */
+	public function setUrl()
 	{
-		$this->file = $file;
+		$this->url = $this->getFileName() . '.html';
 	}
 
-	public function getFile()
+	/**
+	 * Get URL of page
+	 *
+	 * @return string $url
+	 */
+	public function getUrl()
 	{
-		return $this->file;
-	}
-
-	public function setTitle($title)
-	{
-		$this->title = $title;
-	}
-
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	public function setBody($body)
-	{
-		$this->body = $body;
-	}
-
-	public function getBody()
-	{
-		return $this->body;
-	}
-
-	public function setLayout($layout)
-	{
-		$this->layout = $layout;
-	}
-
-	public function getLayout()
-	{
-		return $this->layout;
+		return $this->url;
 	}
 }

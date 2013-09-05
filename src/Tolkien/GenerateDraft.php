@@ -1,26 +1,59 @@
 <?php namespace Tolkien;
 
+/**
+ * Generate draft file and placed under _drafts/
+ * Use command : tolkien generate draft [title]
+ */
 class GenerateDraft implements GenerateNode
 {
+
+	/**
+	 * @var array
+	 */
 	private $config;
+
+	/**
+	 * @var string
+	 */
 	private $title;
 
+	/**
+	 * Construct
+	 *
+	 * @param array $config
+	 * @param string $title
+	 */
 	public function __construct($config, $title)
 	{
 		$this->config = $config;
 		$this->title = $title;
 	}
 
+	/**
+	 * Create draft file to _drafts/
+	 *
+	 * @return void
+	 */
 	public function generate()
 	{
 		file_put_contents( $this->setPath(), $this->setPostContent() );
 	}
 
+	/**
+	 * Set file location to create
+	 *
+	 * @return string
+	 */
 	public function setPath()
 	{
 		return $this->config['dir']['draft'] . '/'  . str_replace(" ", "-", strtolower($this->title)) . '.markdown';
 	}
 
+	/**
+	 * Set draft metadata template
+	 *
+	 * @return string
+	 */
 	public function setPostContent()
 	{
 		$content = "---\n";
