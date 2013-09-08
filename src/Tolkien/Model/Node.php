@@ -10,6 +10,7 @@ abstract class Node
 	protected $body;
 	protected $url;
 	protected $layout;
+	protected $path;
 
 	/**
 	 * Get File Name without extension
@@ -123,5 +124,15 @@ abstract class Node
 	public function getLayout()
 	{
 		return $this->layout;
+	}
+
+	public function setPath($path)
+	{
+		$this->path;
+	}
+
+	public function getPath()
+	{
+		return $this->path;
 	}
 }

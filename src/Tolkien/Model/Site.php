@@ -27,6 +27,11 @@ class Site
 	private $pages = array();
 
 	/**
+	 * @var array(Model\Asset) Assets of your site
+	 */
+	private $assets = array();
+
+	/**
 	 * Construct
 	 *
 	 * @param string $title
@@ -146,5 +151,25 @@ class Site
 	public function getPage($page)
 	{
 		return $this->pages[$page];
+	}
+
+	/**
+	 * Set a Asset
+	 *
+	 * @param Model\Asset $page
+	 */
+	public function setAsset($asset)
+	{
+		$this->assets[] = $asset;
+	}
+
+	/**
+	 * Get a Asset
+	 *
+	 * @return Model\Asset $page
+	 */
+	public function getAsset($asset)
+	{
+		return $this->assets[$asset];
 	}
 }

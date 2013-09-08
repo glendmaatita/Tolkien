@@ -18,6 +18,7 @@ class CompilePage implements CompileNode
 
 	/**
 	 * Construct
+	 *
 	 * @param array $config
 	 * @param array(Model\Page)	$pages
 	 */
@@ -27,7 +28,11 @@ class CompilePage implements CompileNode
 		$this->pages = $pages;
 	}
 
-	
+	/**
+	 * Create a web page from page file unde _pages/
+	 *
+	 * @return void
+	 */
 	public function compile()
 	{
 		$loader = new \Twig_Loader_Filesystem( $this->config['dir']['layout'] );
@@ -42,6 +47,13 @@ class CompilePage implements CompileNode
 		}
 	}
 
+	/**
+	 * Create File for web page
+	 *
+	 * @param string $content Content of web page
+	 * @param Model\Page $page
+	 * @return void
+	 */
 	public function createFile($content, $page)
 	{
     file_put_contents($this->config['dir']['site'] . '/' . $page->getUrl(), $content);

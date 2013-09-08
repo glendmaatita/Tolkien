@@ -46,13 +46,29 @@ class BuildPost implements BuildNode
 	 */
 	public function build()
 	{		
-		$files = scandir($this->config['dir']['post']); // get all post files under _posts/
-		foreach ($files as $file) 
-		{
-			if(is_file( $this->config['dir']['post'] . '/' . $file ))
-				$this->posts[] = $this->read( $this->config['dir']['post'] . '/' . $file, $file );
-		}
-	}	
+		$this->find_all_files($this->config['dir']['post']); // get all post files under _posts/		
+	}
+
+	public function find_all_files($dir) 
+	{ 
+    $root = scandir($dir); 
+    foreach($root as $value) 
+    { 
+      if($value === '.' || $value === '..')
+      	continue;
+
+      if(is_file("$dir/$value")) 
+      {
+      	$this->posts[] = $this->read( "$dir/value", $value );
+      	continue;
+      }
+
+      foreach(find_all_files("$dir/$value") as $value) 
+      { 
+         $this->posts[] = $this->read( "$dir/value", $value );
+      } 
+    }
+	} 	
 	
 	/**
 	 * Read Meta data from post file under _posts/
@@ -125,6 +141,7 @@ class BuildPost implements BuildNode
 		$post->setPublishDate();
 		$post->setUrl();
 		$post->setLayout($header['layout']);
+		$post->setPath($path);
 
 		return $post;
 	}

@@ -1,10 +1,6 @@
 <?php namespace Tolkien;
 
-/**
- * Generate static site from nodes
- * Use Command : tolkien compile
- */
-Interface CompileNode
+interface CompileNode
 {
 	public function compile();
 }

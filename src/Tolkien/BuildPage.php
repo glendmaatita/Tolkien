@@ -44,13 +44,29 @@ class BuildPage implements BuildNode
 	 */
 	public function build()
 	{		
-		$files = scandir($this->config['dir']['page']); // get all page files under _pages/
-		foreach ($files as $file) 
-		{
-			if(is_file( $this->config['dir']['page'] . '/' . $file ))
-				$this->pages[] = $this->read( $this->config['dir']['page'] . '/' . $file, $file );
-		}
+		$this->find_all_files($this->config['dir']['page']);  // get all page files under _pages/
 	}
+
+	public function find_all_files($dir) 
+	{ 
+    $root = scandir($dir); 
+    foreach($root as $value) 
+    { 
+      if($value === '.' || $value === '..')
+      	continue;
+
+      if(is_file("$dir/$value")) 
+      {
+      	$this->pages[] = $this->read( "$dir/value", $value );
+      	continue;
+      }
+
+      foreach(find_all_files("$dir/$value") as $value) 
+      { 
+         $this->pages[] = $this->read( "$dir/value", $value );
+      } 
+    }
+	} 	
 
 	/**
 	 * Read Meta data from page file under _pages/
@@ -115,6 +131,7 @@ class BuildPage implements BuildNode
 		$page = new Page( $file, $header['title'], $this->setBody($file, $body) );
 		$page->setUrl();
 		$page->setLayout($header['layout']);
+		$page->setPath($path);
 
 		return $page;
 	}
