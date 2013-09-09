@@ -4,17 +4,17 @@
  * Generate static site from nodes
  * Use Command : tolkien compile
  */
-class Compile Site
+class CompileSite
 {
 	private $site;
 	private $config;
-	private $twig_loader;
-	private $twig_env;
+	private $twig;
 
-	public function __construct($site, $config, $twig_loader, $twig_env)
+	public function __construct($site, $config, $twig)
 	{
 		$this->site = $site;
 		$this->config = $config;
+		$this->twig = $twig;
 	}
 
 	public function compile()
@@ -26,29 +26,34 @@ class Compile Site
 
 	public function compilePosts()
 	{
-		foreach ($this->site->posts as $post) 
+		foreach ($this->site->getPosts() as $post) 
 		{
-			$this->createFile($this->render($twig->loadTemplate( $post->getLayout() . '.html.tpl')), $post);
+			$template = $this->twig->loadTemplate( $post->getLayout() . '.html.tpl');
+			$content = $template->render(array('site' => $this->site));
+			$this->createFile($content, $post);
 		}
 	}
 
 	public function compilePages()
 	{
-		foreach ($this->site->pages as $page)
+		foreach ($this->site->getPages() as $page)
 		{
-			$this->createFile($this->render($twig->loadTemplate( $page->getLayout() . '.html.tpl')), $page);
+			$template = $this->twig->loadTemplate( $page->getLayout() . '.html.tpl');
+			$content = $template->render(array('site' => $this->site));
+			$this->createFile($content, $page);
 		}
 	}
 
-	public function compileAsset()
+	public function compileAssets()
 	{
-		foreach ($this->site->assets as $asset)
+		foreach ($this->site->getAssets() as $asset)
 		{
 			$url_destination = array_shift(explode('/', $asset->getPath()));
 
 			if(!file_exists(dirname($this->config['dir']['site'] . '/' . $asset->getPath())))
     		mkdir(dirname($this->config['dir']['site'] . '/' . $asset->getPath()), 0777, true);
 
+    	
 			copy( $asset->getPath(), $this->config['dir']['site'] . '/assets/' . $url_destination );
 		}
 	}
