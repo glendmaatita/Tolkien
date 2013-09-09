@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{% block title %}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="{{ site.url }}/assets/css/syntax.css">
-    <link rel="stylesheet" href="{{ site.url }}/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ site.url }}/css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
-  	<div class="container">
-  		<div class="site">
-  			{% include "header.html.tpl" %}
+    {% include "header.html.tpl" %}
 
-        {% include "sidebar.html.tpl" %}        
-
-  			{% block content %}{% endblock %}
-  		</div>
-  	</div> 
+    <div class="container">
+      <div class="row">     
+        {% block content %}{% endblock %}
+      </div>
+      <hr>
+      <footer>
+        <p>Tolkien by Glend Maatita</p>
+      </footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

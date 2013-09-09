@@ -1,15 +1,13 @@
 {% extends "layout.html.tpl" %}
 
-{% block title %}Home{% endblock %}
-
+{% block title %}{{ site.title }}{% endblock %}
 {% block content %}
-	<div class="main">
-		{% for posts in post %}
-			<h2>{{ post.title }}</h2>
-				<p class="meta">{{ page.date }} by {{ post.author.name }}</p>
-				<div class="post">
-				{{ post.body | raw }}
-			</div>
-		{% endfor %}
+	<div class="col-md-9">
+		{% for post in site.posts %}
+		  <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+		  <p>by {{ post.author.name }} on {{ post.publishDate}} </p>
+		  {{ post.body | raw }}
+	  {% endfor %}
 	</div>
+	{% include "sidebar.html.tpl" %}
 {% endblock %}

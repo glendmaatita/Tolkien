@@ -29,7 +29,7 @@ class CompileSite
 		foreach ($this->site->getPosts() as $post) 
 		{
 			$template = $this->twig->loadTemplate( $post->getLayout() . '.html.tpl');
-			$content = $template->render(array('site' => $this->site));
+			$content = $template->render(array('site' => $this->site, 'post' => $post ));
 			$this->createFile($content, $post);
 		}
 	}
@@ -39,7 +39,7 @@ class CompileSite
 		foreach ($this->site->getPages() as $page)
 		{
 			$template = $this->twig->loadTemplate( $page->getLayout() . '.html.tpl');
-			$content = $template->render(array('site' => $this->site));
+			$content = $template->render(array('site' => $this->site, 'page' => $page));
 			$this->createFile($content, $page);
 		}
 	}
