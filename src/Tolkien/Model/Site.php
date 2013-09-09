@@ -7,6 +7,11 @@ class Site
 {
 
 	/**
+	 * @var string URL of your site ex: http://myblog.com
+	 */
+	private $url;
+
+	/**
 	 * @var string Title of Your Web
 	 */
 	private $title;
@@ -37,10 +42,34 @@ class Site
 	 * @param string $title
 	 * @param string $tagline
 	 */
-	public function __constrcut($title, $tagline)
+	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $assets = array())
 	{
 		$this->title = $title;
+		$this->url = $url;
 		$this->tagline = $tagline;
+		$this->posts = $posts;
+		$this->pages = $pages;
+		$this->assets = $assets;
+	}
+
+	/**
+	 * Set URL
+	 *
+	 * @param string $url
+	 */
+	public function setUrl($url)
+	{
+		$this->url = $url;
+	}
+
+	/**
+	 * Get url of site
+	 *
+	 * @return string $url
+	 */
+	public function getUrl()
+	{
+		return $this->url;
 	}
 
 	/**
@@ -74,6 +103,16 @@ class Site
 	}
 
 	/**
+	 * Get Tagline
+	 *
+	 * @return string
+	 */
+	public function getTagline()
+	{
+		return $this->tagline;
+	}
+
+	/**
 	 * Set Posts of Site
 	 *
 	 * @param array(Model\Post) Posts
@@ -90,7 +129,7 @@ class Site
 	 */
 	public function getPosts()
 	{
-		return $posts;
+		return $this->posts;
 	}
 
 	/**
@@ -151,6 +190,26 @@ class Site
 	public function getPage($page)
 	{
 		return $this->pages[$page];
+	}
+
+	/**
+	 * Set Assets of your site
+	 *
+	 * @param array(Model\Asset) $asset
+	 */
+	public function setAssets($assets)
+	{
+		$this->assets = $assets;
+	}
+
+	/**
+	 * Get all assets
+	 *
+	 * @return array(Model\Asset) $asset
+	 */
+	public function getAssets()
+	{
+		return $this->assets;
 	}
 
 	/**

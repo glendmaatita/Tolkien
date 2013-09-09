@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="{{ site.url }}css/syntax.css">
-    <link rel="stylesheet" href="{{ site.url }}css/main.css">
+    <link rel="stylesheet" href="{{ site.url }}/assets/css/syntax.css">
+    <link rel="stylesheet" href="{{ site.url }}/assets/css/main.css">
   </head>
   <body>
   	<div class="container">

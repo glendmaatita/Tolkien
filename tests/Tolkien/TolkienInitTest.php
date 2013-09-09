@@ -1,6 +1,7 @@
 <?php namespace Tolkien;
 
 use Tolkien\Init;
+use Symfony\Component\Yaml\Parser;
 
 class TolkienInitTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,40 +10,56 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 	public function __construct()
 	{
 		$this->init = new Init('blog');
-		rmdir( ROOT_DIR . $this->init->getName() );
+		@rmdir( ROOT_DIR );
 		$this->init->create();
 	}
 
 	public function testCreateBlog()
 	{	
 		// cek if directory created
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() );
+		$this->assertFileExists( ROOT_DIR );
 
 		// create directory assets
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_assets' );
+		$this->assertFileExists( ROOT_DIR . '/_assets' );
+		$this->assertFileExists( ROOT_DIR . '/_assets/css' );
 
 		// create directory posts
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_posts' );
+		$this->assertFileExists( ROOT_DIR . '/_posts' );
 
 		// create directory sites
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_sites' );
+		$this->assertFileExists( ROOT_DIR . '/_sites' );
 
 		// create draft sites
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_drafts' );
+		$this->assertFileExists( ROOT_DIR . '/_drafts' );
 
 		// create page sites
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_pages' );
+		$this->assertFileExists( ROOT_DIR . '/_pages' );
 
 		// create layouts
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/_layouts' );
+		$this->assertFileExists( ROOT_DIR . '/_layouts' );
 
 		//cek if config file exist
-		$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/config.yml' );
+		$this->assertFileExists( ROOT_DIR . '/config.yml' );
 
 		//cek if index.html
-		//$this->assertFileExists( ROOT_DIR . $this->init->getName() . '/index.html' );
+		//$this->assertFileExists( ROOT_DIR . '/index.html' );
 
 		// validate configfile
-		$this->assertContains('config', file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml'));
+		$this->assertContains('config', file_get_contents( ROOT_DIR . '/config.yml'));
+	}
+
+	public function testConfigFile()
+	{
+		$parser = new Parser();
+		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml'));
+
+		$this->assertEquals( $this->init->getName() , $config['config']['app']);
+		$this->assertContains( $this->init->getName() , $config['config']['name']);
+		$this->assertEquals( ROOT_DIR . '/_posts' , $config['dir']['post']);
+		$this->assertEquals( ROOT_DIR . '/_pages' , $config['dir']['page']);
+		$this->assertEquals( ROOT_DIR . '/_drafts' , $config['dir']['draft']);
+		$this->assertEquals( ROOT_DIR . '/_sites' , $config['dir']['site']);
+		$this->assertEquals( ROOT_DIR . '/_layouts' , $config['dir']['layout']);
+		$this->assertEquals( ROOT_DIR . '/_assets' , $config['dir']['asset']);
 	}
 }

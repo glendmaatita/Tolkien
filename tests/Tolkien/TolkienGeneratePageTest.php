@@ -16,9 +16,9 @@ class TolkienGeneratePageTest extends \PHPUnit_Framework_TestCase
 	public function testCreatePage()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
 
-		$page = new GeneratePage( $config, "Latest Android Release" );
+		$page = new GeneratePage( $config, "About Us" );
 
 		$page->generate();
 

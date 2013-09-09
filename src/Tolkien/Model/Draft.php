@@ -7,6 +7,7 @@
  */
 class Draft extends Node
 {
+	
 	/**
 	 * @var Model\Author Draft's Author
 	 */

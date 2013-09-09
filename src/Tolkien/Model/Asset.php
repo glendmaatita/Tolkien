@@ -17,12 +17,13 @@ class Asset
 	
 	/**
 	 * Construct
-	 *
+	 * 
+	 * @param string $path
 	 * @param string $url URL of asset ex/: _assets/css/style.css
 	 */
 	public function __construct($path, $url)
 	{
-		$this->path = $path
+		$this->path = $path;
 		$this->url = $url;
 	}
 

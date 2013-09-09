@@ -16,9 +16,9 @@ class TolkienInitDraftTest extends \PHPUnit_Framework_TestCase
 	public function testCreateDraft()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
 
-		$draft = new GenerateDraft( $config, "Latest Android Release" );
+		$draft = new GenerateDraft( $config, "Latest Android Release", 'post' );
 
 		$draft->generate();
 

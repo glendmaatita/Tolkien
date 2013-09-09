@@ -4,7 +4,7 @@
  * Generate static site from nodes
  * Use Command : tolkien compile
  */
-class CreateSite
+class Compile Site
 {
 	private $site;
 	private $config;
@@ -49,7 +49,7 @@ class CreateSite
 			if(!file_exists(dirname($this->config['dir']['site'] . '/' . $asset->getPath())))
     		mkdir(dirname($this->config['dir']['site'] . '/' . $asset->getPath()), 0777, true);
 
-			copy( $asset->getPath(), $this->config['dir']['site'] . $url_destination );
+			copy( $asset->getPath(), $this->config['dir']['site'] . '/assets/' . $url_destination );
 		}
 	}
 

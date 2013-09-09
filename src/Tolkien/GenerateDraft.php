@@ -18,15 +18,21 @@ class GenerateDraft implements GenerateNode
 	private $title;
 
 	/**
+	 * @var string
+	 */
+	private $type;
+
+	/**
 	 * Construct
 	 *
 	 * @param array $config
 	 * @param string $title
 	 */
-	public function __construct($config, $title)
+	public function __construct($config, $title, $type)
 	{
 		$this->config = $config;
 		$this->title = $title;
+		$this->type = $type;
 	}
 
 	/**
@@ -46,7 +52,7 @@ class GenerateDraft implements GenerateNode
 	 */
 	public function setPath()
 	{
-		return $this->config['dir']['draft'] . '/'  . str_replace(" ", "-", strtolower($this->title)) . '.markdown';
+		return $this->config['dir']['draft'] . '/'  . str_replace(" ", "-", strtolower($this->title)) . '.markdown.' . $this->type;
 	}
 
 	/**

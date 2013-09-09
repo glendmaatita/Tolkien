@@ -10,8 +10,6 @@ class TolkienModelCategoryTest extends \PHPUnit_Framework_TestCase
 		$category = new Category($name = 'News');
 
 		$this->assertClassHasAttribute('name', 'Tolkien\Model\Category');
-
-		$category->setName('Tutorial');
-		$this->assertEquals($category->getName(), 'Tutorial');
+		$this->assertEquals($category->getName(), 'News');
 	}
 }

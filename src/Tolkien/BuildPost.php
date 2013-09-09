@@ -59,13 +59,13 @@ class BuildPost implements BuildNode
 
       if(is_file("$dir/$value")) 
       {
-      	$this->posts[] = $this->read( "$dir/value", $value );
+      	$this->posts[] = $this->read( "$dir/$value", $value );
       	continue;
       }
 
       foreach(find_all_files("$dir/$value") as $value) 
       { 
-         $this->posts[] = $this->read( "$dir/value", $value );
+         $this->posts[] = $this->read( "$dir/$value", $value );
       } 
     }
 	} 	

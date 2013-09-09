@@ -5,11 +5,35 @@
  */
 abstract class Node
 {
+
+	/**
+	 * @var string
+	 */
 	protected $file;
+
+	/**
+	 * @var string
+	 */
 	protected $title;
+
+	/**
+	 * @var string
+	 */
 	protected $body;
+
+	/**
+	 * @var string
+	 */
 	protected $url;
+
+	/**
+	 * @var string
+	 */
 	protected $layout;
+
+	/**
+	 * @var string
+	 */
 	protected $path;
 
 	/**
@@ -61,7 +85,7 @@ abstract class Node
 	 *
 	 * @return string $title title of Node
 	 */
-	public function getFile()
+	public function getTitle()
 	{
 		return $this->title;
 	}
@@ -111,7 +135,7 @@ abstract class Node
 	 *
 	 * @param string $layout
 	 */
-	public function seLayout($layout)
+	public function setLayout($layout)
 	{
 		$this->layout = $layout;
 	}
@@ -126,11 +150,21 @@ abstract class Node
 		return $this->layout;
 	}
 
+	/**
+	 * Set path to Node. Path is origin location of node. Must be in _posts/ or _pages/
+	 *
+	 * @param string $path
+	 */
 	public function setPath($path)
 	{
-		$this->path;
+		$this->path = $path;
 	}
 
+	/**
+	 * Get path of Node
+	 *
+	 * @return string
+	 */
 	public function getPath()
 	{
 		return $this->path;

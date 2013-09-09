@@ -69,14 +69,25 @@ class BuildAsset
     }
 	}
 
+	/**
+	 * Create Asset object instance
+	 *
+	 * @param string $path
+	 * @return Model\Asset
+	 */
 	public function setAsset($path)
 	{
 		$url = explode('/', $path);
 		array_shift($url);
 
-		return new Asset($path, $url);
+		return new Asset($path, '/' . $url);
 	}
 
+	/**
+	 * Get all asset
+	 *
+	 * @return array Model\Asset
+	 */
 	public function getAssets()
 	{
 		return $this->assets;

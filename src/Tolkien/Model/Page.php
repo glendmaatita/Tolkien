@@ -12,7 +12,7 @@ class Page extends Node
 	 * @param string title Title of Page
 	 * @param string body Body of Page
 	 */
-	public function __construct($file, title, $body)
+	public function __construct($file, $title, $body)
 	{
 		$this->file = $file;
 		$this->title = $title;

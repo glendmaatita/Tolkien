@@ -57,13 +57,13 @@ class BuildPage implements BuildNode
 
       if(is_file("$dir/$value")) 
       {
-      	$this->pages[] = $this->read( "$dir/value", $value );
+      	$this->pages[] = $this->read( "$dir/$value", $value );
       	continue;
       }
 
       foreach(find_all_files("$dir/$value") as $value) 
       { 
-         $this->pages[] = $this->read( "$dir/value", $value );
+         $this->pages[] = $this->read( "$dir/$value", $value );
       } 
     }
 	} 	

@@ -2,17 +2,37 @@
 
 use Symfony\Component\Yaml\Dumper;
 
+/**
+ * Blog app Initiation
+ */
 class Init 
 {
+
+	/**
+	 * @var string Name of your blog
+	 */
 	private $name;
+
+	/**
+	 * @var array parsed from config.yml
+	 */
 	private $config;
 
+	/**
+	 * Construct
+	 *
+	 * @param string name
+	 */
 	public function __construct($name)
 	{
 		$this->name = $name;
 	}
 
-	// create blog directory
+	/**
+	 * Create blog app with all its mandatory folder
+	 *
+	 * @return void
+	 */
 	public function create()
 	{		
 		$this->createBlogDirectory();
@@ -20,10 +40,15 @@ class Init
 		$this->createTemplateFile();
 	}
 
+	/**
+	 * Create Blog App Directories
+	 *
+	 * @return void
+	 */
 	public function createBlogDirectory()
 	{
 		$this->config = $this->configContent();
-		@mkdir( ROOT_DIR . $this->name , 0700 );
+		@mkdir( ROOT_DIR , 0700 );
 		@mkdir( $this->config['dir']['post'], 0700 );
 		@mkdir( $this->config['dir']['page'], 0700 );
 		@mkdir( $this->config['dir']['draft'], 0700 );
@@ -32,20 +57,30 @@ class Init
 		@mkdir( $this->config['dir']['layout'], 0700 );		
 	}
 
+	/**
+	 * Creating Config file : config.yml on the root blog app
+	 *
+	 * @return void
+	 */
 	public function createConfigFile()
 	{
 		$dumper = new Dumper();
-		file_put_contents( ROOT_DIR . $this->name . '/config.yml', $dumper->dump( $this->configContent(), 2 ) );
+		file_put_contents( ROOT_DIR . '/config.yml', $dumper->dump( $this->configContent(), 2 ) );
 	}
 
+	/**
+	 * Creating template file. Template will be used for view
+	 *
+	 * @return void
+	 */
 	public function createTemplateFile()
 	{		
-		
 		// css
 		if (!is_dir($this->config['dir']['asset'] . '/css')) {
 		  // dir doesn't exist, make it
 		  mkdir($this->config['dir']['asset'] . '/css');
 		}
+
 		file_put_contents( $this->config['dir']['asset'] . '/css/style.css', file_get_contents(__DIR__ . '/../tpl/style.css.tpl'));
 
 		// index html
@@ -65,28 +100,36 @@ class Init
 
 		// master layout
 		file_put_contents( $this->config['dir']['layout'] . '/layout.html.tpl', file_get_contents(__DIR__ . '/../tpl/layout.html.tpl'));
-
-
 	}
 
+	/**
+	 * Content of config.yml
+	 *
+	 * @return array
+	 */
 	public function configContent()
 	{
 		return $array = array(
 				"config" => array( 
-					"app" => $this->name, 
+					"app" => $this->name,
 					"name" => "Your Blog Name " . $this->name, 
 					"title" => "Your Site Title" ),
 				"dir" => array(
-					"post" => ROOT_DIR . $this->name . "/_posts",
-					"page" => ROOT_DIR . $this->name . "/_pages",
-					"draft" => ROOT_DIR . $this->name . "/_drafts",
-					"site" => ROOT_DIR . $this->name . "/_sites",
-					"asset" => ROOT_DIR . $this->name . "/_assets",
-					"layout" => ROOT_DIR . $this->name . "/_layouts",
+					"post" => ROOT_DIR . "/_posts",
+					"page" => ROOT_DIR . "/_pages",
+					"draft" => ROOT_DIR . "/_drafts",
+					"site" => ROOT_DIR . "/_sites",
+					"asset" => ROOT_DIR . "/_assets",
+					"layout" => ROOT_DIR . "/_layouts",
 					)
 			);
 	}
 
+	/**
+	 * Get Blog app name
+	 *
+	 * @return string
+	 */
 	public function getName()
 	{
 		return $this->name;

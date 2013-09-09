@@ -16,7 +16,7 @@ class TolkienGeneratePostTest extends \PHPUnit_Framework_TestCase
 	public function testCreatePost()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . $this->init->getName() . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
 
 		$post = new GeneratePost( $config, "Latest Android Release" );
 

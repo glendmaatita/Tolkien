@@ -31,37 +31,54 @@ class BuildDraft implements BuildNode
 	 *
 	 * @param array $config
 	 * @param Parser $parse
-	 * @param array $files
 	 */
-	public function __construct($config, $parser, $files)
+	public function __construct($config, $parser)
 	{
 		$this->config = $config;
 		$this->parser = $parser;
-		$this->files = $files;
 	}
 
 	/**
 	 * Generate a post file from draft and put it on folder _posts/
 	 */
 	public function build()
+	{		
+		$this->find_all_files($this->config['dir']['draft']); // get all post files under _drafts/		
+	}
+	
+	public function find_all_files($dir)
 	{
-		foreach ($files as $file)
-		{
+		$root = scandir($dir);		
+    foreach($root as $value) 
+    { 
+      if($value === '.' || $value === '..')
+      	continue;
 
-			/**
-			 * Get file name without extension post/page
-			 * from xyz.markdown.post become xyz.markdown
-			 */
-			$draft = explode('.', $file);
-			$ext = array_pop($draft);
+      if(is_file("$dir/$value")) 
+      {
+      	$draft = explode('.', $value);
+				$ext = array_pop($draft);
 
-			if( $ext == 'post')
-				$this->generatePost(implode('.', $draft), $file);
-			else if( $ext == 'page')
-				$this->generatePage(implode('.', $draft), $file);
-			else
-				return;
-		}
+				if( $ext == 'post')
+					$this->generatePost(implode('.', $draft), $value);
+				else if( $ext == 'page')
+					$this->generatePage(implode('.', $draft), $value);
+				else
+					return;
+
+      	continue;
+      }
+
+      foreach(find_all_files("$dir/$value") as $value) 
+      {
+         if( $ext == 'post')
+					$this->generatePost(implode('.', $draft), $value);
+				else if( $ext == 'page')
+					$this->generatePage(implode('.', $draft), $value);
+				else
+					return;
+      } 
+    }
 	}
 
 	/**
