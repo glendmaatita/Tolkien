@@ -8,7 +8,7 @@ class Category
 	/**
 	 * @var string Category's Name
 	 */ 
-	private $name;
+	protected $name;
 
 	/** 
 	 * Construct

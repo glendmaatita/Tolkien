@@ -37,18 +37,24 @@ class Site
 	private $assets = array();
 
 	/**
+	 * @var array(Model\SiteCategory) Categories
+	 */
+	private $siteCategories = array();
+
+	/**
 	 * Construct
 	 *
 	 * @param string $title
 	 * @param string $tagline
 	 */
-	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $assets = array())
+	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $siteCategories = array(), $assets = array())
 	{
 		$this->title = $title;
 		$this->url = $url;
 		$this->tagline = $tagline;
 		$this->posts = $posts;
 		$this->pages = $pages;
+		$this->siteCategories = $siteCategories;
 		$this->assets = $assets;
 	}
 
@@ -230,5 +236,25 @@ class Site
 	public function getAsset($asset)
 	{
 		return $this->assets[$asset];
+	}
+
+	/**
+	 * Set Categories of your site
+	 *
+	 * @param array(Model\SiteCategory) $siteCategories
+	 */
+	public function setCategories($siteCategories)
+	{
+		$this->siteCategories = $siteCategories;
+	}
+
+	/**
+	 * Get all site's categories
+	 *
+	 * @return array(Model\SiteCategory)
+	 */
+	public function getSiteCategories()
+	{
+		return $this->siteCategories;
 	}
 }

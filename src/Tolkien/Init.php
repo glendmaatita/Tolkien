@@ -112,8 +112,10 @@ class Init
 		return $array = array(
 				"config" => array( 
 					"app" => $this->name,
+					"url" => /,
 					"name" => "Your Blog Name " . $this->name, 
-					"title" => "Your Site Title" ),
+					"title" => "Your Site Title",
+					"tagline" => "Your Site Tagline" ),
 				"dir" => array(
 					"post" => ROOT_DIR . "/_posts",
 					"page" => ROOT_DIR . "/_pages",
