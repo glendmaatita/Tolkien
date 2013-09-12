@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+
+<?php
+
+define('ROOT_DIR', (__DIR__ . '/../../'));
+require_once realpath(__DIR__.'/../../vendor/autoload.php');
+
+switch($argv[1]) 
+{
+	case 'help':
+		help();
+		break;
+	case 'init':
+		$init = new Init($argv[2]);
+		$init->create();
+		break;
+	case 'generate':
+		Tolkien::generate($argv[2], $argv[3]);
+		break;
+	case 'compile':
+		Tolkien::compile();
+		break;
+	default:
+		help();
+		break;
+}
+
+function help()
+{
+		echo <<<EOT
+\n================= Available Commands ===================\n
+php tolkien init [name]
+php tolkien generate [post, draft, page]
+php tolkien build [option: post, draft, page]
+php tolkien compile
+\n================= end ===================\n
+EOT;
+}

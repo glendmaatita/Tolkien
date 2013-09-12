@@ -35,7 +35,6 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue( is_array($posts) );
 		
-		//var_dump($posts[0]);die();
 		$this->assertEquals($posts[0]->getTitle(), 'Latest Android Release Part 1');
 		$this->assertEquals($posts[0]->getFile(), Date('Y-m-d') . '-latest-android-release-part-1.markdown');
 		$this->assertEquals($posts[0]->getPublishDate(), Date('Y-m-d') );

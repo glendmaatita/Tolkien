@@ -81,25 +81,25 @@ class Init
 		  mkdir($this->config['dir']['asset'] . '/css');
 		}
 
-		file_put_contents( $this->config['dir']['asset'] . '/css/style.css', file_get_contents(__DIR__ . '/../tpl/style.css.tpl'));
+		file_put_contents( $this->config['dir']['asset'] . '/css/style.css', file_get_contents(__DIR__ . '/tpl/style.css.tpl'));
 
 		// index html
-		file_put_contents( $this->config['dir']['layout'] . '/index.html.tpl', file_get_contents(__DIR__ . '/../tpl/index.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/index.html.tpl', file_get_contents(__DIR__ . '/tpl/index.html.tpl'));
 
 		// post layout
-		file_put_contents( $this->config['dir']['layout'] . '/post.html.tpl', file_get_contents(__DIR__ . '/../tpl/post.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/post.html.tpl', file_get_contents(__DIR__ . '/tpl/post.html.tpl'));
 		
 		// page layout
-		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/../tpl/page.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/tpl/page.html.tpl'));
 
 		// sidebar layout
-		file_put_contents( $this->config['dir']['layout'] . '/sidebar.html.tpl', file_get_contents(__DIR__ . '/../tpl/sidebar.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/sidebar.html.tpl', file_get_contents(__DIR__ . '/tpl/sidebar.html.tpl'));
 
 		// header layout
-		file_put_contents( $this->config['dir']['layout'] . '/header.html.tpl', file_get_contents(__DIR__ . '/../tpl/header.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/header.html.tpl', file_get_contents(__DIR__ . '/tpl/header.html.tpl'));
 
 		// master layout
-		file_put_contents( $this->config['dir']['layout'] . '/layout.html.tpl', file_get_contents(__DIR__ . '/../tpl/layout.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/layout.html.tpl', file_get_contents(__DIR__ . '/tpl/layout.html.tpl'));
 	}
 
 	/**
@@ -110,9 +110,7 @@ class Init
 	public function configContent()
 	{
 		return $array = array(
-				"config" => array( 
-					"app" => $this->name,
-					"url" => /,
+				"config" => array(
 					"name" => "Your Blog Name " . $this->name, 
 					"title" => "Your Site Title",
 					"tagline" => "Your Site Tagline" ),

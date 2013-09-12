@@ -1,5 +1,7 @@
 <?php namespace Tolkien;
 
+use Tolkien\Model\Asset;
+
 /**
  * Build Asset is copying all files under _assets/ to _site/
  */
@@ -39,7 +41,7 @@ class BuildAsset
 	 */
 	public function build()
 	{
-		$this->find_all_files($this->config['dir']['asset']);  // get all page files under _pages/
+		$this->assets = $this->find_all_files($this->config['dir']['asset']);  // get all page files under _pages/
 	}
 
 	/**
@@ -50,24 +52,25 @@ class BuildAsset
 	 */
 	public function find_all_files($dir) 
 	{ 
-    $root = scandir($dir); 
-    foreach($root as $value) 
-    { 
-      if($value === '.' || $value === '..')
-      	continue;
-
-      if(is_file("$dir/$value")) 
-      {
-      	$this->assets[] = $this->setAsset("$dir/$value");
-      	continue;
-      }
-
-      foreach(find_all_files("$dir/$value") as $value) 
-      { 
-         $this->assets[] = $this->setAsset("$dir/$value");
-      } 
-    }
-	}
+	    $root = scandir($dir); 
+	    foreach($root as $value) 
+	    { 
+	        if($value === '.' || $value === '..') 
+	        {
+	        	continue;
+	        } 
+	        if(is_file("$dir/$value")) 
+	        {
+	        	$result[]="$dir/$value";
+	        	continue;
+	        } 
+	        foreach($this->find_all_files("$dir/$value") as $value) 
+	        {
+	            $result[]=$value; 
+	        } 
+	    } 
+	    return $result; 
+	} 
 
 	/**
 	 * Create Asset object instance
