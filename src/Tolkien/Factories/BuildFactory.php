@@ -21,7 +21,7 @@ class BuildFactory
 		$this->type = $type;
 	}
 
-	public function generate()
+	public function build()
 	{
 		switch ($this->type) {
 			case 'asset':
@@ -45,7 +45,7 @@ class BuildFactory
 				break;
 
 			case 'site':
-				return new BuildSite($this->config, $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildSiteCategory());
+				return new BuildSite($this->prepareConfig($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildSiteCategory());
 				break;
 			
 			default:
@@ -55,27 +55,23 @@ class BuildFactory
 	}
 
 	public function getBuildAsset()
-	{
-		$parser = new Parser();
-		return new BuildAsset($this->config, $parser);
+	{		
+		return new BuildAsset($this->prepareConfig($this->config), $this->getParser());
 	}
 
 	public function getBuildDraft()
 	{
-		$parser = new Parser();
-		return new BuildDraft($this->config, $parser);
+		return new BuildDraft($this->prepareConfig($this->config), $this->getParser());
 	}
 
 	public function getBuildPage()
-	{
-		$parser = new Parser();
-		return new BuildPage($this->config, $parser);
+	{		
+		return new BuildPage($this->prepareConfig($this->config), $this->getParser());
 	}
 
 	public function getBuildPost()
-	{
-		$parser = new Parser();
-		return new BuildPost($this->config, $parser);
+	{		
+		return new BuildPost($this->prepareConfig($this->config), $this->getParser());
 	}
 
 	public function getBuildSiteCategory()
@@ -83,5 +79,15 @@ class BuildFactory
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
 		return new BuildSiteCategory($buildPost->getPosts());
+	}
+
+	public function getParser()
+	{
+		return new Parser();
+	}
+
+	public function prepareConfig($config)
+	{
+		return $this->getParser()->parse(file_get_contents( $config ));
 	}
 }

@@ -25,6 +25,8 @@ class BuildPage implements BuildNode
 	 */
 	private $parser;
 
+	private $result = array();
+
 	/**
 	 * Construct
 	 *
@@ -50,23 +52,23 @@ class BuildPage implements BuildNode
 	public function find_all_files($dir) 
 	{ 
     $root = scandir($dir); 
-	    foreach($root as $value) 
-	    { 
-	        if($value === '.' || $value === '..') 
-	        {
-	        	continue;
-	        } 
-	        if(is_file("$dir/$value")) 
-	        {
-	        	$result[] = $this->read( "$dir/$value", $value );
-	        	continue;
-	        } 
-	        foreach($this->find_all_files("$dir/$value") as $value) 
-	        {
-	            $result [] = $this->read( "$dir/$value", $value );
-	        } 
-	    } 
-	    return $result; 
+    foreach($root as $value) 
+    { 
+        if($value === '.' || $value === '..') 
+        {
+        	continue;
+        } 
+        if(is_file("$dir/$value")) 
+        {
+        	$this->result[] = $this->read( "$dir/$value", $value );
+        	continue;
+        } 
+        foreach($this->find_all_files("$dir/$value") as $value) 
+        {
+            $this->result[] = $this->read( "$dir/$value", $value );
+        } 
+    } 
+    return $this->result; 
 	} 	
 
 	/**

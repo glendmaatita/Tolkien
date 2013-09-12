@@ -34,10 +34,21 @@ class Init
 	 * @return void
 	 */
 	public function create()
-	{		
+	{	
+		$this->createBootstrap();	
 		$this->createBlogDirectory();
 		$this->createConfigFile();
 		$this->createTemplateFile();
+	}
+
+	public function createBootstrap()
+	{
+		$bootstrap = __DIR__. '/../../src/Tolkien/Includes/bootstrap.php';
+		if( !file_exists( $bootstrap ) )
+		{
+			file_put_contents( $bootstrap, "<?php \n define('BASE_DIR', __DIR__ . '/../../../" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
+			include $bootstrap;
+		}
 	}
 
 	/**
@@ -47,8 +58,8 @@ class Init
 	 */
 	public function createBlogDirectory()
 	{
-		$this->config = $this->configContent();
-		@mkdir( ROOT_DIR , 0700 );
+		@mkdir( BASE_DIR , 0700 );
+		$this->config = $this->configContent();		
 		@mkdir( $this->config['dir']['post'], 0700 );
 		@mkdir( $this->config['dir']['page'], 0700 );
 		@mkdir( $this->config['dir']['draft'], 0700 );
@@ -111,16 +122,16 @@ class Init
 	{
 		return $array = array(
 				"config" => array(
-					"name" => "Your Blog Name " . $this->name, 
+					"name" => $this->name, 
 					"title" => "Your Site Title",
 					"tagline" => "Your Site Tagline" ),
 				"dir" => array(
-					"post" => ROOT_DIR . "/_posts",
-					"page" => ROOT_DIR . "/_pages",
-					"draft" => ROOT_DIR . "/_drafts",
-					"site" => ROOT_DIR . "/_sites",
-					"asset" => ROOT_DIR . "/_assets",
-					"layout" => ROOT_DIR . "/_layouts",
+					"post" => ROOT_DIR . "_posts",
+					"page" => ROOT_DIR . "_pages",
+					"draft" => ROOT_DIR . "_drafts",
+					"site" => ROOT_DIR . "_sites",
+					"asset" => ROOT_DIR . "_assets",
+					"layout" => ROOT_DIR . "_layouts",
 					)
 			);
 	}

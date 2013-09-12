@@ -48,13 +48,10 @@ class CompileSite
 	{
 		foreach ($this->site->getAssets() as $asset)
 		{
-			$url_destination = array_shift(explode('/', $asset->getPath()));
+			if(!file_exists(dirname($asset->getUrl()) ))
+    		mkdir(dirname($asset->getUrl()), 0777, true);
 
-			if(!file_exists(dirname($this->config['dir']['site'] . '/' . $asset->getPath())))
-    		mkdir(dirname($this->config['dir']['site'] . '/' . $asset->getPath()), 0777, true);
-
-    	
-			copy( $asset->getPath(), $this->config['dir']['site'] . '/assets/' . $url_destination );
+			copy( $asset->getPath(), $asset->getUrl() );
 		}
 	}
 

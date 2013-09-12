@@ -21,7 +21,7 @@ class TolkienBuildSiteCategoryTest extends \PHPUnit_Framework_TestCase
 		$buildSiteCategory = new BuildSiteCategory($posts);
 		$buildSiteCategory->build();
 
-		$this->assertTrue(is_array($buildSiteCategory->getCategories()));
-		$this->assertEquals(3, count($buildSiteCategory->getCategories()));
+		$this->assertTrue(is_array($buildSiteCategory->getSiteCategories()));
+		$this->assertEquals(3, count($buildSiteCategory->getSiteCategories()));
 	}
 }

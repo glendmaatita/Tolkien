@@ -34,7 +34,7 @@ class BuildSiteCategory implements BuildNode
 	 *
 	 * @return array(Model\SiteCategories)
 	 */
-	public function getCategories()
+	public function getSiteCategories()
 	{
 		$siteCategories = array();
 		$categoriesName = array();

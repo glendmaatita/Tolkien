@@ -22,6 +22,8 @@ class BuildAsset
 	 */
 	private $parser;
 
+	private $result;
+
 	/**
 	 * Construct
 	 *
@@ -41,7 +43,7 @@ class BuildAsset
 	 */
 	public function build()
 	{
-		$this->assets = $this->find_all_files($this->config['dir']['asset']);  // get all page files under _pages/
+		$this->find_all_files($this->config['dir']['asset']);  // get all page files under _pages/
 	}
 
 	/**
@@ -51,25 +53,26 @@ class BuildAsset
 	 * @return void
 	 */
 	public function find_all_files($dir) 
-	{ 
-	    $root = scandir($dir); 
-	    foreach($root as $value) 
-	    { 
-	        if($value === '.' || $value === '..') 
-	        {
-	        	continue;
-	        } 
-	        if(is_file("$dir/$value")) 
-	        {
-	        	$result[]="$dir/$value";
-	        	continue;
-	        } 
-	        foreach($this->find_all_files("$dir/$value") as $value) 
-	        {
-	            $result[]=$value; 
-	        } 
-	    } 
-	    return $result; 
+	{
+	  $root = scandir($dir); 
+    foreach($root as $value) 
+    { 
+        if($value === '.' || $value === '..')
+        {
+        	continue;
+        } 
+        if(is_file("$dir/$value")) 
+        {
+        	$result[] = "$dir/$value";
+        	$this->setAsset("$dir/$value");
+        	continue;
+        } 
+        foreach($this->find_all_files("$dir/$value") as $value) 
+        { 
+            $result[] = $value; 
+        } 
+    } 
+    return $result; 
 	} 
 
 	/**
@@ -79,11 +82,9 @@ class BuildAsset
 	 * @return Model\Asset
 	 */
 	public function setAsset($path)
-	{
-		$url = explode('/', $path);
-		array_shift($url);
-
-		return new Asset($path, '/' . $url);
+	{		
+		$url = $this->config['dir']['site'] . str_replace($this->config['dir']['asset'], '', $path);
+		$this->assets[] = new Asset($path, $url);
 	}
 
 	/**

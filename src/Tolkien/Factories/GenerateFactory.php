@@ -13,7 +13,7 @@ class GenerateFactory
 
 	public function __construct($config, $type = 'post', $properties = array())
 	{
-		$this->config = $this->prepareConfig($config);
+		$this->config = $config;
 		$this->type = $type;
 		$this->properties = $properties;
 	}
@@ -22,7 +22,7 @@ class GenerateFactory
 	{
 		switch ($this->type) {
 			case 'post':
-				return new GeneratePost($this->config, $this->properties['title']);
+				return new GeneratePost($this->prepareConfig($this->config), $this->properties['title']);
 				break;
 
 			case 'draft':
@@ -42,6 +42,6 @@ class GenerateFactory
 	public function prepareConfig($config)
 	{
 		$parser = new Parser();
-		$this->config = $parser->parse(file_get_contents( $config ));
+		return $parser->parse(file_get_contents( $config ));
 	}
 }

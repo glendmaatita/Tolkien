@@ -27,6 +27,8 @@ class BuildPost implements BuildNode
 	 */
 	private $parser;
 
+	private $result;
+
 	/**
 	 * Construct
 	 *
@@ -45,7 +47,7 @@ class BuildPost implements BuildNode
 	 * @return void
 	 */
 	public function build()
-	{		
+	{
 		$this->posts = $this->find_all_files($this->config['dir']['post']); // get all post files under _posts/		
 	}	
 
@@ -60,15 +62,16 @@ class BuildPost implements BuildNode
         } 
         if(is_file("$dir/$value")) 
         {
-        	$result[] = $this->read( "$dir/$value", $value );
+        	$this->result[] = $this->read( "$dir/$value", $value );
         	continue;
         } 
         foreach($this->find_all_files("$dir/$value") as $value) 
         {
-            $result [] = $this->read( "$dir/$value", $value );
+            $this->result[] = $this->read( "$dir/$value", $value );
         } 
     } 
-    return $result; 
+
+    return $this->result; 
 	} 
 	
 	/**
@@ -185,7 +188,7 @@ class BuildPost implements BuildNode
 		$cats = explode(',', $header['categories']);
 		foreach ($cats as $category) 
 		{
-			$categories[] = new Category($category);
+			$categories[] = new Category(trim($category));
 		}
 		return $categories;
 	}

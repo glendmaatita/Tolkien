@@ -2,8 +2,10 @@
 
 <?php
 
-define('ROOT_DIR', (__DIR__ . '/../../'));
-require_once realpath(__DIR__.'/../../vendor/autoload.php');
+include __DIR__. '/../../src/Tolkien/Includes/include.php';
+
+use Tolkien\Init;
+use Tolkien\Facades\Tolkien;
 
 switch($argv[1]) 
 {

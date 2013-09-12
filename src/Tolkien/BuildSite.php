@@ -4,7 +4,7 @@ class BuildSite
 {
 
 	private $buildAsset;
-	private $buildPage
+	private $buildPage;
 	private $buildPost;
 	private $buildSiteCategory;
 
@@ -44,7 +44,7 @@ class BuildSite
 
 	public function getAssets()
 	{
-		$this->buildSiteCategory->build();
-		return $this->buildSiteCategory->getSiteCategories();
+		$this->buildAsset->build();
+		return $this->buildAsset->getAssets();
 	}
 }
