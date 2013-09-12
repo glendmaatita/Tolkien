@@ -1,4 +1,4 @@
-<?php namespace Tolkien;
+<?php namespace Tolkien; 
 
 /**
  * Generate static site from nodes
