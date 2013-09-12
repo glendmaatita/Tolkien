@@ -53,13 +53,13 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml'));
 
-		$this->assertEquals( $this->init->getName() , $config['config']['app']);
+		$this->assertEquals( $this->init->getName() , $config['config']['name']);
 		$this->assertContains( $this->init->getName() , $config['config']['name']);
-		$this->assertEquals( ROOT_DIR . '/_posts' , $config['dir']['post']);
-		$this->assertEquals( ROOT_DIR . '/_pages' , $config['dir']['page']);
-		$this->assertEquals( ROOT_DIR . '/_drafts' , $config['dir']['draft']);
-		$this->assertEquals( ROOT_DIR . '/_sites' , $config['dir']['site']);
-		$this->assertEquals( ROOT_DIR . '/_layouts' , $config['dir']['layout']);
-		$this->assertEquals( ROOT_DIR . '/_assets' , $config['dir']['asset']);
+		$this->assertEquals( ROOT_DIR . '_posts' , $config['dir']['post']);
+		$this->assertEquals( ROOT_DIR . '_pages' , $config['dir']['page']);
+		$this->assertEquals( ROOT_DIR . '_drafts' , $config['dir']['draft']);
+		$this->assertEquals( ROOT_DIR . '_sites' , $config['dir']['site']);
+		$this->assertEquals( ROOT_DIR . '_layouts' , $config['dir']['layout']);
+		$this->assertEquals( ROOT_DIR . '_assets' , $config['dir']['asset']);
 	}
 }

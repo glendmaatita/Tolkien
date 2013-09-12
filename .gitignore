@@ -5,5 +5,5 @@ composer.lock
 vendor/
 
 #generate
-blog1
 blog
+src/Tolkien/Includes/bootstrap.php

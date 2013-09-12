@@ -37,7 +37,7 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($pages[1]->getTitle(), 'Contact');
 		$this->assertEquals($pages[1]->getFile(), 'contact.markdown');
 		$this->assertEquals($pages[1]->getLayout(), 'page' );
-		$this->assertEquals($pages[1]->getPath(), ROOT_DIR . '/_pages/contact.markdown' );
+		$this->assertEquals($pages[1]->getPath(), ROOT_DIR . '_pages/contact.markdown' );
 		$this->assertEquals($pages[1]->getUrl(), 'contact.html' );
 
 	}
