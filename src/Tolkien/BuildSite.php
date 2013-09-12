@@ -1,5 +1,7 @@
 <?php namespace Tolkien;
 
+use Tolkien\Model\Site;
+
 class BuildSite
 {
 
@@ -21,7 +23,7 @@ class BuildSite
 
 	public function build()
 	{
-		return new Site($this->config['app']['url'], $this->config['app']['title'], $this->config['app']['tagline'], $this->getPosts(), $this->getPages(), $this->getSiteCategories(), $this->getAssets() );
+		return new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getSiteCategories(), $this->getAssets() );
 	}
 
 	public function getPosts()

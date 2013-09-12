@@ -26,11 +26,11 @@ class GenerateFactory
 				break;
 
 			case 'draft':
-				return new GenerateDraft($this->config, $this->properties['title'], $this->properties['type']);
+				return new GenerateDraft($this->prepareConfig($this->config), $this->properties['title'], $this->properties['type']);
 				break;
 
 			case 'page':
-				return new GeneratePage($this->config, $this->properties['title']);
+				return new GeneratePage($this->prepareConfig($this->config), $this->properties['title']);
 				break;
 			
 			default:

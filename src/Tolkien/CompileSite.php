@@ -27,17 +27,17 @@ class CompileSite
 	public function compilePosts()
 	{
 		foreach ($this->site->getPosts() as $post) 
-		{
+		{			
 			$template = $this->twig->loadTemplate( $post->getLayout() . '.html.tpl');
 			$content = $template->render(array('site' => $this->site, 'post' => $post ));
 			$this->createFile($content, $post);
-		}
+		}		
 	}
 
 	public function compilePages()
-	{
+	{		
 		foreach ($this->site->getPages() as $page)
-		{
+		{			
 			$template = $this->twig->loadTemplate( $page->getLayout() . '.html.tpl');
 			$content = $template->render(array('site' => $this->site, 'page' => $page));
 			$this->createFile($content, $page);
@@ -53,11 +53,6 @@ class CompileSite
 
 			copy( $asset->getPath(), $asset->getUrl() );
 		}
-	}
-
-	public function render($template)
-	{
-		return $template->render(array('site' => $this->site));
 	}
 
 	public function createFile($content, $node)

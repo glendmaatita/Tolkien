@@ -29,7 +29,9 @@ class Tolkien
 	public static function compile()
 	{
 		$factory = new BuildFactory(self::config(), 'site');
-		$site = $factory->build();
+		$buildSite = $factory->build();
+
+		$site = $buildSite->build();
 
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( self::config() ));
