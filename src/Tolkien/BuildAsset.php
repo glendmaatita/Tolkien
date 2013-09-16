@@ -22,8 +22,6 @@ class BuildAsset
 	 */
 	private $parser;
 
-	private $result;
-
 	/**
 	 * Construct
 	 *

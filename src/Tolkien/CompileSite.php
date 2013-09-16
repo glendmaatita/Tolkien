@@ -6,10 +6,29 @@
  */
 class CompileSite
 {
+
+	/**
+	 * @var Tolkien\Model\Site
+	 */
 	private $site;
+
+	/**
+	 * @var array
+	 */
 	private $config;
+
+	/**
+	 * @var Twig_Environment
+	 */
 	private $twig;
 
+	/**
+	 * Construct
+	 *
+	 * @param Tolkien\Model\Site $site
+	 * @param array $config
+	 * @param Twig_Environment $twig
+	 */
 	public function __construct($site, $config, $twig)
 	{
 		$this->site = $site;
@@ -17,6 +36,11 @@ class CompileSite
 		$this->twig = $twig;
 	}
 
+	/**
+	 * Main function to compile
+	 *
+	 * @return void
+	 */
 	public function compile()
 	{		
 		$this->compilePosts();
@@ -24,6 +48,11 @@ class CompileSite
 		$this->compileAssets();
 	}
 
+	/**
+	 * Compile Post
+	 *
+	 * @return void
+	 */
 	public function compilePosts()
 	{
 		foreach ($this->site->getPosts() as $post) 
@@ -34,6 +63,11 @@ class CompileSite
 		}		
 	}
 
+	/**
+	 * Compile Pages
+	 *
+	 * @return void
+	 */
 	public function compilePages()
 	{		
 		foreach ($this->site->getPages() as $page)
@@ -44,6 +78,11 @@ class CompileSite
 		}
 	}
 
+	/**
+	 * Compile Assets
+	 *
+	 * @return void
+	 */
 	public function compileAssets()
 	{
 		foreach ($this->site->getAssets() as $asset)
@@ -55,6 +94,13 @@ class CompileSite
 		}
 	}
 
+	/**
+	 * Create file
+	 *
+	 * @param string $content
+	 * @param Tolkien\Model\Node
+	 * @return void
+	 */
 	public function createFile($content, $node)
 	{
 		if(!file_exists(dirname($this->config['dir']['site'] . '/' . $node->getUrl())))
