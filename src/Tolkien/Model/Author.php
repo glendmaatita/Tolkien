@@ -5,11 +5,34 @@
  */
 class Author
 {
+	/**
+	 * @var string
+	 */
 	private $name;
+
+	/**
+	 * @var string
+	 */
 	private $email;
+
+	/**
+	 * @var string
+	 */
 	private $signature;
+
+	/**
+	 * @var string
+	 */
 	private $facebook;
+
+	/**
+	 * @var string
+	 */
 	private $twitter;
+
+	/**
+	 * @var string
+	 */
 	private $github;
 
 	/**

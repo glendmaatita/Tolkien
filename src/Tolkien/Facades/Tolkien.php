@@ -5,13 +5,27 @@ use Tolkien\Factories\GenerateFactory;
 use Tolkien\CompileSite;
 use Symfony\Component\Yaml\Parser;
 
+/**
+ * Main class to provide simple API
+ */
 class Tolkien
 {	
+
+	/**
+	 * Return config.yml location
+	 *
+	 * @return $string
+	 */
 	public static function config()
 	{
 		return ROOT_DIR . '/config.yml';
 	}
 
+	/**
+	 * API for build node
+	 *
+	 * @return void
+	 */
 	public static function build($type)
 	{
 		$factory = new BuildFactory(self::config(), $title);
@@ -19,6 +33,11 @@ class Tolkien
 		$buildNode->generate();
 	}
 
+	/**
+	 * API for generate node
+	 *
+	 * @return void
+	 */
 	public static function generate($type = '', $title)
 	{
 		$factory = new GenerateFactory(self::config(), $type, array('title' => $title));
@@ -26,6 +45,11 @@ class Tolkien
 		$generateNode->generate();
 	}
 
+	/**
+	 * API for compile (create file)
+	 *
+	 * @return void
+	 */
 	public static function compile()
 	{
 		$factory = new BuildFactory(self::config(), 'site');

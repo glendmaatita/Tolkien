@@ -16,6 +16,11 @@ $loader->registerNamespaces(array(
 
 $loader->register();
 
+if( file_exists( __DIR__. '/../src/Tolkien/Includes/bootstrap.php') )
+{
+	include __DIR__. '/../src/Tolkien/Includes/bootstrap.php';
+}
+
 use Tolkien\Init;
 use Tolkien\Facades\Tolkien;
 

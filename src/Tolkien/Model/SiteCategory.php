@@ -1,5 +1,8 @@
 <?php namespace Tolkien\Model;
 
+/**
+ * SiteCategory is Category
+ */
 class SiteCategory extends Category
 {
 
@@ -8,8 +11,17 @@ class SiteCategory extends Category
 	 */
 	private $url;
 
+	/**
+	 * @var array(Tolkien\Model\Post)
+	 */
 	private $posts = array();
 
+	/**
+	 * Construct
+	 *
+	 * @param string $name
+	 * @param array(Tolkien\Model\Post) $posts
+	 */
 	public function __construct($name = '', $posts = array())
 	{
 		parent::__construct($name);
@@ -37,16 +49,31 @@ class SiteCategory extends Category
 		return $this->url;
 	}
 
+	/**
+	 * Set posts of site
+	 *
+	 * @param array(Tolkien\Model\Post)
+	 */
 	public function setPosts($posts)
 	{
 		$this->posts = $posts;
 	}
 
+	/**
+	 * Get posts of site
+	 *
+	 * @return array(Tolkien\Model\Post)
+	 */
 	public function getPosts()
 	{
 		return $this->posts;
 	}
 
+	/**
+	 * Set a post to Category
+	 *
+	 * @param Tolkien\Model\Post $post
+	 */
 	public function setPost($post)
 	{
 		$this->posts[] = $post;
