@@ -1,3 +1,3 @@
 <footer>
-	<p>{{ site.title }} - {{ site.tagline }}</p>
+	<p>Powered by Tolkien - Static Blog Generator</p>
 </footer>
