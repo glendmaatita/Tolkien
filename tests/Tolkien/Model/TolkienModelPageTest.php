@@ -16,6 +16,6 @@ class TolkienModelPageTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($body, $page->getBody());
 
 		$page->setUrl();
-		$this->assertEquals( 'learn-kohana.html', $page->getUrl());
+		$this->assertEquals( '/learn-kohana.html', $page->getUrl());
 	}
 }

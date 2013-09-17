@@ -43,13 +43,13 @@ class Init
 
 	public function createBootstrap()
 	{
-		$bootstrap = __DIR__. '/../../src/Tolkien/Includes/bootstrap.php';
+		$bootstrap = __DIR__. '/../../bootstrap.php';
 		if( file_exists( $bootstrap ) )
 		{
 			unlink($bootstrap);
 		}
 
-		file_put_contents( $bootstrap, "<?php \n define('BASE_DIR', __DIR__ . '/../../../" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
+		file_put_contents( $bootstrap, "<?php \n\n date_default_timezone_set('Asia/Jakarta'); \n define('BASE_DIR', __DIR__ . '/" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
 		include $bootstrap;
 	}
 

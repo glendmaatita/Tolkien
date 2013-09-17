@@ -9,14 +9,18 @@
 		}
 	],
 	"autoload": {
-		"psr-0": { "Tolkien": "src" } 
+		"psr-0": { 
+			"Tolkien\\": ["src/", "tests/"],
+			"Tolkien\\Facades\\": ["src/Tolkien/Facades/", "tests/Tolkien/Facades/"],
+			"Tolkien\\Factories\\": ["src/Tolkien/Factories/", "tests/Tolkien/Factories/"],
+			"Tolkien\\Model\\": ["src/Tolkien/Model/", "tests/Tolkien/Model/"]
+		} 
 	},
 	"require": {
 		"phpunit/phpunit": "3.7.*",
 		"symfony/yaml": "2.3.*",
 		"twig/twig": "1.*",
-		"michelf/php-markdown": "1.3.*",
-		"symfony/class-loader": "v2.3.4"
+		"michelf/php-markdown": "1.3.*"
 	},
 	"bin": [
 		"bin/tolkien"

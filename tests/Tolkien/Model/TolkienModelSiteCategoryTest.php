@@ -11,6 +11,6 @@ class TolkienModelSiteCategoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertClassHasAttribute('url', 'Tolkien\Model\SiteCategory');
 
 		$this->assertEquals($name, $siteCategory->getName());
-		$this->assertEquals('categories/News.html', $siteCategory->getUrl());
+		$this->assertEquals('/categories/News.html', $siteCategory->getUrl());
 	}
 }

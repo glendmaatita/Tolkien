@@ -7,3 +7,6 @@ vendor/
 #generate
 blog
 src/Tolkien/Includes/bootstrap.php
+
+#bin dummy
+bin/tolkien
