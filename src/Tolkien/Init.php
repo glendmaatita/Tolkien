@@ -139,7 +139,7 @@ class Init
 		return $array = array(
 				"config" => array(
 					"name" => $this->name, 
-					"url" => '',
+					"url" => '/',
 					"title" => "Your Site Title",
 					"tagline" => "Your Site Tagline" ),
 				"dir" => array(

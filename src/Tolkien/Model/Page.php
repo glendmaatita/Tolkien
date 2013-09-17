@@ -24,7 +24,7 @@ class Page extends Node
 	 */
 	public function setUrl()
 	{
-		$this->url = $this->getFileName() . '.html';
+		$this->url = '/' . $this->getFileName() . '.html';
 	}
 
 	/**
