@@ -1,7 +1,7 @@
 <?php
 
 //define('ROOT_DIR', basename(__DIR__ . '/../../blog/'));
-
+/*
 require_once realpath(__DIR__.'/../../../vendor/autoload.php');
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;
@@ -14,7 +14,7 @@ $loader->registerNamespaces(array(
 	'Tolkien\Facades' => __DIR__.'/../../../src/Tolkien/Facades'
 ));
 
-$loader->register();
+$loader->register();*/
 
 if( file_exists( __DIR__. '/../../../src/Tolkien/Includes/bootstrap.php') )
 {

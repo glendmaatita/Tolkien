@@ -2,7 +2,19 @@
 
 <?php
 
-include __DIR__. '/../../vendor/Tolkien/Includes/include.php';
+require_once realpath(__DIR__.'/../vendor/autoload.php');
+
+use Symfony\Component\ClassLoader\UniversalClassLoader;
+
+$loader = new UniversalClassLoader();
+$loader->useIncludePath(true);
+
+$loader->registerNamespaces(array(
+	'Tolkien' => __DIR__. '/../src/Tolkien',
+	'Tolkien\Facades' => __DIR__.'/../src/Tolkien/Facades'
+));
+
+$loader->register();
 
 use Tolkien\Init;
 use Tolkien\Facades\Tolkien;

@@ -44,10 +44,12 @@ class Init
 	public function createBootstrap()
 	{
 		$bootstrap = __DIR__. '/../../src/Tolkien/Includes/bootstrap.php';
-		if( !file_exists( $bootstrap ) )
+		if( file_exists( $bootstrap ) )
 		{
-			file_put_contents( $bootstrap, "<?php \n define('BASE_DIR', __DIR__ . '/../../../" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
+			unlink($bootstrap);
 		}
+
+		file_put_contents( $bootstrap, "<?php \n define('BASE_DIR', __DIR__ . '/../../../" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
 		include $bootstrap;
 	}
 
@@ -92,7 +94,18 @@ class Init
 		  mkdir($this->config['dir']['asset'] . '/css');
 		}
 
-		file_put_contents( $this->config['dir']['asset'] . '/css/style.css', file_get_contents(__DIR__ . '/tpl/style.css.tpl'));
+		//js
+		if (!is_dir($this->config['dir']['asset'] . '/js')) {
+		  mkdir($this->config['dir']['asset'] . '/js');
+		}
+
+		file_put_contents( $this->config['dir']['asset'] . '/css/bootstrap.min.css', file_get_contents(__DIR__ . '/tpl/css/bootstrap.min.css'));
+
+		file_put_contents( $this->config['dir']['asset'] . '/css/bootstrap-theme.min.css', file_get_contents(__DIR__ . '/tpl/css/bootstrap-theme.min.css'));
+
+		file_put_contents( $this->config['dir']['asset'] . '/js/jquery.js', file_get_contents(__DIR__ . '/tpl/js/jquery.js'));
+
+		file_put_contents( $this->config['dir']['asset'] . '/js/bootstrap.min.js', file_get_contents(__DIR__ . '/tpl/js/bootstrap.min.js'));
 
 		// index html
 		file_put_contents( $this->config['dir']['layout'] . '/index.html.tpl', file_get_contents(__DIR__ . '/tpl/index.html.tpl'));
