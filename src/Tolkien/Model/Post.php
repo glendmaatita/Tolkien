@@ -176,9 +176,9 @@ class Post extends Node
 	 *
 	 * @todo set excerpt
 	 */
-	public function setExcerpt()
+	public function setExcerpt($excerpt)
 	{
-
+		$this->excerpt = $excerpt;
 	}
 
 	/**

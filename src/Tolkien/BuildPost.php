@@ -120,6 +120,7 @@ class BuildPost implements BuildNode
 			else
 			{
 				$current = rtrim(fgets($content));
+				// get header
 				while(  $current != '---' &&  $header_parsed_flag == true)
 				{
 					$header_parsed .= $current . "\n";
@@ -133,6 +134,7 @@ class BuildPost implements BuildNode
 					$header_parsed_flag = false;
 					continue;
 				}
+
 				$body .= $current . "\n";
 			}			
 		}
@@ -140,12 +142,22 @@ class BuildPost implements BuildNode
 		//parse header
 		$header = $this->parser->parse($header_parsed);
 
+		$body_excerpt = explode("[more]", $body);
+		if(count($body_excerpt) == '2')
+		{
+			$excerpt = trim($body[0]);
+			$body = trim($body[0]) . trim($body[1]);
+		}
+
 		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $this->defineAuthor($header), $this->defineCategories($header) );
 
 		$post->setPublishDate();
 		$post->setUrl();
 		$post->setLayout($header['layout']);
 		$post->setPath($path);
+
+		if(isset($excerpt))
+			$post->setExcerpt($this->setBody($file, $excerpt));
 
 		return $post;
 	}

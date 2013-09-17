@@ -45,6 +45,7 @@ class CompileSite
 	{		
 		$this->compilePosts();
 		$this->compilePages();
+		$this->compileSiteCategories();
 		$this->compileAssets();
 	}
 
@@ -75,6 +76,16 @@ class CompileSite
 			$template = $this->twig->loadTemplate( $page->getLayout() . '.html.tpl');
 			$content = $template->render(array('site' => $this->site, 'page' => $page));
 			$this->createFile($content, $page);
+		}
+	}
+
+	public function compileSiteCategories()
+	{
+		foreach ($this->site->getSiteCategories() as $siteCategory) 
+		{
+			$template = $this->twig->loadTemplate( 'site_categories.html.tpl' );
+			$content = $template->render(array('site' => $this->site, 'siteCategory' => $siteCategory));
+			$this->createFile($content, $siteCategory);
 		}
 	}
 

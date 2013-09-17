@@ -15,7 +15,7 @@ class TolkienBuildAssetTest extends \PHPUnit_Framework_TestCase
 	public function testBuildAsset()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
 		$buildAsset = new BuildAsset($config, $parser);
 		$buildAsset->build();

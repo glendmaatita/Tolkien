@@ -16,7 +16,7 @@ class TolkienBuildDraftTest extends \PHPUnit_Framework_TestCase
 	public function testBuildDraft()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
 		$draft_1 = new GenerateDraft( $config, 'Rails Tutorial', 'post' );
 		$draft_1->generate();

@@ -10,7 +10,7 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 	public function __construct()
 	{
 		$this->init = new Init('blog');
-		@rmdir( ROOT_DIR );
+		$this->rrmdir( ROOT_DIR );
 		$this->init->create();
 	}
 
@@ -45,13 +45,13 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		//$this->assertFileExists( ROOT_DIR . '/index.html' );
 
 		// validate configfile
-		$this->assertContains('config', file_get_contents( ROOT_DIR . '/config.yml'));
+		$this->assertContains('config', file_get_contents( ROOT_DIR . 'config.yml'));
 	}
 
 	public function testConfigFile()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml'));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml'));
 
 		$this->assertEquals( $this->init->getName() , $config['config']['name']);
 		$this->assertContains( $this->init->getName() , $config['config']['name']);
@@ -61,5 +61,18 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( ROOT_DIR . '_sites' , $config['dir']['site']);
 		$this->assertEquals( ROOT_DIR . '_layouts' , $config['dir']['layout']);
 		$this->assertEquals( ROOT_DIR . '_assets' , $config['dir']['asset']);
+	}
+
+	public function rrmdir($dir) 
+	{
+		foreach(glob("{$dir}/*") as $file)
+    {
+        if(is_dir($file)) { 
+            $this->rrmdir($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($dir);
 	}
 }

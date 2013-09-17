@@ -16,7 +16,7 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 	public function testBuildPost()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
 		$page_1 = new GeneratePage( $config, 'Contact' );
 		$page_1->generate();
@@ -39,7 +39,6 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($pages[1]->getLayout(), 'page' );
 		$this->assertEquals($pages[1]->getPath(), ROOT_DIR . '_pages/contact.markdown' );
 		$this->assertEquals($pages[1]->getUrl(), 'contact.html' );
-
 	}
 
 	public function rrmdir($dir) 

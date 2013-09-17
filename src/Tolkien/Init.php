@@ -47,8 +47,8 @@ class Init
 		if( !file_exists( $bootstrap ) )
 		{
 			file_put_contents( $bootstrap, "<?php \n define('BASE_DIR', __DIR__ . '/../../../" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
-			include $bootstrap;
 		}
+		include $bootstrap;
 	}
 
 	/**
@@ -102,6 +102,9 @@ class Init
 		
 		// page layout
 		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/tpl/page.html.tpl'));
+
+		// page layout
+		file_put_contents( $this->config['dir']['layout'] . '/site_categories.html.tpl', file_get_contents(__DIR__ . '/tpl/site_categories.html.tpl'));
 
 		// sidebar layout
 		file_put_contents( $this->config['dir']['layout'] . '/sidebar.html.tpl', file_get_contents(__DIR__ . '/tpl/sidebar.html.tpl'));

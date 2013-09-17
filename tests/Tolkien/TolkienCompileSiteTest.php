@@ -6,6 +6,7 @@ use Tolkien\Model\Post;
 use Tolkien\Model\Author;
 use Tolkien\Model\Category;
 use Tolkien\Model\Site;
+use Tolkien\Model\SiteCategory;
 
 class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,6 +21,7 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 	public function testCompileSite()
 	{
 		$assets = array();
+		$siteCategories = array();
 
 		$page_1 = new Page('contact.markdown', 'Contact to our corp', 'Contact Body');
 		$page_1->setLayout('page');
@@ -43,7 +45,9 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 		$post_2->setUrl();
 		$posts = array($post_1, $post_2);
 
-		$site = new Site( $url = 'http://localhost/blog/', $title = 'My Another Blog', $tagline = 'My Blog My Way', $posts, $pages, $assets );
+		$siteCategories = array(new SiteCategory('News', array($post_1, $post_2)));
+
+		$site = new Site( $url = 'http://localhost/blog/', $title = 'My Another Blog', $tagline = 'My Blog My Way', $posts, $pages, $siteCategories, $assets );
 
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
@@ -54,5 +58,14 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 		$compiler = new CompileSite($site, $config, $twig);
 		$compiler->compile();
 
+		$this->assertFileExists( ROOT_DIR . '_sites/' . $page_1->getUrl() );
+		$this->assertFileExists( ROOT_DIR . '_sites/' . $page_2->getUrl() );
+		$this->assertFileExists( ROOT_DIR . '_sites/' . $page_3->getUrl() );
+
+		$this->assertFileExists( ROOT_DIR . '_sites/' . $post_1->getUrl() );
+		$this->assertFileExists( ROOT_DIR . '_sites/' . $post_2->getUrl() );
+
+		$siteCategories = $site->getSiteCategories();
+		$this->assertFileExists( ROOT_DIR . '_sites/categories/' . $siteCategories[0]->getName() . '.html');
 	}		
 }

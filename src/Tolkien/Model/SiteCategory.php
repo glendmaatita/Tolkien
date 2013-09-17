@@ -8,9 +8,12 @@ class SiteCategory extends Category
 	 */
 	private $url;
 
-	public function __construct($name)
+	private $posts = array();
+
+	public function __construct($name = '', $posts = array())
 	{
 		parent::__construct($name);
+		$this->posts = $posts;
 		$this->setUrl();
 	}
 
@@ -32,5 +35,20 @@ class SiteCategory extends Category
 	public function getUrl()
 	{
 		return $this->url;
+	}
+
+	public function setPosts($posts)
+	{
+		$this->posts = $posts;
+	}
+
+	public function getPosts()
+	{
+		return $this->posts;
+	}
+
+	public function setPost($post)
+	{
+		$this->posts[] = $post;
 	}
 }
