@@ -16,9 +16,9 @@ class Tolkien
 	 *
 	 * @return $string
 	 */
-	public static function config()
+	public static function config($name)
 	{
-		return ROOT_DIR . '/config.yml';
+		return $name . '/config.yml';
 	}
 
 	/**
@@ -26,9 +26,9 @@ class Tolkien
 	 *
 	 * @return void
 	 */
-	public static function build($type)
+	public static function build($name, $type)
 	{
-		$factory = new BuildFactory(self::config(), $title);
+		$factory = new BuildFactory(self::config($name), $title);
 		$buildNode = $factory->generate();
 		$buildNode->generate();
 	}
@@ -38,9 +38,9 @@ class Tolkien
 	 *
 	 * @return void
 	 */
-	public static function generate($type = '', $title)
+	public static function generate($name, $type = '', $title)
 	{
-		$factory = new GenerateFactory(self::config(), $type, array('title' => $title));
+		$factory = new GenerateFactory(self::config($name), $type, array('title' => $title));
 		$generateNode = $factory->generate();
 		$generateNode->generate();
 	}
@@ -50,20 +50,28 @@ class Tolkien
 	 *
 	 * @return void
 	 */
-	public static function compile()
+	public static function compile($name)
 	{
-		$factory = new BuildFactory(self::config(), 'site');
+		$factory = new BuildFactory(self::config($name), 'site');
 		$buildSite = $factory->build();
 
 		$site = $buildSite->build();
 
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( self::config() ));
+		$config = $parser->parse(file_get_contents( self::config($name) ));
 
 		$loader = new \Twig_Loader_Filesystem( $config['dir']['layout'] );
 		$twig = new \Twig_Environment($loader);
 
 		$compiler = new CompileSite($site, $config, $twig);
 		$compiler->compile();
+	}
+
+	/**
+	 * Serve Tolkien with built in webserver
+	 */
+	public static function serve($name)
+	{
+		shell_exec('php -S localhost:3000 -t ' . $name . '/_sites');
 	}
 }

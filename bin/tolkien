@@ -4,6 +4,8 @@
 
 require_once realpath(__DIR__.'/../vendor/autoload.php');
 
+date_default_timezone_set('Asia/Jakarta');
+
 use Tolkien\Init;
 use Tolkien\Facades\Tolkien;
 
@@ -17,10 +19,13 @@ switch($argv[1])
 		$init->create();
 		break;
 	case 'generate':
-		Tolkien::generate($argv[2], $argv[3]);
+		Tolkien::generate($argv[2], $argv[3], $argv[4]);
 		break;
 	case 'compile':
-		Tolkien::compile();
+		Tolkien::compile($argv[2]);
+		break;
+	case 'serve':
+		Tolkien::serve($argv[2]);
 		break;
 	default:
 		help();
@@ -32,9 +37,9 @@ function help()
 		echo <<<EOT
 ================= Available Commands ===================\n
 php (vendor\bin\)tolkien init [name]
-php (vendor\bin\)tolkien generate [post, draft, page] [name]
-php (vendor\bin\)tolkien build [option: post, draft, page]
-php (vendor\bin\)tolkien compile
+php (vendor\bin\)tolkien generate [name] [post, draft, page] [name]
+php (vendor\bin\)tolkien build [name] [option: post, draft, page]
+php (vendor\bin\)tolkien compile [name]
 \n================= end ===================\n\n
 EOT;
 }

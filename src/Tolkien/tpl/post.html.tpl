@@ -12,10 +12,11 @@
 		  </em>
 		  on {{ post.publishDate}}
 	  </p>
-	  {{ post.body | raw }}  
-	</div>
-	<p>by {{ post.author.name }}</p>
-  <p>Contact me on {{ post.author.twitter }} | {{ post.author.github }}</p>
+	  {{ post.body | raw }} 
+
+	  <p>by {{ post.author.name }}</p>
+  	<p>Contact me on {{ post.author.twitter }} | {{ post.author.github }}</p>
+	</div>	
 
 	{% include "sidebar.html.tpl" %}
 {% endblock %}
