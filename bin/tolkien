@@ -36,10 +36,14 @@ function help()
 {
 		echo <<<EOT
 ================= Available Commands ===================\n
-php (vendor\bin\)tolkien init [name]
-php (vendor\bin\)tolkien generate [name] [post, draft, page] [name]
-php (vendor\bin\)tolkien build [name] [option: post, draft, page]
-php (vendor\bin\)tolkien compile [name]
+Initialize First
+(php) (vendor\bin\)tolkien init [name]
+\nGenerate Post
+(php) (vendor\bin\)tolkien generate [name] [post, draft, page] [name]
+\nGenerate Website
+(php) (vendor\bin\)tolkien compile [name]
+\nActivate Webserver
+(php) (vendor\bin\)tolkien serve [name]
 \n================= end ===================\n\n
 EOT;
 }
