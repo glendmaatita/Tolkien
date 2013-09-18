@@ -55,12 +55,12 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->init->getName() , $config['config']['name']);
 		$this->assertContains( $this->init->getName() , $config['config']['name']);
-		$this->assertEquals( ROOT_DIR . '_posts' , $config['dir']['post']);
-		$this->assertEquals( ROOT_DIR . '_pages' , $config['dir']['page']);
-		$this->assertEquals( ROOT_DIR . '_drafts' , $config['dir']['draft']);
-		$this->assertEquals( ROOT_DIR . '_sites' , $config['dir']['site']);
-		$this->assertEquals( ROOT_DIR . '_layouts' , $config['dir']['layout']);
-		$this->assertEquals( ROOT_DIR . '_assets' , $config['dir']['asset']);
+		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_posts' , $config['dir']['post']);
+		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_pages' , $config['dir']['page']);
+		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_drafts' , $config['dir']['draft']);
+		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_sites' , $config['dir']['site']);
+		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_layouts' , $config['dir']['layout']);
+		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_assets' , $config['dir']['asset']);
 	}
 
 	public function rrmdir($dir) 

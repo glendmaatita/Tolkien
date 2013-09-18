@@ -35,22 +35,10 @@ class Init
 	 */
 	public function create()
 	{	
-		$this->createBootstrap();	
-		$this->createBlogDirectory();
-		$this->createConfigFile();
-		$this->createTemplateFile();
-	}
-
-	public function createBootstrap()
-	{
-		$bootstrap = __DIR__. '/../../bootstrap.php';
-		if( file_exists( $bootstrap ) )
-		{
-			unlink($bootstrap);
-		}
-
-		file_put_contents( $bootstrap, "<?php \n\n date_default_timezone_set('Asia/Jakarta'); \n define('BASE_DIR', __DIR__ . '/" . $this->name . "/'); \n define('ROOT_DIR', basename(BASE_DIR) . '/'); " );
-		include $bootstrap;
+		$blog_dir = getcwd() . '/' . $this->name . '/';
+		$this->createBlogDirectory($blog_dir);
+		$this->createConfigFile($blog_dir);
+		$this->createTemplateFile($blog_dir);
 	}
 
 	/**
@@ -58,10 +46,10 @@ class Init
 	 *
 	 * @return void
 	 */
-	public function createBlogDirectory()
+	public function createBlogDirectory($blog_dir)
 	{
-		@mkdir( BASE_DIR , 0700 );
-		$this->config = $this->configContent();		
+		@mkdir($blog_dir , 0700 );
+		$this->config = $this->configContent( $blog_dir );
 		@mkdir( $this->config['dir']['post'], 0700 );
 		@mkdir( $this->config['dir']['page'], 0700 );
 		@mkdir( $this->config['dir']['draft'], 0700 );
@@ -75,10 +63,10 @@ class Init
 	 *
 	 * @return void
 	 */
-	public function createConfigFile()
+	public function createConfigFile($blog_dir)
 	{
 		$dumper = new Dumper();
-		file_put_contents( ROOT_DIR . '/config.yml', $dumper->dump( $this->configContent(), 2 ) );
+		file_put_contents( $blog_dir . 'config.yml', $dumper->dump( $this->configContent($blog_dir), 2 ) );
 	}
 
 	/**
@@ -134,8 +122,10 @@ class Init
 	 *
 	 * @return array
 	 */
-	public function configContent()
+	public function configContent($blog_dir)
 	{
+		$base_blog = basename($blog_dir);
+
 		return $array = array(
 				"config" => array(
 					"name" => $this->name, 
@@ -143,12 +133,12 @@ class Init
 					"title" => "Your Site Title",
 					"tagline" => "Your Site Tagline" ),
 				"dir" => array(
-					"post" => ROOT_DIR . "_posts",
-					"page" => ROOT_DIR . "_pages",
-					"draft" => ROOT_DIR . "_drafts",
-					"site" => ROOT_DIR . "_sites",
-					"asset" => ROOT_DIR . "_assets",
-					"layout" => ROOT_DIR . "_layouts",
+					"post" => $base_blog . "/_posts",
+					"page" => $base_blog . "/_pages",
+					"draft" => $base_blog . "/_drafts",
+					"site" => $base_blog . "/_sites",
+					"asset" => $base_blog . "/_assets",
+					"layout" => $base_blog . "/_layouts",
 					)
 			);
 	}

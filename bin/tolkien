@@ -2,16 +2,7 @@
 
 <?php
 
-require_once realpath(__DIR__.'/../../vendor/autoload.php');
-
-if( file_exists( __DIR__. '/../../bootstrap.php') )
-{
-	include __DIR__. '/../../bootstrap.php';
-}
-else {
-	help();
-	die();
-}
+require_once realpath(__DIR__.'/../vendor/autoload.php');
 
 use Tolkien\Init;
 use Tolkien\Facades\Tolkien;

@@ -39,13 +39,13 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($posts[0]->getFile(), Date('Y-m-d') . '-latest-android-release-part-1.markdown');
 		$this->assertEquals($posts[0]->getPublishDate(), Date('Y-m-d') );
 		$this->assertEquals($posts[0]->getLayout(), 'post' );
-		$this->assertEquals($posts[0]->getPath(), ROOT_DIR . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-1.markdown' );
+		$this->assertEquals($posts[0]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-1.markdown' );
 
 		$this->assertEquals($posts[1]->getTitle(), 'Latest Android Release Part 2');
 		$this->assertEquals($posts[1]->getFile(), Date('Y-m-d') . '-latest-android-release-part-2.markdown');
 		$this->assertEquals($posts[1]->getPublishDate(), Date('Y-m-d') );
 		$this->assertEquals($posts[1]->getLayout(), 'post' );
-		$this->assertEquals($posts[1]->getPath(), ROOT_DIR . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-2.markdown' );
+		$this->assertEquals($posts[1]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-2.markdown' );
 		
 	}
 
