@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         {% for page in site.pages %}
-          <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+          <li><a href="{{ page.url }}">{{ page.title | capitalize }}</a></li>
         {% endfor %}
       </ul>          
     </div>

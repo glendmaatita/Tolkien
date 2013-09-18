@@ -6,8 +6,8 @@
 	  <h3>{{ post.title }}</h3>
 	  <p>Categories
 	  	<em>
-	  	{% for category in site.categories %}
-			  <a href="{{ category.url }}">{{ category.name }}<a> 
+	  	{% for siteCategory in site.siteCategories %}
+			  <a href="{{ siteCategory.url }}">{{ siteCategory.name | capitalize }}<a> 
 		  {% endfor %}
 		  </em>
 		  on {{ post.publishDate}}
