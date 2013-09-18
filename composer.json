@@ -10,10 +10,7 @@
 	],
 	"autoload": {
 		"psr-0": { 
-			"Tolkien\\": ["src/", "tests/"],
-			"Tolkien\\Facades\\": ["src/Tolkien/Facades/", "tests/Tolkien/Facades/"],
-			"Tolkien\\Factories\\": ["src/Tolkien/Factories/", "tests/Tolkien/Factories/"],
-			"Tolkien\\Model\\": ["src/Tolkien/Model/", "tests/Tolkien/Model/"]
+			"Tolkien": ["src", "tests"]
 		} 
 	},
 	"require": {
