@@ -7,7 +7,7 @@
 	  <p>Categories
 	  	<em>
 	  	{% for siteCategory in site.siteCategories %}
-			  <a href="{{ siteCategory.url }}">{{ siteCategory.name | capitalize }}<a> 
+			  <a href="{{ siteCategory.url }}">{{ siteCategory.name | capitalize }}</a> 
 		  {% endfor %}
 		  </em>
 		  on {{ post.publishDate}}
