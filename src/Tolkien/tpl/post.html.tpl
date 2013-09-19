@@ -14,8 +14,7 @@
 	  </p>
 	  {{ post.body | raw }} 
 
-	  <p>by {{ post.author.name }}</p>
-  	<p>Contact me on {{ post.author.twitter }} | {{ post.author.github }}</p>
+	  <p>by {{ post.author.name }} | Mention me on {{ post.author.twitter }}</p>
 	</div>	
 
 	{% include "sidebar.html.tpl" %}

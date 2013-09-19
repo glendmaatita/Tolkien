@@ -6,7 +6,13 @@
 		{% for post in siteCategory.posts %}
 		  <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 		  <p>by {{ post.author.name }} on {{ post.publishDate}} </p>
-		  {{ post.body | raw }}
+		  {% if post.excerpt is null %}
+		  	{{ post.body | raw }}
+		  {% else %}
+		  	{{ post.excerpt| raw }}
+		  	<p><a href="{{ post.url }}">Read More</a></p>
+		  {% endif %}
+		  <hr>
 	  {% endfor %}
 	</div>
 	{% include "sidebar.html.tpl" %}
