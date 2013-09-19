@@ -2,7 +2,6 @@
 
 class TolkienModelAssetTest extends \PHPUnit_Framework_TestCase
 {
-
 	public function testAssetAttributes()
 	{
 		$asset = new Asset($path = 'assets/css/style.css', $url = '_assets/css/style.css');
