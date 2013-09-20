@@ -13,7 +13,7 @@ The best way to install Tolkien is to use Composer to install it. Add this follo
 
     {
         "require": {
-            "tolkien/tolkien": "dev-master"
+            "tolkien/tolkien": "v0.5.0"
         }
     }
     
