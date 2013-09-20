@@ -1,7 +1,7 @@
 {
 	"name": "tolkien/tolkien",
 	"description": "Simple Blogging Engine inspired by Jekyll",
-	"license": "Sembarangmu",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Glend Maatita",
