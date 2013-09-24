@@ -5,7 +5,7 @@ Tolkien is a simple static web generator (especially for blog) mainly inspired b
 Requirement
 -----------
 * Minimum PHP >= 5.3.*
-* Very Recommended to use PHP >= 5.4 because Tolkien rely on PHP built-in webserver to run your static web page directly via Tolkien 'serve' command
+* Very Recommended to use PHP >= 5.4 because Tolkien relies on PHP built-in webserver to run your static web page directly via Tolkien 'serve' command
 
 Installation
 ------------
@@ -107,7 +107,7 @@ Serve command relies on PHP Built-in webserver to run our static web page direct
     vendor\bin\tolkien serve myblog
 
 ## Layout
-To create layout files under **_layout**, Tolkien use  [Twig](http://http://twig.sensiolabs.org/) template engine which is awesome. In other words, you can use all Twig's features including Filters, Functions, Control Structure, Expression, etc.
+To create layout files under **_layout**, Tolkien use  [Twig](http://twig.sensiolabs.org/) template engine which is awesome. In other words, you can use all Twig's features including Filters, Functions, Control Structure, Expression, etc.
 
 The default layout is available under **_layout**, but you are totally free to create your own layout. Just use Twig template engine, and some variables below.
 
@@ -161,10 +161,12 @@ then, change the layout to index
     layout: index
     title: Home
     ---
+    
+## Deployment
+Check [Heston](http://github.com/glendmaatita/heston/) on Github for easy deployment using FTP. If you use Heston, just run this command below to deploy your site that generated with Tolkien to your FTP Server
 
+    vendor\bin\heston ftp://username:password@ftp.domain.tld:port myblog/_sites/ "_your_comment_"
 
 License
 ----
-
-MIT 
-    
+Tolkien is released under the MIT License. Check License file for detail
