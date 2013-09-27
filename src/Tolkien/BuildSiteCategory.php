@@ -11,7 +11,14 @@ class BuildSiteCategory implements BuildNode
 	 */
 	private $posts;
 
+	/**
+	 * @var array(Model\SiteCategory)
+	 */
 	private $siteCategories = array();
+
+	/**
+	 * @var array(string)
+	 */
 	private $categoriesName = array();
 
 	/**
@@ -19,11 +26,21 @@ class BuildSiteCategory implements BuildNode
 	 */
 	private $categories = array();
 
+	/**
+	 * Construct
+	 *
+	 * @param array(Model\Post) $posts
+	 */
 	public function __construct($posts)
 	{
 		$this->posts = $posts;
 	}
 
+	/**
+	 * Build Site Category
+	 *
+	 * @return void
+	 */
 	public function build()
 	{
 		foreach ($this->posts as $post) 
@@ -54,6 +71,11 @@ class BuildSiteCategory implements BuildNode
 		}
 	}
 
+	/**
+	 * Get all site categories
+	 *
+	 * @return array(Model\SiteCategory)
+	 */
 	public function getSiteCategories()
 	{
 		return $this->siteCategories;
