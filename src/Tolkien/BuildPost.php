@@ -27,8 +27,6 @@ class BuildPost implements BuildNode
 	 */
 	private $parser;
 
-	private $result;
-
 	/**
 	 * Construct
 	 *
@@ -48,30 +46,36 @@ class BuildPost implements BuildNode
 	 */
 	public function build()
 	{
-		$this->posts = $this->find_all_files($this->config['dir']['post']); // get all post files under _posts/		
+		$this->find_all_files($this->config['dir']['post']); // get all post files under _posts/		
 	}	
 
+	/**
+	 * Find All file on asset dir and create array of Model\Post
+	 *
+	 * @param string $dir
+	 * @return recursive
+	 */
 	public function find_all_files($dir) 
-	{ 
-    $root = scandir($dir); 
-    foreach($root as $value) 
-    { 
-        if($value === '.' || $value === '..') 
-        {
-        	continue;
-        } 
-        if(is_file("$dir/$value")) 
-        {
-        	$this->result[] = $this->read( "$dir/$value", $value );
-        	continue;
-        } 
-        foreach($this->find_all_files("$dir/$value") as $value) 
-        {
-            $this->result[] = $this->read( "$dir/$value", $value );
-        } 
-    } 
-
-    return $this->result; 
+	{
+		$root = scandir($dir);
+		foreach($root as $value)
+		{
+			if($value === '.' || $value === '..')
+			{
+				continue;
+			}
+			if(is_file("$dir/$value"))
+			{
+				$result[] = "$dir/$value";
+				$this->posts[] = $this->read( "$dir/$value", $value );
+				continue;
+			}
+			foreach($this->find_all_files("$dir/$value") as $value)
+			{
+				$result[] = $value;
+			}
+		}
+		return $result;
 	} 
 	
 	/**

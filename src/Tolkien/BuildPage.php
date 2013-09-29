@@ -25,8 +25,6 @@ class BuildPage implements BuildNode
 	 */
 	private $parser;
 
-	private $result = array();
-
 	/**
 	 * Construct
 	 *
@@ -46,29 +44,36 @@ class BuildPage implements BuildNode
 	 */
 	public function build()
 	{		
-		$this->pages = $this->find_all_files($this->config['dir']['page']);  // get all page files under _pages/
+		$this->find_all_files($this->config['dir']['page']);  // get all page files under _pages/
 	}
 
+	/**
+	 * Find All file on asset dir and create array of Model\Page
+	 *
+	 * @param string $dir
+	 * @return recursive
+	 */
 	public function find_all_files($dir) 
-	{ 
-    $root = scandir($dir); 
-    foreach($root as $value) 
-    { 
-        if($value === '.' || $value === '..') 
-        {
-        	continue;
-        } 
-        if(is_file("$dir/$value")) 
-        {
-        	$this->result[] = $this->read( "$dir/$value", $value );
-        	continue;
-        } 
-        foreach($this->find_all_files("$dir/$value") as $value) 
-        {
-            $this->result[] = $this->read( "$dir/$value", $value );
-        } 
-    } 
-    return $this->result; 
+	{
+		$root = scandir($dir);
+		foreach($root as $value)
+		{
+			if($value === '.' || $value === '..')
+			{
+				continue;
+			}
+			if(is_file("$dir/$value"))
+			{
+				$result[] = "$dir/$value";
+				$this->pages[] = $this->read( "$dir/$value", $value );
+				continue;
+			}
+			foreach($this->find_all_files("$dir/$value") as $value)
+			{
+				$result[] = $value;
+			}
+		}
+		return $result; 
 	} 	
 
 	/**

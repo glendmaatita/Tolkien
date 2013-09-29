@@ -48,7 +48,7 @@ class BuildAsset
 	 * Find All file on asset dir and create array of Model\Asset
 	 *
 	 * @param string $dir
-	 * @return void
+	 * @return recursive
 	 */
 	public function find_all_files($dir) 
 	{

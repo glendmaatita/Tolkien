@@ -47,7 +47,7 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 
 		$siteCategories = array(new SiteCategory('News', array($post_1, $post_2)));
 
-		$site = new Site( $url = 'http://localhost/blog/', $title = 'My Another Blog', $tagline = 'My Blog My Way', $posts, $pages, $siteCategories, $assets );
+		$site = new Site( $url = 'http://localhost:3000/', $title = 'My Another Blog', $tagline = 'My Blog My Way', $posts, $pages, $siteCategories, $assets );
 
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
