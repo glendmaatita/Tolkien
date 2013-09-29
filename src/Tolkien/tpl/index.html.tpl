@@ -14,13 +14,12 @@
 		  {% endif %}		  
 		  <hr>
 	  {% endfor %}
-	  <hr>
-	  {% if pagination.previousPage is defined %}
+	  {% if pagination.previousPage is not null %}
 		  <div class="col-md-3">
 		  	<a href="{{ pagination.previousPage.url }}"><< Sebelumnya</a>
 		  </div>
 		 {% endif %}
-		 {% if pagination.previousPage is defined %}
+		 {% if pagination.nextPage is not null %}
 		  <div class="col-md-3 pull-right">
 		  	<a href="{{ pagination.nextPage.url }}">Berikutnya >></a>
 		  </div>
@@ -28,4 +27,3 @@
 	</div>
 	{% include "sidebar.html.tpl" %}
 {% endblock %}
-

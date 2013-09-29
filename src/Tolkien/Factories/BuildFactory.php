@@ -67,11 +67,11 @@ class BuildFactory
 				break;
 
 			case 'pagination':
-				return $this->getPagination();
+				return $this->getBuildPagination();
 				break;
 
 			case 'site':
-				return new BuildSite($this->prepareConfig($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildSiteCategory());
+				return new BuildSite($this->prepareConfig($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildSiteCategory(), $this->getBuildPagination());
 				break;
 			
 			default:
@@ -137,7 +137,7 @@ class BuildFactory
 	 *
 	 * @return BuildPagination
 	 */
-	public function getPagination()
+	public function getBuildPagination()
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
