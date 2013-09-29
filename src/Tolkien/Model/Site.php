@@ -52,7 +52,7 @@ class Site
 	 * @param string $title
 	 * @param string $tagline
 	 */
-	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $siteCategories = array(), $assets = array(), $pagination = array())
+	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $siteCategories = array(), $assets = array(), $paginations = array())
 	{
 		$this->title = $title;
 		$this->url = $url;

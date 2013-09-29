@@ -1,6 +1,6 @@
 <?php namespace Tolkien;
 
-use Model\Pagination;
+use Tolkien\Model\Pagination;
 
 class BuildPagination implements BuildNode
 {
@@ -17,13 +17,20 @@ class BuildPagination implements BuildNode
 
 	public function build()
 	{
-		$pageNumber = 0;
-		for($count = 0; $count < count($this->posts), $count++) 
+		$pageNumber = -1;
+		$count = 0;
+
+		while($count < count($this->posts))
 		{
-			$i = null; // $i define post per page
-			$pageNumber++;
-			$pagination = new Pagination($pageNumber, '/index' . $pageNumber . '.html');
-			while($i <= $this->config['config']['pagination'])
+			$i = 0; // $i define post per page
+			$pageNumber++; 
+
+			if($pageNumber == 0)
+				$pagination = new Pagination($pageNumber, '/index.html');
+			else
+				$pagination = new Pagination($pageNumber, '/index' . $pageNumber . '.html');
+
+			while($i < $this->config['config']['pagination'] && $count < count($this->posts))
 			{
 				$pagination->setPost($this->posts[$count]);
 				$i++;

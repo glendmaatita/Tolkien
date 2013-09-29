@@ -87,12 +87,12 @@ class Init
 		  mkdir($this->config['dir']['asset'] . '/js');
 		}
 
+		// css file
 		file_put_contents( $this->config['dir']['asset'] . '/css/bootstrap.min.css', file_get_contents(__DIR__ . '/tpl/css/bootstrap.min.css'));
-
 		file_put_contents( $this->config['dir']['asset'] . '/css/bootstrap-theme.min.css', file_get_contents(__DIR__ . '/tpl/css/bootstrap-theme.min.css'));
 
+		// js file
 		file_put_contents( $this->config['dir']['asset'] . '/js/jquery.js', file_get_contents(__DIR__ . '/tpl/js/jquery.js'));
-
 		file_put_contents( $this->config['dir']['asset'] . '/js/bootstrap.min.js', file_get_contents(__DIR__ . '/tpl/js/bootstrap.min.js'));
 
 		// index html
@@ -131,7 +131,8 @@ class Init
 					"name" => $this->name, 
 					"url" => '/',
 					"title" => "Your Site Title",
-					"tagline" => "Your Site Tagline" ),
+					"tagline" => "Your Site Tagline",
+					"pagination" => 10),					
 				"dir" => array(
 					"post" => $base_blog . "/_posts",
 					"page" => $base_blog . "/_pages",

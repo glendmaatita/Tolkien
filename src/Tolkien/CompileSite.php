@@ -48,9 +48,6 @@ class CompileSite
 		$this->compileSiteCategories();
 		$this->compileAssets();
 		$this->compilePagination();
-
-		if(isset($this->config['config']['pagination']))
-			$this->pagination
 	}
 
 	/**
@@ -105,7 +102,7 @@ class CompileSite
 	 */
 	public function compilePagination()
 	{
-		foreach ($this->sites->getPaginations as $pagination) 
+		foreach ($this->site->getPaginations() as $pagination) 
 		{
 			$template = $this->twig->loadTemplate( 'index.html.tpl' );
 			$content = $template->render(array('site' => $this->site, 'pagination' => $pagination));
