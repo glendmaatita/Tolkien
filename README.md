@@ -162,10 +162,16 @@ then, change the layout to index
     title: Home
     ---
     
+## Pagination
+Pagination is on progress. See tag v0.5.1
+    
 ## Deployment
 Check [Heston](http://github.com/glendmaatita/heston/) on Github for easy deployment using FTP. If you use Heston, just run this command below to deploy your site that generated with Tolkien to your FTP Server
 
     vendor\bin\heston ftp://username:password@ftp.domain.tld:port myblog/_sites/ "_your_comment_"
+    
+## Other
+For documentation in Bahasa (Indonesian) Version, please refer to [My Blog](http://glend.beenarylab.com/2013/09/24/tolkien.html) 
 
 License
 ----
