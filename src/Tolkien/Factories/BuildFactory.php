@@ -7,6 +7,7 @@ use Tolkien\BuildDraft;
 use Tolkien\BuildPage;
 use Tolkien\BuildPost;
 use Tolkien\BuildSiteCategory;
+use Tolkien\BuildPagination;
 use Tolkien\BuildSite;
 
 /**
@@ -63,6 +64,10 @@ class BuildFactory
 
 			case 'site_category':
 				return $this->getBuildSiteCategory();
+				break;
+
+			case 'pagination':
+				return $this->getPagination();
 				break;
 
 			case 'site':
@@ -125,6 +130,18 @@ class BuildFactory
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
 		return new BuildSiteCategory($buildPost->getPosts());
+	}
+
+	/**
+	 * Get instance of BuildPagination
+	 *
+	 * @return BuildPagination
+	 */
+	public function getPagination()
+	{
+		$buildPost = $this->getBuildPost();
+		$buildPost->build();
+		return new BuildPagination($this->prepareConfig($this->config), $buildPost->getPosts());
 	}
 
 	/**

@@ -29,6 +29,11 @@ class BuildSite
 	private $buildSiteCategory;
 
 	/**
+	 * @var BuildPagination
+	 */
+	private $buildPagination;
+
+	/**
 	 * @var array
 	 */
 	private $config;
@@ -42,13 +47,14 @@ class BuildSite
 	 * @param BuildPost $buildPost
 	 * @param BuildSiteCategory $buildSiteCategory
 	 */
-	public function __construct($config, $buildAsset, $buildPage, $buildPost, $buildSiteCategory)
+	public function __construct($config, $buildAsset, $buildPage, $buildPost, $buildSiteCategory, $buildPagination)
 	{
 		$this->config = $config;
 		$this->buildAsset = $buildAsset;
 		$this->buildPage = $buildPage;
 		$this->buildPost = $buildPost;
 		$this->buildSiteCategory = $buildSiteCategory;
+		$this->buildPagination = $buildPagination;
 	}
 
 	/**
@@ -58,7 +64,7 @@ class BuildSite
 	 */
 	public function build()
 	{
-		return new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getSiteCategories(), $this->getAssets() );
+		return new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getSiteCategories(), $this->getAssets(), $this->getPaginations() );
 	}
 
 	/**
@@ -98,9 +104,21 @@ class BuildSite
 	 * Build Asset
 	 *
 	 * @return Model\Asset
+	 */
 	public function getAssets()
 	{
 		$this->buildAsset->build();
 		return $this->buildAsset->getAssets();
+	}
+
+	/**
+	 * Build Pagination
+	 *
+	 * @return Model\Pagination
+	 */
+	public function getPaginations()
+	{
+		$this->buildPagination->build();
+		return $this->buildPagination->getPaginations();
 	}
 }

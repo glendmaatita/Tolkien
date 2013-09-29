@@ -47,6 +47,10 @@ class CompileSite
 		$this->compilePages();
 		$this->compileSiteCategories();
 		$this->compileAssets();
+		$this->compilePagination();
+
+		if(isset($this->config['config']['pagination']))
+			$this->pagination
 	}
 
 	/**
@@ -79,6 +83,11 @@ class CompileSite
 		}
 	}
 
+	/**
+	 * Compile Site Categories
+	 *
+	 * @return void
+	 */
 	public function compileSiteCategories()
 	{
 		foreach ($this->site->getSiteCategories() as $siteCategory) 
@@ -86,6 +95,21 @@ class CompileSite
 			$template = $this->twig->loadTemplate( 'site_categories.html.tpl' );
 			$content = $template->render(array('site' => $this->site, 'siteCategory' => $siteCategory));
 			$this->createFile($content, $siteCategory);
+		}
+	}
+
+	/**
+	 * Compile Pagination
+	 *
+	 * @return void
+	 */
+	public function compilePagination()
+	{
+		foreach ($this->sites->getPaginations as $pagination) 
+		{
+			$template = $this->twig->loadTemplate( 'index.html.tpl' );
+			$content = $template->render(array('site' => $this->site, 'pagination' => $pagination));
+			$this->createFile($content, $pagination);
 		}
 	}
 

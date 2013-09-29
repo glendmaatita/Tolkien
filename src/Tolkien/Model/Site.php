@@ -42,12 +42,17 @@ class Site
 	private $siteCategories = array();
 
 	/**
+	 * @var array(Model\Pagination) Pagination
+	 */
+	private $paginations = array();
+
+	/**
 	 * Construct
 	 *
 	 * @param string $title
 	 * @param string $tagline
 	 */
-	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $siteCategories = array(), $assets = array())
+	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $siteCategories = array(), $assets = array(), $pagination = array())
 	{
 		$this->title = $title;
 		$this->url = $url;
@@ -56,6 +61,7 @@ class Site
 		$this->pages = $pages;
 		$this->siteCategories = $siteCategories;
 		$this->assets = $assets;
+		$this->paginations = $paginations;
 	}
 
 	/**
@@ -256,5 +262,25 @@ class Site
 	public function getSiteCategories()
 	{
 		return $this->siteCategories;
+	}
+
+	/**
+	 * set site's paginations
+	 *
+	 * @param array(Model\Pagination)
+	 */
+	public function setPaginations($paginations)
+	{
+		$this->paginations = $paginations;
+	}
+
+	/**
+	 * Get all site's paginations
+	 *
+	 * @return array(Model\Pagination)
+	 */
+	public function getPaginations()
+	{
+		return $this->paginations;
 	}
 }
