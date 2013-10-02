@@ -77,7 +77,8 @@ class Post extends Node
 	public function setPublishDate()
 	{
 		$name_separate = explode('-', $this->getFileName(), 4);
-		$this->publishDate = $name_separate[0] . '-' . $name_separate[1] . '-' .$name_separate[2];
+		$originalDate = $name_separate[0] . '-' . $name_separate[1] . '-' .$name_separate[2];
+		$this->publishDate = date("F d, Y", strtotime($originalDate));
 	}
 
 	/**
