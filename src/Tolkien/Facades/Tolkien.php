@@ -14,6 +14,7 @@ class Tolkien
 	/**
 	 * Return config.yml location
 	 *
+	 * @param string $name
 	 * @return $string
 	 */
 	public static function config($name)
@@ -24,6 +25,8 @@ class Tolkien
 	/**
 	 * API for build node
 	 *
+	 * @param string $name Blog's name
+	 * @param string $type Type of Node
 	 * @return void
 	 */
 	public static function build($name, $type)
@@ -37,11 +40,14 @@ class Tolkien
 	/**
 	 * API for generate node
 	 *
+	 * @param string $name Blog's name
+	 * @param string $type Type of Nde
+	 * @param array $properties Title, dll
 	 * @return void
 	 */
-	public static function generate($name, $type = '', $title)
+	public static function generate($name, $properties)
 	{
-		$factory = new GenerateFactory(self::config($name), $type, array('title' => $title));
+		$factory = new GenerateFactory(self::config($name), $properties);
 		$generateNode = $factory->generate();
 		$generateNode->generate();
 	}
@@ -49,6 +55,7 @@ class Tolkien
 	/**
 	 * API for compile (create file)
 	 *
+	 * @param string $name
 	 * @return void
 	 */
 	public static function compile($name)

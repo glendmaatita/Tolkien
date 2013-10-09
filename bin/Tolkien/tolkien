@@ -29,7 +29,7 @@ switch($argv[1])
 		$init->create();
 		break;
 	case 'generate':
-		Tolkien::generate($argv[2], $argv[3], $argv[4]);
+		Tolkien::generate($argv[2], array('type' => $argv[3], 'title' => $argv[4]) );
 		break;
 	case 'compile':
 		Tolkien::compile($argv[2]);

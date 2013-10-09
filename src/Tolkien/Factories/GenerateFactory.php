@@ -17,11 +17,6 @@ class GenerateFactory
 	private $config;
 
 	/**
-	 * @var string
-	 */
-	private $type;
-
-	/**
 	 * @var array
 	 */
 	private $properties;
@@ -33,10 +28,9 @@ class GenerateFactory
 	 * @oaram string $type
 	 * @param array $properties
 	 */
-	public function __construct($config, $type = 'post', $properties = array())
+	public function __construct($config, $properties = array())
 	{
 		$this->config = $config;
-		$this->type = $type;
 		$this->properties = $properties;
 	}
 
@@ -45,7 +39,7 @@ class GenerateFactory
 	 */
 	public function generate()
 	{
-		switch ($this->type) {
+		switch ($this->properties['type']) {
 			case 'post':
 				return new GeneratePost($this->prepareConfig($this->config), $this->properties);
 				break;
