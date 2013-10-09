@@ -47,15 +47,15 @@ class GenerateFactory
 	{
 		switch ($this->type) {
 			case 'post':
-				return new GeneratePost($this->prepareConfig($this->config), $this->properties['title']);
+				return new GeneratePost($this->prepareConfig($this->config), $this->properties);
 				break;
 
 			case 'draft':
-				return new GenerateDraft($this->prepareConfig($this->config), $this->properties['title'], $this->properties['type']);
+				return new GenerateDraft($this->prepareConfig($this->config), $this->properties);
 				break;
 
 			case 'page':
-				return new GeneratePage($this->prepareConfig($this->config), $this->properties['title']);
+				return new GeneratePage($this->prepareConfig($this->config), $this->properties);
 				break;
 			
 			default:

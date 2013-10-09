@@ -18,13 +18,13 @@ class TolkienBuildDraftTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
-		$draft_1 = new GenerateDraft( $config, 'Rails Tutorial', 'post' );
+		$draft_1 = new GenerateDraft( $config, array('title' => 'Rails Tutorial', 'type' => 'post') );
 		$draft_1->generate();
 
-		$draft_2 = new GenerateDraft( $config, 'Kohana Guide', 'post' );
+		$draft_2 = new GenerateDraft( $config, array('title' => 'Kohana Guide', 'type' => 'post') );
 		$draft_2->generate();
 
-		$draft_3 = new GenerateDraft( $config, 'PHP and My SQL Tuts', 'post' );
+		$draft_3 = new GenerateDraft( $config, array('title' => 'PHP and My SQL Tuts', 'type' => 'post') );
 		$draft_3->generate();
 
 		$buildDraft = new BuildDraft($config, $parser);

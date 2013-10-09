@@ -19,13 +19,13 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
-		$post_1 = new GeneratePost( $config, "Latest Android Release Part 1" );
+		$post_1 = new GeneratePost( $config, array('title' => "Latest Android Release Part 1" ) );
 		$post_1->generate();
-		$post_2 = new GeneratePost( $config, "Latest Android Release Part 2" );
+		$post_2 = new GeneratePost( $config, array('title' => "Latest Android Release Part 2" ) );
 		$post_2->generate();
-		$post_3 = new GeneratePost( $config, "Latest Android Release Part 3" );
+		$post_3 = new GeneratePost( $config, array('title' => "Latest Android Release Part 3" ) );
 		$post_3->generate();
-		$post_4 = new GeneratePost( $config, "Latest Android Release Part 4" );
+		$post_4 = new GeneratePost( $config, array('title' => "Latest Android Release Part 4" ) );
 		$post_4->generate();
 
 		$buildPost = new BuildPost($config, $parser);

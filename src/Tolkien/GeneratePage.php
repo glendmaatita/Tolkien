@@ -9,9 +9,9 @@ class GeneratePage implements GenerateNode
 {
 
 	/**
-	 * @var string Page title
+	 * @var array
 	 */
-	private $title;
+	private $properties;
 
 	/**
 	 * @var array $config Result parsing from config.yml
@@ -22,12 +22,12 @@ class GeneratePage implements GenerateNode
 	 * Construct
 	 *
 	 * @param array $config
-	 * @param string $title
+	 * @param array $properties
 	 */
-	public function __construct($config, $title)
+	public function __construct($config, $properties)
 	{
 		$this->config = $config;
-		$this->title = $title;
+		$this->properties = $properties;
 	}
 
 	/**
@@ -47,7 +47,7 @@ class GeneratePage implements GenerateNode
 	 */
 	public function setPath()
 	{
-		return $this->config['dir']['page'] . '/' . str_replace(" ", "-", strtolower($this->title)) . '.markdown';
+		return $this->config['dir']['page'] . '/' . str_replace(" ", "-", strtolower($this->properties['title'])) . '.markdown';
 	}
 
 	/**
@@ -60,7 +60,7 @@ class GeneratePage implements GenerateNode
 		$content = "---\n";
 		$content .= "type: page\n";
 		$content .= "layout: page\n";
-		$content .= "title: " . $this->title . "\n";
+		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "---\n";
 
 		return $content;

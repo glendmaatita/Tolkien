@@ -13,14 +13,9 @@ class GenerateDraft implements GenerateNode
 	private $config;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	private $title;
-
-	/**
-	 * @var string
-	 */
-	private $type;
+	private $properties;
 
 	/**
 	 * Construct
@@ -28,11 +23,10 @@ class GenerateDraft implements GenerateNode
 	 * @param array $config
 	 * @param string $title
 	 */
-	public function __construct($config, $title, $type)
+	public function __construct($config, $properties)
 	{
 		$this->config = $config;
-		$this->title = $title;
-		$this->type = $type;
+		$this->properties = $properties;
 	}
 
 	/**
@@ -52,7 +46,7 @@ class GenerateDraft implements GenerateNode
 	 */
 	public function setPath()
 	{
-		return $this->config['dir']['draft'] . '/'  . str_replace(" ", "-", strtolower($this->title)) . '.markdown.' . $this->type;
+		return $this->config['dir']['draft'] . '/'  . str_replace(" ", "-", strtolower($this->properties['title'])) . '.markdown.' . $this->properties['type'];
 	}
 
 	/**
@@ -65,7 +59,7 @@ class GenerateDraft implements GenerateNode
 		$content = "---\n";
 		$content .= "type: draft\n";
 		$content .= "layout: post\n";
-		$content .= "title: " . $this->title . "\n";
+		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "---\n";
 
 		return $content;
