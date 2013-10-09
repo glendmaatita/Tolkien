@@ -18,7 +18,7 @@ class TolkienGeneratePostTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
 
-		$post = new GeneratePost( $config, array('title' => "Latest Android Release" ) );
+		$post = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release" ) );
 
 		$post->generate();
 
@@ -27,5 +27,24 @@ class TolkienGeneratePostTest extends \PHPUnit_Framework_TestCase
 
 		// cek file is written by config
 		$this->assertNotEmpty(file_get_contents($post->setPath()));
+	}
+
+	public function prepareProperties($title)
+	{
+		return array(
+			'title' => $title,
+			'type' => 'post',
+			'layout' => 'post',
+			'author' => array(
+				'name' => 'Your Name',
+				'email' => 'Your Email',
+				'facebook' => 'Your Facebook',
+				'twitter' => 'Your Twitter',
+				'github' => 'Your Github',
+				'signature' => 'Your Signature',			
+				),
+			'categories' => array('category1'),
+			'body' => 'Body of Content'
+			);
 	}
 }

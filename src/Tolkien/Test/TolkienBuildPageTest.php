@@ -18,13 +18,13 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml') );
 
-		$page_1 = new GeneratePage( $config, array('title' => 'Contact') );
+		$page_1 = new GeneratePage( $config, $this->prepareProperties( 'Contact') );
 		$page_1->generate();
 
-		$page_2 = new GeneratePage( $config, array('title' => 'About') );
+		$page_2 = new GeneratePage( $config, $this->prepareProperties( 'About') );
 		$page_2->generate();
 
-		$page_3 = new GeneratePage( $config, array('title' => 'Portofolio') );
+		$page_3 = new GeneratePage( $config, $this->prepareProperties( 'Portofolio') );
 		$page_3->generate();
 
 		$buildPage = new BuildPage($config, $parser);
@@ -52,5 +52,24 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
         }
     }
     rmdir($dir);
+	}
+
+	public function prepareProperties($title)
+	{
+		return array(
+			'title' => $title,
+			'type' => 'page',
+			'layout' => 'page',
+			'author' => array(
+				'name' => 'Your Name',
+				'email' => 'Your Email',
+				'facebook' => 'Your Facebook',
+				'twitter' => 'Your Twitter',
+				'github' => 'Your Github',
+				'signature' => 'Your Signature',			
+				),
+			'categories' => array('category1'),
+			'body' => 'Body of Content'
+			);
 	}
 }

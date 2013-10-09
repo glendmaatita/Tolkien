@@ -58,18 +58,19 @@ class GeneratePost implements GenerateNode
 	{
 		$content = "---\n";
 		$content .= "type: post\n";
-		$content .= "layout: post\n";		
+		$content .= "layout: " . $this->properties['layout'] . "\n";		
 		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "date: " . Date('Y-m-d') . "\n";
 		$content .= "author:" . "\n";
-		$content .= "  name: Your Name" . "\n";
-		$content .= "  email: Your Email" . "\n";
-		$content .= "  facebook: Your Facebook" . "\n";
-		$content .= "  twitter: Your Twitter" . "\n";
-		$content .= "  github: Your Github" . "\n";
-		$content .= "  signature: Your Signature" . "\n";
-		$content .= "categories: category1" . "\n";
+		$content .= "  name: " . $this->properties['author']['name'] . "\n";
+		$content .= "  email: " . $this->properties['author']['email'] . "\n";
+		$content .= "  facebook: " . $this->properties['author']['facebook'] . "\n";
+		$content .= "  twitter: " . $this->properties['author']['twitter'] . "\n";
+		$content .= "  github: " . $this->properties['author']['github'] . "\n";
+		$content .= "  signature: " . $this->properties['author']['signature'] . "\n";
+		$content .= "categories: " . implode(',', $this->properties['categories']) . "\n";
 		$content .= "---\n";
+		$content .= $this->properties['body'];
 
 		return $content;
 	}

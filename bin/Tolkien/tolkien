@@ -29,7 +29,7 @@ switch($argv[1])
 		$init->create();
 		break;
 	case 'generate':
-		Tolkien::generate($argv[2], array('type' => $argv[3], 'title' => $argv[4]) );
+		Tolkien::generate($argv[2], prepareProperties() );
 		break;
 	case 'compile':
 		Tolkien::compile($argv[2]);
@@ -56,4 +56,23 @@ Initialize First
 (php) (vendor\bin\)tolkien serve [name]
 \n================= end ===================\n\n
 EOT;
+}
+
+function prepareProperties($argv)
+{
+	return array(
+		'title' => $argv[4],
+		'type' => $argv[3],
+		'layout' => $argv[3],
+		'author' => array(
+			'name' => 'Your Name',
+			'email' => 'Your Email',
+			'facebook' => 'Your Facebook',
+			'twitter' => 'Your Twitter',
+			'github' => 'Your Github',
+			'signature' => 'Your Signature',			
+			),
+		'categories' => 'category1',
+		'body' => 'Body of Content'
+		);
 }

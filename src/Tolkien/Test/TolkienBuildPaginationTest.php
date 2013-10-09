@@ -19,51 +19,51 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
-		$post_1 = new GeneratePost( $config, array('title' => "Latest Android Release Part a" ) );
+		$post_1 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part a" ) );
 		$post_1->generate();
-		$post_2 = new GeneratePost( $config, array('title' => "Latest Android Release Part b" ) );
+		$post_2 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part b" ) );
 		$post_2->generate();
-		$post_3 = new GeneratePost( $config, array('title' => "Latest Android Release Part c" ) );
+		$post_3 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part c" ) );
 		$post_3->generate();
-		$post_4 = new GeneratePost( $config, array('title' => "Latest Android Release Part d" ) );
+		$post_4 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part d" ) );
 		$post_4->generate();
-		$post_5 = new GeneratePost( $config, array('title' => "Latest Android Release Part e" ) );
+		$post_5 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part e" ) );
 		$post_5->generate();
-		$post_6 = new GeneratePost( $config, array('title' => "Latest Android Release Part f" ) );
+		$post_6 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part f" ) );
 		$post_6->generate();
-		$post_7 = new GeneratePost( $config, array('title' => "Latest Android Release Part g" ) );
+		$post_7 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part g" ) );
 		$post_7->generate();
-		$post_8 = new GeneratePost( $config, array('title' => "Latest Android Release Part h" ) );
+		$post_8 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part h" ) );
 		$post_8->generate();
-		$post_9 = new GeneratePost( $config, array('title' => "Latest Android Release Part i" ) );
+		$post_9 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part i" ) );
 		$post_9->generate();
-		$post_10 = new GeneratePost( $config, array('title' => "Latest Android Release Part j" ) );
+		$post_10 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part j" ) );
 		$post_10->generate();
-		$post_11 = new GeneratePost( $config, array('title' => "Latest Android Release Part k" ) );
+		$post_11 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part k" ) );
 		$post_11->generate();
-		$post_12 = new GeneratePost( $config, array('title' => "Latest Android Release Part l" ) );
+		$post_12 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part l" ) );
 		$post_12->generate();
-		$post_13 = new GeneratePost( $config, array('title' => "Latest Android Release Part m" ) );
+		$post_13 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part m" ) );
 		$post_13->generate();
-		$post_14 = new GeneratePost( $config, array('title' => "Latest Android Release Part n" ) );
+		$post_14 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part n" ) );
 		$post_14->generate();
-		$post_15 = new GeneratePost( $config, array('title' => "Latest Android Release Part o" ) );
+		$post_15 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part o" ) );
 		$post_15->generate();
-		$post_16 = new GeneratePost( $config, array('title' => "Latest Android Release Part p" ) );
+		$post_16 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part p" ) );
 		$post_16->generate();
-		$post_17 = new GeneratePost( $config, array('title' => "Latest Android Release Part q" ) );
+		$post_17 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part q" ) );
 		$post_17->generate();
-		$post_18 = new GeneratePost( $config, array('title' => "Latest Android Release Part r" ) );
+		$post_18 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part r" ) );
 		$post_18->generate();
-		$post_19 = new GeneratePost( $config, array('title' => "Latest Android Release Part s" ) );
+		$post_19 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part s" ) );
 		$post_19->generate();
-		$post_20 = new GeneratePost( $config, array('title' => "Latest Android Release Part t" ) );
+		$post_20 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part t" ) );
 		$post_20->generate();
-		$post_21 = new GeneratePost( $config, array('title' => "Latest Android Release Part u" ) );
+		$post_21 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part u" ) );
 		$post_21->generate();
-		$post_22 = new GeneratePost( $config, array('title' => "Latest Android Release Part v" ) );
+		$post_22 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part v" ) );
 		$post_22->generate();
-		$post_23 = new GeneratePost( $config, array('title' => "Latest Android Release Part w" ) );
+		$post_23 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part w" ) );
 		$post_23->generate();
 
 
@@ -100,5 +100,24 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
         }
     }
     rmdir($dir);
+	}
+
+	public function prepareProperties($title)
+	{
+		return array(
+			'title' => $title,
+			'type' => 'post',
+			'layout' => 'post',
+			'author' => array(
+				'name' => 'Your Name',
+				'email' => 'Your Email',
+				'facebook' => 'Your Facebook',
+				'twitter' => 'Your Twitter',
+				'github' => 'Your Github',
+				'signature' => 'Your Signature',			
+				),
+			'categories' => array('category1'),
+			'body' => 'Body of Content'
+			);
 	}
 }
