@@ -29,8 +29,8 @@ class Tolkien
 	public static function build($name, $type)
 	{
 		$factory = new BuildFactory(self::config($name), $title);
-		$buildNode = $factory->generate();
-		$buildNode->generate();
+		$buildNode = $factory->build();
+		$buildNode->build();
 	}
 
 	/**
