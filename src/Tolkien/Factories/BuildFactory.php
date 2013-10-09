@@ -129,7 +129,7 @@ class BuildFactory
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
-		return new BuildSiteCategory($buildPost->getPosts());
+		return new BuildSiteCategory($buildPost->getNodes());
 	}
 
 	/**
@@ -141,7 +141,7 @@ class BuildFactory
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
-		return new BuildPagination($this->prepareConfig($this->config), $buildPost->getPosts());
+		return new BuildPagination($this->prepareConfig($this->config), $buildPost->getNodes());
 	}
 
 	/**

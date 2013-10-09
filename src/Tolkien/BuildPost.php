@@ -58,6 +58,8 @@ class BuildPost implements BuildNode
 	public function find_all_files($dir) 
 	{
 		$root = scandir($dir);
+		if(count($root) == 0) return;
+		
 		foreach($root as $value)
 		{
 			if($value === '.' || $value === '..')

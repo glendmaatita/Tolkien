@@ -29,7 +29,7 @@ switch($argv[1])
 		$init->create();
 		break;
 	case 'generate':
-		Tolkien::generate($argv[2], prepareProperties() );
+		Tolkien::generate($argv[2], prepareProperties($argv) );
 		break;
 	case 'compile':
 		Tolkien::compile($argv[2]);
@@ -72,7 +72,7 @@ function prepareProperties($argv)
 			'github' => 'Your Github',
 			'signature' => 'Your Signature',			
 			),
-		'categories' => 'category1',
+		'categories' => array('category1'),
 		'body' => 'Body of Content'
 		);
 }
