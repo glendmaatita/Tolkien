@@ -13,20 +13,20 @@ class GeneratePost implements GenerateNode
 	private $config;
 
 	/**
-	 * @var string $title Post title
+	 * @var array
 	 */
-	private $title;
+	private $properties;
 
 	/**
 	 * Construct
 	 *
 	 * @param array $config
-	 * @param string $title
+	 * @param array $properties
 	 */
-	public function __construct($config, $title)
+	public function __construct($config, $properties)
 	{
 		$this->config = $config;
-		$this->title = $title;
+		$this->properties = $properties;
 	}
 
 	/**
@@ -46,7 +46,7 @@ class GeneratePost implements GenerateNode
 	 */
 	public function setPath()
 	{
-		return $this->config['dir']['post'] . '/' . Date('Y-m-d') . '-' . str_replace(" ", "-", strtolower($this->title)) . '.markdown';
+		return $this->config['dir']['post'] . '/' . Date('Y-m-d') . '-' . str_replace(" ", "-", strtolower($this->properties['title'])) . '.markdown';
 	}
 
 	/**
@@ -59,7 +59,7 @@ class GeneratePost implements GenerateNode
 		$content = "---\n";
 		$content .= "type: post\n";
 		$content .= "layout: post\n";		
-		$content .= "title: " . $this->title . "\n";
+		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "date: " . Date('Y-m-d') . "\n";
 		$content .= "author:" . "\n";
 		$content .= "  name: Your Name" . "\n";

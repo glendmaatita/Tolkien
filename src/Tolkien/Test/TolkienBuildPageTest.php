@@ -16,15 +16,15 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 	public function testBuildPage()
 	{
 		$parser = new Parser();
-		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml') );
 
-		$page_1 = new GeneratePage( $config, 'Contact' );
+		$page_1 = new GeneratePage( $config, array('title' => 'Contact') );
 		$page_1->generate();
 
-		$page_2 = new GeneratePage( $config, 'About' );
+		$page_2 = new GeneratePage( $config, array('title' => 'About') );
 		$page_2->generate();
 
-		$page_3 = new GeneratePage( $config, 'Portofolio' );
+		$page_3 = new GeneratePage( $config, array('title' => 'Portofolio') );
 		$page_3->generate();
 
 		$buildPage = new BuildPage($config, $parser);

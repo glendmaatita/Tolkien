@@ -18,7 +18,7 @@ class TolkienGeneratePageTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
 
-		$page = new GeneratePage( $config, "About Us" );
+		$page = new GeneratePage( $config, array('title' => "About Us" ) );
 
 		$page->generate();
 
