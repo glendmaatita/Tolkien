@@ -27,7 +27,7 @@ class TolkienModelPostTest extends \PHPUnit_Framework_TestCase
 
 		$post->setPublishDate();
 		$post->setUrl();
-		$this->assertEquals( '2013-08-09', $post->getPublishDate());
+		$this->assertEquals( 'August 09, 2013', $post->getPublishDate());
 		$this->assertEquals( '/2013/08/09/learn-kohana.html', $post->getUrl());
 	}
 }
