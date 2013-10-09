@@ -164,7 +164,7 @@ class BuildPage implements BuildNode
 	 *
 	 * @return array(Model\Page) $pages
 	 */
-	public function getPages()
+	public function getNodes()
 	{
 		return $this->pages;
 	}

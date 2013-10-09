@@ -75,7 +75,7 @@ class BuildPagination implements BuildNode
 	 *
 	 * @return array(Model\Pagination)
 	 */
-	public function getPaginations()
+	public function getNodes()
 	{
 		return $this->paginations;
 	}

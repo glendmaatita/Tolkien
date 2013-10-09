@@ -31,6 +31,7 @@ class Tolkien
 		$factory = new BuildFactory(self::config($name), $title);
 		$buildNode = $factory->build();
 		$buildNode->build();
+		return $buildNode->getNodes();
 	}
 
 	/**

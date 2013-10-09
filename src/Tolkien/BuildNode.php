@@ -8,4 +8,5 @@ interface BuildNode
 	 * @return array Model\Post 
 	 */
 	public function build();
+	public function getNodes();
 }

@@ -96,4 +96,9 @@ class BuildDraft implements BuildNode
 	{
 		file_put_contents( $this->config['dir']['page'] . '/' . $draft, file_get_contents( $this->config['dir']['draft'] . '/' . $file));
 	}
+
+	public function getNodes()
+	{
+		
+	}
 }

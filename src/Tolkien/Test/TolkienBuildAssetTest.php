@@ -20,7 +20,7 @@ class TolkienBuildAssetTest extends \PHPUnit_Framework_TestCase
 		$buildAsset = new BuildAsset($config, $parser);
 		$buildAsset->build();
 
-		$this->assertTrue(is_array($buildAsset->getAssets()));
+		$this->assertTrue(is_array($buildAsset->getNodes()));
 
 	}
 

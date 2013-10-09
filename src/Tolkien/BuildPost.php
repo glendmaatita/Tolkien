@@ -214,7 +214,7 @@ class BuildPost implements BuildNode
 	 *
 	 * @return array(Model\Posts)
 	 */
-	public function getPosts()
+	public function getNodes()
 	{
 		return $this->posts;
 	}

@@ -70,11 +70,11 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 		$buildPost = new BuildPost($config, $parser);
 		$buildPost->build();
 
-		$posts = $buildPost->getPosts();
+		$posts = $buildPost->getNodes();
 
 		$buildPagination = new BuildPagination($config, $posts);
 		$buildPagination->build();
-		$paginations = $buildPagination->getPaginations();
+		$paginations = $buildPagination->getNodes();
 
 		$this->assertTrue(is_array($paginations));
 		$this->assertEquals(10, count($paginations[0]->getPosts()));

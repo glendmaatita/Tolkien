@@ -75,7 +75,7 @@ class BuildSite
 	public function getPosts()
 	{
 		$this->buildPost->build();
-		return $this->buildPost->getPosts();
+		return $this->buildPost->getNodes();
 	}
 
 	/**
@@ -86,7 +86,7 @@ class BuildSite
 	public function getPages()
 	{
 		$this->buildPage->build();
-		return $this->buildPage->getPages();
+		return $this->buildPage->getNodes();
 	}
 
 	/**
@@ -97,7 +97,7 @@ class BuildSite
 	public function getSiteCategories()
 	{
 		$this->buildSiteCategory->build();
-		return $this->buildSiteCategory->getSiteCategories();
+		return $this->buildSiteCategory->getNodes();
 	}
 
 	/**
@@ -108,7 +108,7 @@ class BuildSite
 	public function getAssets()
 	{
 		$this->buildAsset->build();
-		return $this->buildAsset->getAssets();
+		return $this->buildAsset->getNodes();
 	}
 
 	/**
@@ -119,6 +119,6 @@ class BuildSite
 	public function getPaginations()
 	{
 		$this->buildPagination->build();
-		return $this->buildPagination->getPaginations();
+		return $this->buildPagination->getNodes();
 	}
 }

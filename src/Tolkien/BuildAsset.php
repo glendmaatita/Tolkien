@@ -90,7 +90,7 @@ class BuildAsset
 	 *
 	 * @return array Model\Asset
 	 */
-	public function getAssets()
+	public function getNodes()
 	{
 		return $this->assets;
 	}

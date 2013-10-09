@@ -30,7 +30,7 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 		$buildPage = new BuildPage($config, $parser);
 		$buildPage->build();
 
-		$pages = $buildPage->getPages();
+		$pages = $buildPage->getNodes();
 
 		$this->assertTrue( is_array($pages) );
 

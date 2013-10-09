@@ -76,7 +76,7 @@ class BuildSiteCategory implements BuildNode
 	 *
 	 * @return array(Model\SiteCategory)
 	 */
-	public function getSiteCategories()
+	public function getNodes()
 	{
 		return $this->siteCategories;
 	}

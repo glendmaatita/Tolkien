@@ -31,7 +31,7 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$buildPost = new BuildPost($config, $parser);
 		$buildPost->build();
 
-		$posts = $buildPost->getPosts();
+		$posts = $buildPost->getNodes();
 
 		$this->assertTrue( is_array($posts) );
 
