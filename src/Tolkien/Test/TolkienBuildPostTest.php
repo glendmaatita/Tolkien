@@ -7,15 +7,12 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 
 	private $init;
 
-	public function __construct()
+	public function testBuildPost()
 	{
 		$this->init = new Init('blog');
 		$this->rrmdir( ROOT_DIR );
 		$this->init->create();
-	}
 
-	public function testBuildPost()
-	{
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
@@ -39,18 +36,18 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$originalDate = $name_separate[0] . '-' . $name_separate[1] . '-' .$name_separate[2];
 		$publishDate = date("F d, Y", strtotime($originalDate));
 		
-		$this->assertEquals($posts[0]->getTitle(), 'Latest Android Release Part 1');
-		$this->assertEquals($posts[0]->getFile(), Date('Y-m-d') . '-latest-android-release-part-1.markdown');
+		$this->assertEquals($posts[0]->getTitle(), 'Latest Android Release Part 4');
+		$this->assertEquals($posts[0]->getFile(), Date('Y-m-d') . '-latest-android-release-part-4.markdown');
 		$this->assertEquals($posts[0]->getPublishDate(), $publishDate );
 		$this->assertEquals($posts[0]->getLayout(), 'post' );
-		$this->assertEquals($posts[0]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-1.markdown' );
+		$this->assertEquals($posts[0]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-4.markdown' );
 
-		$this->assertEquals($posts[1]->getTitle(), 'Latest Android Release Part 2');
-		$this->assertEquals($posts[1]->getFile(), Date('Y-m-d') . '-latest-android-release-part-2.markdown');
+		$this->assertEquals($posts[1]->getTitle(), 'Latest Android Release Part 3');
+		$this->assertEquals($posts[1]->getFile(), Date('Y-m-d') . '-latest-android-release-part-3.markdown');
 
 		$this->assertEquals($posts[1]->getPublishDate(), $publishDate );
 		$this->assertEquals($posts[1]->getLayout(), 'post' );
-		$this->assertEquals($posts[1]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-2.markdown' );
+		$this->assertEquals($posts[1]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-3.markdown' );
 		
 	}
 
