@@ -47,7 +47,10 @@ class GeneratePage implements GenerateNode
 	 */
 	public function setPath()
 	{
-		return $this->config['dir']['page'] . '/' . str_replace(" ", "-", strtolower($this->properties['title'])) . '.markdown';
+		$title = preg_replace("/[^a-zA-Z0-9]+/", " ", $this->properties['title']);
+		$title = preg_replace('!\s+!', ' ', trim($title));
+
+		return $this->config['dir']['page'] . '/' . str_replace(" ", "-", strtolower($title) ) . '.markdown';
 	}
 
 	/**

@@ -22,7 +22,7 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$post_2->generate();
 		$post_3 = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release Part 3" ) );
 		$post_3->generate();
-		$post_4 = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release Part 4" ) );
+		$post_4 = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release Part 4 (revised)" ) );
 		$post_4->generate();
 
 		$buildPost = new BuildPost($config, $parser);
@@ -36,11 +36,11 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$originalDate = $name_separate[0] . '-' . $name_separate[1] . '-' .$name_separate[2];
 		$publishDate = date("F d, Y", strtotime($originalDate));
 		
-		$this->assertEquals($posts[0]->getTitle(), 'Latest Android Release Part 4');
-		$this->assertEquals($posts[0]->getFile(), Date('Y-m-d') . '-latest-android-release-part-4.markdown');
+		$this->assertEquals($posts[0]->getTitle(), 'Latest Android Release Part 4 (revised)');
+		$this->assertEquals($posts[0]->getFile(), Date('Y-m-d') . '-latest-android-release-part-4-revised.markdown');
 		$this->assertEquals($posts[0]->getPublishDate(), $publishDate );
 		$this->assertEquals($posts[0]->getLayout(), 'post' );
-		$this->assertEquals($posts[0]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-4.markdown' );
+		$this->assertEquals($posts[0]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_posts/' . Date('Y-m-d') . '-latest-android-release-part-4-revised.markdown' );
 
 		$this->assertEquals($posts[1]->getTitle(), 'Latest Android Release Part 3');
 		$this->assertEquals($posts[1]->getFile(), Date('Y-m-d') . '-latest-android-release-part-3.markdown');

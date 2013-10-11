@@ -18,7 +18,7 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml') );
 
-		$page_1 = new GeneratePage( $config, $this->prepareProperties( 'Contact') );
+		$page_1 = new GeneratePage( $config, $this->prepareProperties( 'Contact (revised)') );
 		$page_1->generate();
 
 		$page_2 = new GeneratePage( $config, $this->prepareProperties( 'About') );
@@ -34,11 +34,11 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue( is_array($pages) );
 
-		$this->assertEquals($pages[1]->getTitle(), 'Contact');
-		$this->assertEquals($pages[1]->getFile(), 'contact.markdown');
+		$this->assertEquals($pages[1]->getTitle(), 'Contact (revised)');
+		$this->assertEquals($pages[1]->getFile(), 'contact-revised.markdown');
 		$this->assertEquals($pages[1]->getLayout(), 'page' );
-		$this->assertEquals($pages[1]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_pages/contact.markdown' );
-		$this->assertEquals($pages[1]->getUrl(), '/contact.html' );
+		$this->assertEquals($pages[1]->getPath(), basename(realpath(ROOT_DIR)) .'/' . '_pages/contact-revised.markdown' );
+		$this->assertEquals($pages[1]->getUrl(), '/contact-revised.html' );
 	}
 
 	public function rrmdir($dir) 
