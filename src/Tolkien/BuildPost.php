@@ -151,8 +151,8 @@ class BuildPost implements BuildNode
 		$body_excerpt = explode("[more]", $body);
 		if(count($body_excerpt) == '2')
 		{
-			$excerpt = trim($body_excerpt[0]);
-			$body = trim($body_excerpt[0]) . trim($body_excerpt[1]);
+			$excerpt = rtrim($body_excerpt[0]);
+			$body = rtrim($body_excerpt[0]) . rtrim($body_excerpt[1]);
 		}
 
 		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $this->defineAuthor($header), $this->defineCategories($header) );
