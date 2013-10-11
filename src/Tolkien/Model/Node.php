@@ -113,12 +113,8 @@ abstract class Node
 	/**
 	 * Set URL for Node
 	 *
-	 * @param string $url
 	 */
-	public function setUrl($url)
-	{
-		$this->url = $url;
-	}
+	abstract public function setUrl();
 
 	/**
 	 * Get URL of Node
