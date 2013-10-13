@@ -135,8 +135,8 @@ Tolkien has several variables that you can pass to your layout files (Twig templ
     
 #### Post's Author
     
-    post.author.name    // Name of Post's Author
-    post.author.email   // Author's email
+    post.author.name        // Name of Post's Author
+    post.author.email       // Author's email
     post.author.signature   // Signature
     post.author.facebook
     post.author.twitter
