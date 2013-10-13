@@ -47,6 +47,12 @@ class Tolkien
 	 */
 	public static function generate($name, $properties)
 	{
+		/**
+		 * $properties
+		 *
+		 * for Page : array(type, title, layout, body)
+		 * for Post : array(type, title, layout, author, categories, body)
+		 */
 		$factory = new GenerateFactory(self::config($name), $properties);
 		$generateNode = $factory->generate();
 		$generateNode->generate();
