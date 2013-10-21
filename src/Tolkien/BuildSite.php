@@ -39,6 +39,11 @@ class BuildSite
 	private $config;
 
 	/**
+	 * @var Model\Site
+	 */
+	private $site;
+
+	/**
 	 * Construct
 	 *
 	 * @param array $config Parse from config.yml
@@ -64,7 +69,7 @@ class BuildSite
 	 */
 	public function build()
 	{
-		return new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getSiteCategories(), $this->getAssets(), $this->getPaginations() );
+		$this->site = new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getSiteCategories(), $this->getAssets(), $this->getPaginations() );
 	}
 
 	/**
@@ -120,5 +125,15 @@ class BuildSite
 	{
 		$this->buildPagination->build();
 		return $this->buildPagination->getNodes();
+	}
+
+	/**
+	 * Get Site object instance
+	 *
+	 * @return Site
+	 */
+	public function getNodes()
+	{
+		return $this->site;
 	}
 }

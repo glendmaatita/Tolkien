@@ -48,14 +48,14 @@ class Init
 	 */
 	public function createBlogDirectory($blog_dir)
 	{
-		@mkdir($blog_dir , 0700 );
+		@mkdir($blog_dir , 0777, true );
 		$this->config = $this->configContent( $blog_dir );
-		@mkdir( $this->config['dir']['post'], 0700 );
-		@mkdir( $this->config['dir']['page'], 0700 );
-		@mkdir( $this->config['dir']['draft'], 0700 );
-		@mkdir( $this->config['dir']['site'], 0700 );
-		@mkdir( $this->config['dir']['asset'], 0700 );
-		@mkdir( $this->config['dir']['layout'], 0700 );		
+		@mkdir( $this->config['dir']['post'], 0777, true );
+		@mkdir( $this->config['dir']['page'], 0777, true );
+		@mkdir( $this->config['dir']['draft'], 0777, true );
+		@mkdir( $this->config['dir']['site'], 0777, true );
+		@mkdir( $this->config['dir']['asset'], 0777, true );
+		@mkdir( $this->config['dir']['layout'], 0777, true );	
 	}
 
 	/**

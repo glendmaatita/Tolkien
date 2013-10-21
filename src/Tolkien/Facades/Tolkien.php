@@ -68,8 +68,8 @@ class Tolkien
 	{
 		$factory = new BuildFactory(self::config($name), 'site');
 		$buildSite = $factory->build();
-
-		$site = $buildSite->build();
+		$buildSite->build();
+		$site = $buildSite->getNodes();
 
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( self::config($name) ));
