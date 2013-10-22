@@ -56,6 +56,7 @@ class Tolkien
 		$factory = new GenerateFactory(self::config($name), $properties);
 		$generateNode = $factory->generate();
 		$generateNode->generate();
+		$generateNode->report();
 	}
 
 	/**

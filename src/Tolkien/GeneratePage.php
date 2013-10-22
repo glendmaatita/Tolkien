@@ -69,4 +69,10 @@ class GeneratePage implements GenerateNode
 
 		return $content;
 	}
+
+	public function report()
+	{
+		print "Generating Page file ... \n";
+		print "Successfully generate " . $this->setPath() . "\n\n";
+	}
 }
