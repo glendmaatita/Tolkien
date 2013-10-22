@@ -66,6 +66,6 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 		$this->assertFileExists( ROOT_DIR . '_sites/' . $post_2->getUrl() );
 
 		$siteCategories = $site->getSiteCategories();
-		$this->assertFileExists( ROOT_DIR . '_sites/categories/' . $siteCategories[0]->getName() . '.html');
+		$this->assertFileExists( ROOT_DIR . '_sites/categories/' . strtolower($siteCategories[0]->getName()) . '.html');
 	}		
 }

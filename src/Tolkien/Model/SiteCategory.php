@@ -36,7 +36,7 @@ class SiteCategory extends Category
 	 */
 	public function setUrl()
 	{
-		$this->url = '/categories/' . $this->getName() . '.html';
+		$this->url = '/categories/' . strtolower($this->getName()) . '.html';
 	}
 
 	/**
