@@ -29,9 +29,6 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		// create directory sites
 		$this->assertFileExists( ROOT_DIR . '/_sites' );
 
-		// create draft sites
-		$this->assertFileExists( ROOT_DIR . '/_drafts' );
-
 		// create page sites
 		$this->assertFileExists( ROOT_DIR . '/_pages' );
 
@@ -57,7 +54,6 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains( $this->init->getName() , $config['config']['name']);
 		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_posts' , $config['dir']['post']);
 		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_pages' , $config['dir']['page']);
-		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_drafts' , $config['dir']['draft']);
 		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_sites' , $config['dir']['site']);
 		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_layouts' , $config['dir']['layout']);
 		$this->assertEquals( basename(realpath(ROOT_DIR)) . '/' . '_assets' , $config['dir']['asset']);

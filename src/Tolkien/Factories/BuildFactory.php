@@ -3,7 +3,6 @@
 use Symfony\Component\Yaml\Parser;
 
 use Tolkien\BuildAsset;
-use Tolkien\BuildDraft;
 use Tolkien\BuildPage;
 use Tolkien\BuildPost;
 use Tolkien\BuildSiteCategory;
@@ -50,10 +49,6 @@ class BuildFactory
 				return $this->getBuildAsset();
 				break;
 
-			case 'draft':
-				return $this->getBuildDraft();
-				break;
-
 			case 'page':
 				return $this->getBuildPage();
 				break;
@@ -88,16 +83,6 @@ class BuildFactory
 	public function getBuildAsset()
 	{		
 		return new BuildAsset($this->prepareConfig($this->config), $this->getParser());
-	}
-
-	/**
-	 * Get instance of BuildDraft
-	 *
-	 * @return BuildDraft
-	 */
-	public function getBuildDraft()
-	{
-		return new BuildDraft($this->prepareConfig($this->config), $this->getParser());
 	}
 
 	/** 

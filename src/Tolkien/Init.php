@@ -52,7 +52,6 @@ class Init
 		$this->config = $this->configContent( $blog_dir );
 		@mkdir( $this->config['dir']['post'], 0777, true );
 		@mkdir( $this->config['dir']['page'], 0777, true );
-		@mkdir( $this->config['dir']['draft'], 0777, true );
 		@mkdir( $this->config['dir']['site'], 0777, true );
 		@mkdir( $this->config['dir']['asset'], 0777, true );
 		@mkdir( $this->config['dir']['layout'], 0777, true );	
@@ -136,7 +135,6 @@ class Init
 				"dir" => array(
 					"post" => $base_blog . "/_posts",
 					"page" => $base_blog . "/_pages",
-					"draft" => $base_blog . "/_drafts",
 					"site" => $base_blog . "/_sites",
 					"asset" => $base_blog . "/_assets",
 					"layout" => $base_blog . "/_layouts",

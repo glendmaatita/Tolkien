@@ -1,7 +1,6 @@
 <?php namespace Tolkien\Factories;
 
 use Tolkien\GeneratePost;
-use Tolkien\GenerateDraft;
 use Tolkien\GeneratePage;
 use Symfony\Component\Yaml\Parser;
 
@@ -42,10 +41,6 @@ class GenerateFactory
 		switch ($this->properties['type']) {
 			case 'post':
 				return new GeneratePost($this->prepareConfig($this->config), $this->properties);
-				break;
-
-			case 'draft':
-				return new GenerateDraft($this->prepareConfig($this->config), $this->properties);
 				break;
 
 			case 'page':
