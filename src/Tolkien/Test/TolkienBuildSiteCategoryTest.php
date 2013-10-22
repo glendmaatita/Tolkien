@@ -10,7 +10,7 @@ class TolkienBuildSiteCategoryTest extends \PHPUnit_Framework_TestCase
 	public function testBuildSiteCategory()
 	{
 		$categories_1 = array(new Category('News'), new Category('Tutorial') );
-		$categories_2 = array(new Category('Note'), new Category('Tutorial') );
+		$categories_2 = array(new Category('Note'), new Category('tutoriaL') );
 
 		$author = new Author($name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
 
@@ -25,11 +25,11 @@ class TolkienBuildSiteCategoryTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_array($siteCategories));
 		$this->assertEquals( count($siteCategories), 3 );
-		$this->assertEquals( count($siteCategories['Note']->getPosts()), 1 );
-		$this->assertEquals( count($siteCategories['News']->getPosts()), 1 );
-		$this->assertEquals( count($siteCategories['Tutorial']->getPosts()), 2 );
+		$this->assertEquals( count($siteCategories['note']->getPosts()), 1 );
+		$this->assertEquals( count($siteCategories['news']->getPosts()), 1 );
+		$this->assertEquals( count($siteCategories['tutorial']->getPosts()), 2 );
 
-		$ex_posts = $siteCategories['News']->getPosts();
+		$ex_posts = $siteCategories['news']->getPosts();
 		$ex_post =$ex_posts[0];
 		$this->assertEquals( $ex_post->getTitle(), 'How to learn Kohana' );
 	}

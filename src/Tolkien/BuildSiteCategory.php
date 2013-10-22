@@ -59,15 +59,16 @@ class BuildSiteCategory implements BuildNode
 	{
 		foreach ($post->getCategories() as $category) 
 		{
-			if(in_array($category->getName(), $this->categoriesName))
+			$categoryName = strtolower($category->getName());
+			if(in_array($categoryName, array_map('strtolower', $this->categoriesName)))
 			{
-				$this->siteCategories[$category->getName()]->setPost($post);
+				$this->siteCategories[$categoryName]->setPost($post);
 				continue;
 			}
 
-			$this->siteCategories[$category->getName()] = new SiteCategory($category->getName());
-			$this->siteCategories[$category->getName()]->setPost($post);
-			$this->categoriesName[] = $category->getName();			
+			$this->siteCategories[$categoryName] = new SiteCategory($categoryName);
+			$this->siteCategories[$categoryName]->setPost($post);
+			$this->categoriesName[] = $categoryName;			
 		}
 	}
 
