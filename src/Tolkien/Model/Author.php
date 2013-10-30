@@ -36,6 +36,11 @@ class Author
 	private $github;
 
 	/**
+	 * @var array(Model\Post)
+	 */
+	private $posts;
+
+	/**
 	 * Construct. Name and email is mandatory
 	 *
 	 * @param string $name Author's Name
@@ -45,7 +50,7 @@ class Author
 	 * @param string $twitter Author's Twitter Account
 	 * @param string $github Author's Github 
 	 */
-	public function __construct($name, $email, $signature = '', $facebook = '', $twitter = '', $github = '')
+	public function __construct($name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array())
 	{
 		$this->name = $name;
 		$this->email = $email;
@@ -53,6 +58,7 @@ class Author
 		$this->facebook = $facebook;
 		$this->twitter = $twitter;
 		$this->github = $github;
+		$this->posts = $posts;
 	}
 
 	/**
@@ -173,5 +179,35 @@ class Author
 	public function getGithub()
 	{
 		return $this->github;
+	}
+
+	/**
+	 * set posts by the author
+	 *
+	 * @param array(Model\Post)
+	 */
+	public function setPosts($posts)
+	{
+		$this->posts = $posts;
+	}
+
+	/**
+	 * Get all posts by the author
+	 *
+	 * @return array(Model\Post)
+	 */
+	public function getPosts()
+	{
+		return $this->posts;
+	}
+
+	/**
+	 * Set a post to author's post
+	 *
+	 * @param Model\Post $post
+	 */
+	public function setPost($post)
+	{
+		$this->posts[] = $post;
 	}
 }

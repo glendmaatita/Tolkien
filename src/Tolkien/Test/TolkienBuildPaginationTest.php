@@ -10,12 +10,12 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 	public function __construct()
 	{
 		$this->init = new Init('blog');
-		$this->rrmdir( ROOT_DIR );
+		$this->rrmdir( ROOT_DIR );		
 		$this->init->create();
 	}
 
 	public function testBuildPagination()
-	{
+	{		
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
@@ -85,8 +85,6 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($paginations[0]->getPreviousPage(), null);
 		$this->assertEquals($paginations[1]->getNextPage(), $paginations[2]);
 		$this->assertEquals($paginations[1]->getPreviousPage(), $paginations[0]);
-		
-		
 	}
 
 	public function rrmdir($dir) 

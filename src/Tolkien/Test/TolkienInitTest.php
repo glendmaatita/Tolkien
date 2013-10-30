@@ -38,11 +38,15 @@ class TolkienInitTest extends \PHPUnit_Framework_TestCase
 		//cek if config file exist
 		$this->assertFileExists( ROOT_DIR . '/config.yml' );
 
+		//cek if author file exist
+		$this->assertFileExists( ROOT_DIR . '/author.yml' );
+
 		//cek if index.html
 		//$this->assertFileExists( ROOT_DIR . '/index.html' );
 
 		// validate configfile
 		$this->assertContains('config', file_get_contents( ROOT_DIR . 'config.yml'));
+		$this->assertContains('name', file_get_contents( ROOT_DIR . 'author.yml'));
 	}
 
 	public function testConfigFile()
