@@ -111,7 +111,7 @@ class Init
 		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/tpl/page.html.tpl'));
 
 		// page layout
-		file_put_contents( $this->config['dir']['layout'] . '/site_categories.html.tpl', file_get_contents(__DIR__ . '/tpl/site_categories.html.tpl'));
+		file_put_contents( $this->config['dir']['layout'] . '/category.html.tpl', file_get_contents(__DIR__ . '/tpl/category.html.tpl'));
 
 		// sidebar layout
 		file_put_contents( $this->config['dir']['layout'] . '/sidebar.html.tpl', file_get_contents(__DIR__ . '/tpl/sidebar.html.tpl'));

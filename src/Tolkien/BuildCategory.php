@@ -40,7 +40,6 @@ class BuildCategory implements BuildNode
 	{
 		foreach ($this->posts as $post) 
 		{
-			//$this->categories = array_merge($this->categories, $post->getCategories($post));
 			$this->setCategories($post);
 		}
 	}
