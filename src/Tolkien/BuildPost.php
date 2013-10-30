@@ -2,7 +2,7 @@
 
 use Tolkien\Model\Post;
 use Tolkien\Model\Author;
-use Tolkien\Model\SiteCategory;
+use Tolkien\Model\Category;
 use Michelf\Markdown;
 use Symfony\Component\Yaml\Parser;
 
@@ -206,7 +206,7 @@ class BuildPost implements BuildNode
 		$cats = explode(',', $header['categories']);
 		foreach ($cats as $category) 
 		{
-			$categories[] = new SiteCategory(trim($category));
+			$categories[] = new Category(trim($category));
 		}
 		return $categories;
 	}

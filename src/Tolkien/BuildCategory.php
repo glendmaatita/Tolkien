@@ -1,9 +1,9 @@
 <?php namespace Tolkien;
 
 use Tolkien\Model\Post;
-use Tolkien\Model\SiteCategory;
+use Tolkien\Model\Category;
 
-class BuildSiteCategory implements BuildNode
+class BuildCategory implements BuildNode
 {
 
 	/**
@@ -12,19 +12,14 @@ class BuildSiteCategory implements BuildNode
 	private $posts;
 
 	/**
-	 * @var array(Model\SiteCategory)
+	 * @var array(Model\Category)
 	 */
-	private $siteCategories = array();
+	private $categories = array();
 
 	/**
 	 * @var array(string)
 	 */
 	private $categoriesName = array();
-
-	/**
-	 * @var array(Model\SiteCategory)
-	 */
-	private $categories = array();
 
 	/**
 	 * Construct
@@ -46,28 +41,28 @@ class BuildSiteCategory implements BuildNode
 		foreach ($this->posts as $post) 
 		{
 			//$this->categories = array_merge($this->categories, $post->getCategories($post));
-			$this->setSiteCategories($post);
+			$this->setCategories($post);
 		}
 	}
 
 	/**
 	 * Get all Site Categories
 	 *
-	 * @return array(Model\SiteCategories)
+	 * @return array(Model\Categories)
 	 */
-	public function setSiteCategories($post)
+	public function setCategories($post)
 	{
 		foreach ($post->getCategories() as $category) 
 		{
 			$categoryName = strtolower($category->getName());
 			if(in_array($categoryName, array_map('strtolower', $this->categoriesName)))
 			{
-				$this->siteCategories[$categoryName]->setPost($post);
+				$this->categories[$categoryName]->setPost($post);
 				continue;
 			}
 
-			$this->siteCategories[$categoryName] = new SiteCategory($categoryName);
-			$this->siteCategories[$categoryName]->setPost($post);
+			$this->categories[$categoryName] = new Category($categoryName);
+			$this->categories[$categoryName]->setPost($post);
 			$this->categoriesName[] = $categoryName;			
 		}
 	}
@@ -75,10 +70,10 @@ class BuildSiteCategory implements BuildNode
 	/**
 	 * Get all site categories
 	 *
-	 * @return array(Model\SiteCategory)
+	 * @return array(Model\Category)
 	 */
 	public function getNodes()
 	{
-		return $this->siteCategories;
+		return $this->categories;
 	}
 }

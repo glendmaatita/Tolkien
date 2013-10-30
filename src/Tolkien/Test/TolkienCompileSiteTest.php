@@ -4,9 +4,8 @@ use Symfony\Component\Yaml\Parser;
 use Tolkien\Model\Page;
 use Tolkien\Model\Post;
 use Tolkien\Model\Author;
-use Tolkien\Model\Category;
 use Tolkien\Model\Site;
-use Tolkien\Model\SiteCategory;
+use Tolkien\Model\Category;
 
 class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +20,7 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 	public function testCompileSite()
 	{
 		$assets = array();
-		$siteCategories = array();
+		$categories = array();
 
 		$page_1 = new Page('contact.markdown', 'Contact to our corp', 'Contact Body');
 		$page_1->setLayout('page');
@@ -45,9 +44,9 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 		$post_2->setUrl();
 		$posts = array($post_1, $post_2);
 
-		$siteCategories = array(new SiteCategory('News', array($post_1, $post_2)));
+		$categories = array(new Category('News', array($post_1, $post_2)));
 
-		$site = new Site( $url = 'http://localhost:3000/', $title = 'My Another Blog', $tagline = 'My Blog My Way', $posts, $pages, $siteCategories, $assets );
+		$site = new Site( $url = 'http://localhost:3000/', $title = 'My Another Blog', $tagline = 'My Blog My Way', $posts, $pages, $categories, $assets );
 
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
@@ -65,7 +64,7 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 		$this->assertFileExists( ROOT_DIR . '_sites/' . $post_1->getUrl() );
 		$this->assertFileExists( ROOT_DIR . '_sites/' . $post_2->getUrl() );
 
-		$siteCategories = $site->getSiteCategories();
-		$this->assertFileExists( ROOT_DIR . '_sites/categories/' . strtolower($siteCategories[0]->getName()) . '.html');
+		$categories = $site->getCategories();
+		$this->assertFileExists( ROOT_DIR . '_sites/categories/' . strtolower($categories[0]->getName()) . '.html');
 	}		
 }

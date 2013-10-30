@@ -5,7 +5,7 @@ use Symfony\Component\Yaml\Parser;
 use Tolkien\BuildAsset;
 use Tolkien\BuildPage;
 use Tolkien\BuildPost;
-use Tolkien\BuildSiteCategory;
+use Tolkien\BuildCategory;
 use Tolkien\BuildPagination;
 use Tolkien\BuildSite;
 
@@ -58,7 +58,7 @@ class BuildFactory
 				break;
 
 			case 'site_category':
-				return $this->getBuildSiteCategory();
+				return $this->getBuildCategory();
 				break;
 
 			case 'pagination':
@@ -66,7 +66,7 @@ class BuildFactory
 				break;
 
 			case 'site':
-				return new BuildSite($this->prepareConfig($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildSiteCategory(), $this->getBuildPagination());
+				return new BuildSite($this->prepareConfig($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildCategory(), $this->getBuildPagination());
 				break;
 			
 			default:
@@ -106,15 +106,15 @@ class BuildFactory
 	}
 
 	/**
-	 * Get instance of BuildSiteCategory
+	 * Get instance of BuildCategory
 	 *
-	 * @return BuildSiteCategory
+	 * @return BuildCategory
 	 */
-	public function getBuildSiteCategory()
+	public function getBuildCategory()
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
-		return new BuildSiteCategory($buildPost->getNodes());
+		return new BuildCategory($buildPost->getNodes());
 	}
 
 	/**

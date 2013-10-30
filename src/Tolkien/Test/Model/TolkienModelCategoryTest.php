@@ -1,15 +1,16 @@
 <?php namespace Tolkien\Model;
 
-use Tolkien\Model\Category;
-
 class TolkienModelCategoryTest extends \PHPUnit_Framework_TestCase
 {
 
-	public function testCategoryAttributes()
+	public function testCategoriesAttributes()
 	{
-		$category = new Category($name = 'News');
+		$siteCategory = new Category($name = 'News');
 
 		$this->assertClassHasAttribute('name', 'Tolkien\Model\Category');
-		$this->assertEquals($category->getName(), 'News');
+		$this->assertClassHasAttribute('url', 'Tolkien\Model\Category');
+
+		$this->assertEquals($name, $siteCategory->getName());
+		$this->assertEquals('/categories/news.html', $siteCategory->getUrl());
 	}
 }

@@ -47,7 +47,7 @@ class CompileSite
 
 		$this->compilePosts();
 		$this->compilePages();
-		$this->compileSiteCategories();
+		$this->compileCategories();
 		$this->compileAssets();
 		$this->compilePagination();
     $this->report_success();
@@ -88,13 +88,13 @@ class CompileSite
 	 *
 	 * @return void
 	 */
-	public function compileSiteCategories()
+	public function compileCategories()
 	{
-		foreach ($this->site->getSiteCategories() as $siteCategory) 
+		foreach ($this->site->getCategories() as $category) 
 		{
 			$template = $this->twig->loadTemplate( 'site_categories.html.tpl' );
-			$content = $template->render(array('site' => $this->site, 'siteCategory' => $siteCategory));
-			$this->createFile($content, $siteCategory);
+			$content = $template->render(array('site' => $this->site, 'category' => $category));
+			$this->createFile($content, $category);
 		}
 	}
 

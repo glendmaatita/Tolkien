@@ -37,9 +37,9 @@ class Site
 	private $assets = array();
 
 	/**
-	 * @var array(Model\SiteCategory) Categories
+	 * @var array(Model\Category) Categories
 	 */
-	private $siteCategories = array();
+	private $categories = array();
 
 	/**
 	 * @var array(Model\Pagination) Pagination
@@ -52,14 +52,14 @@ class Site
 	 * @param string $title
 	 * @param string $tagline
 	 */
-	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $siteCategories = array(), $assets = array(), $paginations = array())
+	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $categories = array(), $assets = array(), $paginations = array())
 	{
 		$this->title = $title;
 		$this->url = $url;
 		$this->tagline = $tagline;
 		$this->posts = $posts;
 		$this->pages = $pages;
-		$this->siteCategories = $siteCategories;
+		$this->categories = $categories;
 		$this->assets = $assets;
 		$this->paginations = $paginations;
 	}
@@ -247,21 +247,21 @@ class Site
 	/**
 	 * Set Categories of your site
 	 *
-	 * @param array(Model\SiteCategory) $siteCategories
+	 * @param array(Model\Category) $categories
 	 */
-	public function setCategories($siteCategories)
+	public function setCategories($categories)
 	{
-		$this->siteCategories = $siteCategories;
+		$this->categories = $categories;
 	}
 
 	/**
 	 * Get all site's categories
 	 *
-	 * @return array(Model\SiteCategory)
+	 * @return array(Model\Category)
 	 */
-	public function getSiteCategories()
+	public function getCategories()
 	{
-		return $this->siteCategories;
+		return $this->categories;
 	}
 
 	/**
