@@ -7,6 +7,7 @@ use Tolkien\BuildPage;
 use Tolkien\BuildPost;
 use Tolkien\BuildCategory;
 use Tolkien\BuildPagination;
+use Tolkien\BuildAuthor;
 use Tolkien\BuildSite;
 
 /**
@@ -23,17 +24,24 @@ class BuildFactory
 	/**
 	 * @var string
 	 */
+	private $author_config;
+
+	/**
+	 * @var string
+	 */
 	private $type;
 
 	/**
 	 * Construct
 	 *
 	 * @param string $config Content of config.yml
+	 * @param string $author_config Content of author_config.yml
 	 * @param string $type What is you want to build ?
 	 */
-	public function __construct($config, $type = 'post')
+	public function __construct($config, $author_config, $type = 'post')
 	{
 		$this->config = $config;
+		$this->author_config = $author_config;
 		$this->type = $type;
 	}
 
@@ -57,12 +65,16 @@ class BuildFactory
 				return $this->getBuildPost();
 				break;
 
-			case 'site_category':
+			case 'category':
 				return $this->getBuildCategory();
 				break;
 
 			case 'pagination':
 				return $this->getBuildPagination();
+				break;
+
+			case 'author':
+				return $this->getBuildAuthor();
 				break;
 
 			case 'site':
@@ -102,7 +114,7 @@ class BuildFactory
 	 */
 	public function getBuildPost()
 	{		
-		return new BuildPost($this->prepareConfig($this->config), $this->getParser());
+		return new BuildPost($this->prepareConfig($this->config), $this->prepareConfig($this->author_config), $this->getParser());
 	}
 
 	/**
@@ -127,6 +139,13 @@ class BuildFactory
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
 		return new BuildPagination($this->prepareConfig($this->config), $buildPost->getNodes());
+	}
+
+	public function getBuildAuthor()
+	{
+		$buildPost = $this->getBuildPost();
+		$buildPost->build();
+		return new BuildAuthor($this->prepareConfig($this->author_config), $buildPost->getNodes());
 	}
 
 	/**

@@ -64,13 +64,7 @@ class GeneratePost implements GenerateNode
 		$content .= "layout: " . $this->properties['layout'] . "\n";		
 		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "date: " . Date('Y-m-d') . "\n";
-		$content .= "author:" . "\n";
-		$content .= "  name: " . $this->properties['author']['name'] . "\n";
-		$content .= "  email: " . $this->properties['author']['email'] . "\n";
-		$content .= "  facebook: " . $this->properties['author']['facebook'] . "\n";
-		$content .= "  twitter: " . $this->properties['author']['twitter'] . "\n";
-		$content .= "  github: " . $this->properties['author']['github'] . "\n";
-		$content .= "  signature: " . $this->properties['author']['signature'] . "\n";
+		$content .= "author: tolkien \n";
 		$content .= "categories: " . implode(',', $this->properties['categories']) . "\n";
 		$content .= "---\n";
 		$content .= $this->properties['body'];

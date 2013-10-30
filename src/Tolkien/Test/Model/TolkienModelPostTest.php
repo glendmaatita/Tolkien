@@ -5,7 +5,7 @@ class TolkienModelPostTest extends \PHPUnit_Framework_TestCase
 
 	public function testPostAttributes()
 	{
-		$author = new Author($name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
+		$author = new Author($username = 'entung', $name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
 
 		$categories = array(new Category($name = 'News'), new Category($name = 'Tutorial') );
 
@@ -24,6 +24,7 @@ class TolkienModelPostTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($categories, $post->getCategories());
 		$this->assertEquals('2013-08-09-learn-kohana', $post->getFileName());
 		$this->assertEquals( 'Glend Maatita', $post->getAuthor()->getName());
+		$this->assertEquals( 'entung', $post->getAuthor()->getUserName());
 
 		$post->setPublishDate();
 		$post->setUrl();

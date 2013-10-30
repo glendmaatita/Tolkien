@@ -157,7 +157,7 @@ class Init
 				'email' => 'tolkien@kodetalk.com',
 				'facebook' => 'Tolkien',
 				'twitter' => '@tolkien',
-				'facebook' => 'Tolkien',
+				'github' => 'Tolkien',
 				'signature' => 'Creator of LoTR Trilogy'
 				)
 			);

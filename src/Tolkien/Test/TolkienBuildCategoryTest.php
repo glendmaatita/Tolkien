@@ -12,7 +12,7 @@ class TolkienBuildCategoryTest extends \PHPUnit_Framework_TestCase
 		$categories_1 = array(new Category('News'), new Category('Tutorial') );
 		$categories_2 = array(new Category('Note'), new Category('tutoriaL') );
 
-		$author = new Author($name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
+		$author = new Author($username = 'entung', $name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
 
 
 		$posts[0] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', $author, $categories_1);

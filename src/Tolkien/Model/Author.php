@@ -8,6 +8,10 @@ class Author
 	/**
 	 * @var string
 	 */
+	private $username;
+	/**
+	 * @var string
+	 */
 	private $name;
 
 	/**
@@ -43,6 +47,7 @@ class Author
 	/**
 	 * Construct. Name and email is mandatory
 	 *
+	 * @param string $username Author's Code Name
 	 * @param string $name Author's Name
 	 * @param string $email Author's email
 	 * @param string $signature Author's signature, description of him
@@ -50,8 +55,9 @@ class Author
 	 * @param string $twitter Author's Twitter Account
 	 * @param string $github Author's Github 
 	 */
-	public function __construct($name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array())
+	public function __construct($username, $name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array())
 	{
+		$this->username = $username;
 		$this->name = $name;
 		$this->email = $email;
 		$this->signature = $signature;
@@ -59,6 +65,26 @@ class Author
 		$this->twitter = $twitter;
 		$this->github = $github;
 		$this->posts = $posts;
+	}
+
+	/**
+	 * Set Username
+	 *
+	 * @param string $username
+	 */
+	public function setUsername($username)
+	{
+		$this->username = $username;
+	}
+
+	/**
+	 * Get Author's username
+	 *
+	 * @return string $username
+	 */
+	public function getUsername()
+	{
+		return $this->username;
 	}
 
 	/**

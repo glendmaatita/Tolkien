@@ -18,6 +18,7 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 	{		
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
+		$author_config = $parser->parse(file_get_contents( ROOT_DIR . 'author.yml' ));
 
 		$post_1 = new GeneratePost( $config, $this->prepareProperties("Latest Android Release Part a" ) );
 		$post_1->generate();
@@ -67,7 +68,7 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 		$post_23->generate();
 
 
-		$buildPost = new BuildPost($config, $parser);
+		$buildPost = new BuildPost($config, $author_config, $parser);
 		$buildPost->build();
 
 		$posts = $buildPost->getNodes();
