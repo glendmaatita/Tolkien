@@ -45,6 +45,7 @@ class CompileSite
 	{
 		print "Compiling website ..\n\n";
 
+		$this->rrmdir($this->config['dir']['site']);
 		$this->compilePosts();
 		$this->compilePages();
 		$this->compileCategories();
@@ -156,5 +157,24 @@ class CompileSite
 		print "\nSuccesfully compile your web";
     print "Your website now live on _sites/ folder!! \n\n";
     print "Access it on http://localhost:3000 (default)\n\n";
+	}
+
+	/**
+	 * Delete all file under _sites folder
+	 * 
+	 * @return void
+	 */
+	public function rrmdir($dir) 
+	{
+		foreach(glob("{$dir}/*") as $file)
+		{
+			if(is_dir($file)) {
+				$this->rrmdir($file);
+			} 
+			else {
+				unlink($file);
+			}
+		}
+		rmdir($dir);
 	}
 }

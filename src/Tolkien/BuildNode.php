@@ -8,5 +8,11 @@ interface BuildNode
 	 * @return array Model\Post 
 	 */
 	public function build();
+
+	/**
+	 * Get Nodes : Post, page, authors, categories after build
+	 *
+	 * @return Model\Node
+	 */
 	public function getNodes();
 }

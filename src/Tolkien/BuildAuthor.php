@@ -49,6 +49,12 @@ class BuildAuthor implements BuildNode {
 		}
 	}
 
+	/**
+	 * Set Posts on author
+	 *
+	 * @param Model\Post $post
+	 * @return void
+	 */
 	public function setAuthors($post)
 	{
 		$username = $post->getAuthor()->getUsername();
