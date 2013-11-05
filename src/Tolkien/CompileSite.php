@@ -43,15 +43,12 @@ class CompileSite
 	 */
 	public function compile()
 	{
-		print "Compiling website ..\n\n";
-
 		$this->rrmdir($this->config['dir']['site']);
 		$this->compilePosts();
 		$this->compilePages();
 		$this->compileCategories();
 		$this->compileAssets();
 		$this->compilePagination();
-    $this->report_success();
 	}
 
 	/**
@@ -127,7 +124,6 @@ class CompileSite
     		mkdir(dirname($asset->getUrl()), 0777, true);
 
 			copy( $asset->getPath(), $asset->getUrl() );
-			$this->report($asset->getUrl());
 		}
 	}
 
@@ -144,19 +140,6 @@ class CompileSite
     	mkdir(dirname($this->config['dir']['site'] . '/' . $node->getUrl()), 0777, true);
 
     file_put_contents($this->config['dir']['site'] . '/' . $node->getUrl(), $content);
-    $this->report($this->config['dir']['site'] . '/' . $node->getUrl());
-	}
-
-	public function report($file)
-	{
-		print "Successfully create file " . $file . "\n";
-	}
-
-	public function report_success()
-	{
-		print "\nSuccesfully compile your web";
-    print "Your website now live on _sites/ folder!! \n\n";
-    print "Access it on http://localhost:3000 (default)\n\n";
 	}
 
 	/**

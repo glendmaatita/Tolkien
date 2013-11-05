@@ -71,10 +71,4 @@ class GeneratePost implements GenerateNode
 
 		return $content;
 	}
-
-	public function report()
-	{
-		print "Generating Post file ... \n";
-		print "Successfully generate " . $this->setPath() . "\n\n";
-	}
 }

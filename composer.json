@@ -16,6 +16,7 @@
 	"require": {
 		"phpunit/phpunit": "3.7.*",
 		"symfony/yaml": "2.3.*",
+		"symfony/console": "2.3.*",
 		"twig/twig": "1.*",
 		"michelf/php-markdown": "1.3.*"
 	},

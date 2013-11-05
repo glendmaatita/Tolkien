@@ -6,5 +6,4 @@
 interface GenerateNode
 {
 	public function generate();
-	public function report();
 }

@@ -47,7 +47,6 @@ class Tolkien
 	 * API for generate node
 	 *
 	 * @param string $name Blog's name
-	 * @param string $type Type of Nde
 	 * @param array $properties Title, dll
 	 * @return void
 	 */
@@ -62,7 +61,7 @@ class Tolkien
 		$factory = new GenerateFactory(self::config($name), $properties);
 		$generateNode = $factory->generate();
 		$generateNode->generate();
-		$generateNode->report();
+		return $generateNode;
 	}
 
 	/**
