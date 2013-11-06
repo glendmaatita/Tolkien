@@ -22,12 +22,6 @@ class Tolkien
 		return $name . '/config.yml';
 	}
 
-	public static function author_config($name)
-	{
-		return $name . '/author.yml';
-	}
-
-
 	/**
 	 * API for build node
 	 *
@@ -37,7 +31,7 @@ class Tolkien
 	 */
 	public static function build($name, $type)
 	{
-		$factory = new BuildFactory(self::config($name), self::author_config($name), $type);
+		$factory = new BuildFactory(self::config($name), $type);
 		$buildNode = $factory->build();
 		$buildNode->build();
 		return $buildNode->getNodes();
@@ -72,7 +66,7 @@ class Tolkien
 	 */
 	public static function compile($name)
 	{
-		$factory = new BuildFactory(self::config($name), self::author_config($name), 'site');
+		$factory = new BuildFactory(self::config($name), 'site');
 		$buildSite = $factory->build();
 		$buildSite->build();
 		$site = $buildSite->getNodes();

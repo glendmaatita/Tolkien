@@ -15,7 +15,6 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
-		$author_config = $parser->parse(file_get_contents( ROOT_DIR . 'author.yml' ));
 
 		$post_1 = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release Part 1" ) );
 		$post_1->generate();
@@ -26,9 +25,8 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$post_4 = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release Part 4 (revised)" ) );
 		$post_4->generate();
 
-		$buildPost = new BuildPost($config, $author_config, $parser);
+		$buildPost = new BuildPost($config, $parser);
 		$buildPost->build();
-
 		$posts = $buildPost->getNodes();
 
 		$this->assertTrue( is_array($posts) );

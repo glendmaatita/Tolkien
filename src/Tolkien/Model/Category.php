@@ -38,7 +38,9 @@ class Category
 	 */
 	public function setUrl()
 	{
-		$this->url = '/categories/' . strtolower($this->getName()) . '.html';
+		$name = preg_replace("/[^a-zA-Z0-9]+/", " ", $this->getName());
+		$name = preg_replace('!\s+!', ' ', trim($name));
+		$this->url = '/categories/' . str_replace(" ", "-", strtolower($name)) . '.html';
 	}
 
 	/**

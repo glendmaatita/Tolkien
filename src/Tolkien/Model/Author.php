@@ -45,6 +45,11 @@ class Author
 	private $posts;
 
 	/**
+	 * @var string
+	 */
+	private $url;
+
+	/**
 	 * Construct. Name and email is mandatory
 	 *
 	 * @param string $username Author's Code Name
@@ -55,7 +60,7 @@ class Author
 	 * @param string $twitter Author's Twitter Account
 	 * @param string $github Author's Github 
 	 */
-	public function __construct($username, $name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array())
+	public function __construct($username, $name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array(), $url = '')
 	{
 		$this->username = $username;
 		$this->name = $name;
@@ -65,6 +70,7 @@ class Author
 		$this->twitter = $twitter;
 		$this->github = $github;
 		$this->posts = $posts;
+		$this->url = $url;
 	}
 
 	/**
@@ -235,5 +241,25 @@ class Author
 	public function setPost($post)
 	{
 		$this->posts[] = $post;
+	}
+
+	/**
+	 * Set URL of author page
+	 * 
+	 * @param string $url
+	 */
+	public function setUrl($url)
+	{
+		$this->url = $url;
+	}
+
+	/**
+	 * Get URL of author page
+	 *
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		return $this->url;
 	}
 }

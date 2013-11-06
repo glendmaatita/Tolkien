@@ -24,24 +24,17 @@ class BuildFactory
 	/**
 	 * @var string
 	 */
-	private $author_config;
-
-	/**
-	 * @var string
-	 */
 	private $type;
 
 	/**
 	 * Construct
 	 *
 	 * @param string $config Content of config.yml
-	 * @param string $author_config Content of author_config.yml
 	 * @param string $type What is you want to build ?
 	 */
-	public function __construct($config, $author_config, $type = 'post')
+	public function __construct($config, $type = 'post')
 	{
-		$this->config = $config;
-		$this->author_config = $author_config;
+		$this->config = $this->prepareConfig($config);
 		$this->type = $type;
 	}
 
@@ -78,7 +71,7 @@ class BuildFactory
 				break;
 
 			case 'site':
-				return new BuildSite($this->prepareConfig($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildCategory(), $this->getBuildPagination());
+				return new BuildSite($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildCategory(), $this->getBuildPagination());
 				break;
 			
 			default:
@@ -94,7 +87,7 @@ class BuildFactory
 	 */
 	public function getBuildAsset()
 	{		
-		return new BuildAsset($this->prepareConfig($this->config), $this->getParser());
+		return new BuildAsset($this->config, $this->getParser());
 	}
 
 	/** 
@@ -104,7 +97,7 @@ class BuildFactory
 	 */
 	public function getBuildPage()
 	{		
-		return new BuildPage($this->prepareConfig($this->config), $this->getParser());
+		return new BuildPage($this->config, $this->getParser());
 	}
 
 	/**
@@ -114,7 +107,7 @@ class BuildFactory
 	 */
 	public function getBuildPost()
 	{		
-		return new BuildPost($this->prepareConfig($this->config), $this->prepareConfig($this->author_config), $this->getParser());
+		return new BuildPost($this->config, $this->getParser());
 	}
 
 	/**
@@ -138,14 +131,19 @@ class BuildFactory
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
-		return new BuildPagination($this->prepareConfig($this->config), $buildPost->getNodes());
+		return new BuildPagination($this->config, $buildPost->getNodes());
 	}
 
+	/**
+	 * Get instance of BuildAuthor
+	 *
+	 * @return BuildAuthor
+	 */
 	public function getBuildAuthor()
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
-		return new BuildAuthor($this->prepareConfig($this->author_config), $buildPost->getNodes());
+		return new BuildAuthor($this->config, $buildPost->getNodes());
 	}
 
 	/**

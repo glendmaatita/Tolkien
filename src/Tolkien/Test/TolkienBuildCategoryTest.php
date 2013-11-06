@@ -10,7 +10,7 @@ class TolkienBuildCategoryTest extends \PHPUnit_Framework_TestCase
 	public function testBuildCategory()
 	{
 		$categories_1 = array(new Category('News'), new Category('Tutorial') );
-		$categories_2 = array(new Category('Note'), new Category('tutoriaL') );
+		$categories_2 = array(new Category('nEwS'), new Category('My Tutorial') );
 
 		$author = new Author($username = 'entung', $name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
 
@@ -25,9 +25,11 @@ class TolkienBuildCategoryTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_array($categories));
 		$this->assertEquals( count($categories), 3 );
-		$this->assertEquals( count($categories['note']->getPosts()), 1 );
-		$this->assertEquals( count($categories['news']->getPosts()), 1 );
-		$this->assertEquals( count($categories['tutorial']->getPosts()), 2 );
+		$this->assertEquals( count($categories['news']->getPosts()), 2 );
+		$this->assertEquals( count($categories['tutorial']->getPosts()), 1 );
+
+		$this->assertEquals( $categories['news']->getUrl(), '/categories/news.html' );
+		$this->assertEquals( $categories['my tutorial']->getUrl(), '/categories/my-tutorial.html' );
 
 		$ex_posts = $categories['news']->getPosts();
 		$ex_post =$ex_posts[0];

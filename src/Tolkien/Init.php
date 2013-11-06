@@ -38,7 +38,6 @@ class Init
 		$blog_dir = getcwd() . '/' . $this->name . '/';
 		$this->createBlogDirectory($blog_dir);
 		$this->createConfigFile($blog_dir);
-		$this->createAuthorFile($blog_dir);
 		$this->createTemplateFile($blog_dir);
 	}
 
@@ -67,12 +66,6 @@ class Init
 	{
 		$dumper = new Dumper();
 		file_put_contents( $blog_dir . 'config.yml', $dumper->dump( $this->configContent($blog_dir), 2 ) );
-	}
-
-	public function createAuthorFile($blog_dir)
-	{
-		$dumper = new Dumper();
-		file_put_contents( $blog_dir . 'author.yml', $dumper->dump( $this->authorConfigContent($blog_dir), 2 ) );
 	}
 
 	/**
@@ -145,22 +138,18 @@ class Init
 					"site" => $base_blog . "/_sites",
 					"asset" => $base_blog . "/_assets",
 					"layout" => $base_blog . "/_layouts",
+					),
+				"authors" => array(
+					'tolkien' => array(
+						'name' => 'John Ronald Reuel Tolkien',
+						'email' => 'tolkien@kodetalk.com',
+						'facebook' => 'Tolkien',
+						'twitter' => '@tolkien',
+						'github' => 'Tolkien',
+						'signature' => 'Creator of LoTR Trilogy'
+						)
 					)
-			);
-	}
-
-	public function authorConfigContent($blog)
-	{
-		return array(
-			'tolkien' => array(
-				'name' => 'John Ronald Reuel Tolkien',
-				'email' => 'tolkien@kodetalk.com',
-				'facebook' => 'Tolkien',
-				'twitter' => '@tolkien',
-				'github' => 'Tolkien',
-				'signature' => 'Creator of LoTR Trilogy'
-				)
-			);
+				);
 	}
 
 	/**

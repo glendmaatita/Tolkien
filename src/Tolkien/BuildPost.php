@@ -18,11 +18,6 @@ class BuildPost implements BuildNode
 	private $config;
 
 	/**
-	 * @var array $author_config Result from parsing author.yml
-	 */
-	private $author_config;
-
-	/**
 	 * @var array(Model\Post) $posts 
 	 */
 	private $posts = array();
@@ -38,10 +33,9 @@ class BuildPost implements BuildNode
 	 * @param array $config
 	 * @param Parser $parser
 	 */
-	public function __construct($config, $author_config, $parser)
+	public function __construct($config, $parser)
 	{
 		$this->config = $config;
-		$this->author_config = $author_config;
 		$this->parser = $parser;
 	}
 
@@ -197,7 +191,7 @@ class BuildPost implements BuildNode
 	 */
 	public function defineAuthor($header)
 	{
-		$author = $this->author_config[$header['author']];
+		$author = $this->config['authors'][$header['author']];
 		return new Author($header['author'], $author['name'], $author['email'], $author['signature'], $author['facebook'], $author['twitter'], $author['github']);
 	}
 

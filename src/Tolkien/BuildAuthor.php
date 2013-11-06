@@ -22,7 +22,7 @@ class BuildAuthor implements BuildNode {
 	/**
 	 * @var array
 	 */
-	private $author_config;
+	private $config;
 
 	/**
 	 * Construct
@@ -30,9 +30,9 @@ class BuildAuthor implements BuildNode {
 	 * @param array $author
 	 * @param array(Model\Post)
 	 */
-	public function __construct($author_config, $posts)
+	public function __construct($config, $posts)
 	{
-		$this->author_config = $author_config;
+		$this->config = $config;
 		$this->posts = $posts;
 	}
 
@@ -59,7 +59,7 @@ class BuildAuthor implements BuildNode {
 	{
 		$username = $post->getAuthor()->getUsername();
 
-		if(in_array($username, array_keys($this->author_config)))
+		if(in_array($username, array_keys($this->config['authors'])))
 		{
 			if(in_array($username, $this->authorsName))
 			{
@@ -67,7 +67,7 @@ class BuildAuthor implements BuildNode {
 			}
 			else 
 			{
-				$this->authors[$username] = new Author($username, $this->author_config[$username]['name'], $this->author_config[$username]['email'], $this->author_config[$username]['facebook'], $this->author_config[$username]['twitter'], $this->author_config[$username]['github']);
+				$this->authors[$username] = new Author($username, $this->config['authors'][$username]['name'], $this->config['authors'][$username]['email'], $this->config['authors'][$username]['facebook'], $this->config['authors'][$username]['twitter'], $this->config['authors'][$username]['github']);
 				$this->authors[$username]->setPost($post);
 				$this->authorsName[] = $username;	
 			}

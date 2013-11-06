@@ -12,7 +12,7 @@ class TolkienBuildAuthorTest extends \PHPUnit_Framework_TestCase
 	{
 
 		$parser = new Parser();
-		$author_config = $parser->parse(file_get_contents( ROOT_DIR . 'author.yml' ));
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml' ));
 
 		$categories_1 = array(new Category('News'), new Category('Tutorial') );
 		$categories_2 = array(new Category('Note'), new Category('tutoriaL') );
@@ -23,7 +23,7 @@ class TolkienBuildAuthorTest extends \PHPUnit_Framework_TestCase
 		$posts[0] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', $author, $categories_1);
 		$posts[1] = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', $author, $categories_2);
 
-		$buildAuthor = new BuildAuthor($author_config, $posts);
+		$buildAuthor = new BuildAuthor($config, $posts);
 		$buildAuthor->build();
 
 		$authors = $buildAuthor->getNodes();
