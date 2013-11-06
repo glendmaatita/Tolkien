@@ -65,7 +65,7 @@ class Init
 	public function createConfigFile($blog_dir)
 	{
 		$dumper = new Dumper();
-		file_put_contents( $blog_dir . 'config.yml', $dumper->dump( $this->configContent($blog_dir), 2 ) );
+		file_put_contents( $blog_dir . 'config.yml', $dumper->dump( $this->configContent($blog_dir), 3 ) );
 	}
 
 	/**
@@ -103,8 +103,11 @@ class Init
 		// page layout
 		file_put_contents( $this->config['dir']['layout'] . '/page.html.tpl', file_get_contents(__DIR__ . '/tpl/page.html.tpl'));
 
-		// page layout
+		// category layout
 		file_put_contents( $this->config['dir']['layout'] . '/category.html.tpl', file_get_contents(__DIR__ . '/tpl/category.html.tpl'));
+
+		// author layout
+		file_put_contents( $this->config['dir']['layout'] . '/author.html.tpl', file_get_contents(__DIR__ . '/tpl/author.html.tpl'));
 
 		// sidebar layout
 		file_put_contents( $this->config['dir']['layout'] . '/sidebar.html.tpl', file_get_contents(__DIR__ . '/tpl/sidebar.html.tpl'));

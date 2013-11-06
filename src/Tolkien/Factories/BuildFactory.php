@@ -71,7 +71,7 @@ class BuildFactory
 				break;
 
 			case 'site':
-				return new BuildSite($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildCategory(), $this->getBuildPagination());
+				return new BuildSite($this->config), $this->getBuildAsset(), $this->getBuildPage(), $this->getBuildPost(), $this->getBuildCategory(), $this->getBuildPagination(), $this->getBuildAuthor() );
 				break;
 			
 			default:

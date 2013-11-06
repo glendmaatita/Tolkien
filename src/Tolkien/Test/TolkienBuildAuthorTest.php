@@ -30,5 +30,6 @@ class TolkienBuildAuthorTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_array($authors));
 		$this->assertEquals(2, count($authors['tolkien']->getPosts()));
+		$this->assertEquals($authors['tolkien']->getUrl(), '/authors/tolkien.html');
 	}
 }

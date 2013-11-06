@@ -47,12 +47,17 @@ class Site
 	private $paginations = array();
 
 	/**
+	 * @var array(Model\Author) Author
+	 */
+	private $authors = array();
+
+	/**
 	 * Construct
 	 *
 	 * @param string $title
 	 * @param string $tagline
 	 */
-	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $categories = array(), $assets = array(), $paginations = array())
+	public function __construct($url, $title, $tagline = '', $posts = array(), $pages = array(), $categories = array(), $assets = array(), $paginations = array(), $authors = array())
 	{
 		$this->title = $title;
 		$this->url = $url;
@@ -62,6 +67,7 @@ class Site
 		$this->categories = $categories;
 		$this->assets = $assets;
 		$this->paginations = $paginations;
+		$this->authors = $authors;
 	}
 
 	/**
@@ -282,5 +288,25 @@ class Site
 	public function getPaginations()
 	{
 		return $this->paginations;
+	}
+
+	/**
+	 * set site's authors
+	 *
+	 * @param array(Model\Author)
+	 */
+	public function setAuthors($authors)
+	{
+		$this->authors = $authors;
+	}
+
+	/**
+	 * Get all site's authors
+	 *
+	 * @return array(Model\Author)
+	 */
+	public function getAuthors()
+	{
+		return $this->authors;
 	}
 }

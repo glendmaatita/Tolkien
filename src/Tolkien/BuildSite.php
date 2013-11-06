@@ -34,6 +34,11 @@ class BuildSite
 	private $buildPagination;
 
 	/**
+	 * @var BuildAuthor
+	 */
+	private $buildAuthor;
+
+	/**
 	 * @var array
 	 */
 	private $config;
@@ -51,8 +56,9 @@ class BuildSite
 	 * @param BuildPage $buildPage
 	 * @param BuildPost $buildPost
 	 * @param BuildCategory $buildCategory
+	 * @param BuildAuthor $buildAuthor
 	 */
-	public function __construct($config, $buildAsset, $buildPage, $buildPost, $buildCategory, $buildPagination)
+	public function __construct($config, $buildAsset, $buildPage, $buildPost, $buildCategory, $buildPagination, $buildAuthor)
 	{
 		$this->config = $config;
 		$this->buildAsset = $buildAsset;
@@ -60,6 +66,7 @@ class BuildSite
 		$this->buildPost = $buildPost;
 		$this->buildCategory = $buildCategory;
 		$this->buildPagination = $buildPagination;
+		$this->buildAuthor = $buildAuthor;
 	}
 
 	/**
@@ -68,8 +75,8 @@ class BuildSite
 	 * @return Model\Site
 	 */
 	public function build()
-	{
-		$this->site = new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getCategories(), $this->getAssets(), $this->getPaginations() );
+	{var_dump($this->getAuthors());die();
+		$this->site = new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getCategories(), $this->getAssets(), $this->getPaginations(), $this->getAuthors() );
 	}
 
 	/**
@@ -114,6 +121,17 @@ class BuildSite
 	{
 		$this->buildAsset->build();
 		return $this->buildAsset->getNodes();
+	}
+
+	/**
+	 * Build Author
+	 *
+	 * @return Model\Author
+	 */
+	public function getAuthors()
+	{
+		$this->buildAuthor->build();
+		return $this->buildAuthor->getNodes();
 	}
 
 	/**

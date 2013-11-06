@@ -48,7 +48,8 @@ class CompileSite
 		$this->compilePages();
 		$this->compileCategories();
 		$this->compileAssets();
-		$this->compilePagination();
+		$this->compilePaginations();
+		$this->compileAuthors();
 	}
 
 	/**
@@ -97,11 +98,26 @@ class CompileSite
 	}
 
 	/**
+	 * Compile authors page
+	 *
+	 * @return void
+	 */
+	public function compileAuthors()
+	{
+		foreach ($this->site->getAuthors() as $author) 
+		{
+			$template = $this->twig->loadTemplate( 'author.html.tpl' );
+			$content = $template->render(array('site' => $this->site, 'author' => $author));
+			$this->createFile($content, $author);
+		}
+	}
+
+	/**
 	 * Compile Pagination
 	 *
 	 * @return void
 	 */
-	public function compilePagination()
+	public function compilePaginations()
 	{
 		foreach ($this->site->getPaginations() as $pagination) 
 		{

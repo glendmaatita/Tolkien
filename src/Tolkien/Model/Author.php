@@ -60,7 +60,7 @@ class Author
 	 * @param string $twitter Author's Twitter Account
 	 * @param string $github Author's Github 
 	 */
-	public function __construct($username, $name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array(), $url = '')
+	public function __construct($username, $name, $email, $signature = '', $facebook = '', $twitter = '', $github = '', $posts = array())
 	{
 		$this->username = $username;
 		$this->name = $name;
@@ -70,7 +70,7 @@ class Author
 		$this->twitter = $twitter;
 		$this->github = $github;
 		$this->posts = $posts;
-		$this->url = $url;
+		$this->setUrl();
 	}
 
 	/**
@@ -248,9 +248,11 @@ class Author
 	 * 
 	 * @param string $url
 	 */
-	public function setUrl($url)
+	public function setUrl()
 	{
-		$this->url = $url;
+		$name = preg_replace("/[^a-zA-Z0-9]+/", " ", $this->getUsername());
+		$name = preg_replace('!\s+!', ' ', trim($name));
+		$this->url = '/authors/' . str_replace(" ", "-", strtolower($name)) . '.html';
 	}
 
 	/**
