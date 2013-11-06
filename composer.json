@@ -10,7 +10,7 @@
 	],
 	"autoload": {
 		"psr-0": { 
-			"Tolkien": "src"
+			"Tolkien": ["src", "test"]
 		} 
 	},
 	"require": {

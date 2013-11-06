@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit 
-	bootstrap="src/Tolkien/Test/bootstrap.php"
+	bootstrap="test/Tolkien/bootstrap.php"
 	colors="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
@@ -11,7 +11,7 @@
 	stopOnSkipped="false">
 	<testsuites>
 		<testsuite name="Tolkoen Blog Engine">
-			<directory suffix="Test.php">src/Tolkien/Test</directory>
+			<directory suffix="Test.php">test/Tolkien</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>
