@@ -75,7 +75,7 @@ class BuildSite
 	 * @return Model\Site
 	 */
 	public function build()
-	{var_dump($this->getAuthors());die();
+	{
 		$this->site = new Site($this->config['config']['url'], $this->config['config']['title'], $this->config['config']['tagline'], $this->getPosts(), $this->getPages(), $this->getCategories(), $this->getAssets(), $this->getPaginations(), $this->getAuthors() );
 	}
 
