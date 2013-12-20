@@ -61,7 +61,7 @@ class GeneratePage implements GenerateNode
 	public function setPageContent()
 	{
 		$content = "---\n";
-		$content .= "type: page\n";
+		$content .= "type: ". $this->properties['type'] . "\n";
 		$content .= "layout: " . $this->properties['layout'] . "\n";
 		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "---\n";

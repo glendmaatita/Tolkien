@@ -60,7 +60,7 @@ class GeneratePost implements GenerateNode
 	public function setPostContent()
 	{
 		$content = "---\n";
-		$content .= "type: post\n";
+		$content .= "type: " . $this->properties['type'] . "\n";
 		$content .= "layout: " . $this->properties['layout'] . "\n";		
 		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "date: " . Date('Y-m-d') . "\n";

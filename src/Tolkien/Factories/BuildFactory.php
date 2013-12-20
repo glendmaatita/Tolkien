@@ -27,15 +27,21 @@ class BuildFactory
 	private $type;
 
 	/**
+	 * Draft will be build or not 
+	 */
+	private $with_draft;
+
+	/**
 	 * Construct
 	 *
 	 * @param string $config Content of config.yml
 	 * @param string $type What is you want to build ?
 	 */
-	public function __construct($config, $type = 'post')
+	public function __construct($config, $type = 'post', $with_draft = false)
 	{
 		$this->config = $this->prepareConfig($config);
 		$this->type = $type;
+		$this->with_draft = $with_draft;
 	}
 
 	/**
@@ -107,7 +113,7 @@ class BuildFactory
 	 */
 	public function getBuildPost()
 	{		
-		return new BuildPost($this->config, $this->getParser());
+		return new BuildPost($this->config, $this->getParser(), $this->with_draft);
 	}
 
 	/**

@@ -28,15 +28,21 @@ class BuildPost implements BuildNode
 	private $parser;
 
 	/**
+	 * @var Boolean
+	 */
+	private $with_draft;
+
+	/**
 	 * Construct
 	 *
 	 * @param array $config
 	 * @param Parser $parser
 	 */
-	public function __construct($config, $parser)
+	public function __construct($config, $parser, $with_draft = false)
 	{
 		$this->config = $config;
 		$this->parser = $parser;
+		$this->with_draft = $with_draft;
 	}
 
 	/**
@@ -147,6 +153,10 @@ class BuildPost implements BuildNode
 
 		//parse header
 		$header = $this->parser->parse($header_parsed);
+
+		// if type is draft, then continue loop. Not build draft post
+		if($header['type'] == 'draft' && !$this->with_draft)
+			continue;
 
 		$body_excerpt = explode("[more]", $body);
 		if(count($body_excerpt) == '2')

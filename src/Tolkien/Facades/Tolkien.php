@@ -64,9 +64,9 @@ class Tolkien
 	 * @param string $name
 	 * @return void
 	 */
-	public static function compile($name)
+	public static function compile($name, $with_draft = false)
 	{
-		$factory = new BuildFactory(self::config($name), 'site');
+		$factory = new BuildFactory(self::config($name), 'site', $with_draft);
 		$buildSite = $factory->build();
 		$buildSite->build();
 		$site = $buildSite->getNodes();
