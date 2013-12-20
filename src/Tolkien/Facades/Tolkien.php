@@ -84,8 +84,8 @@ class Tolkien
 	/**
 	 * Serve Tolkien with built in webserver
 	 */
-	public static function serve($name)
+	public static function serve($name, $host = 'localhost:3000')
 	{
-		shell_exec('php -S localhost:3000 -t ' . $name . '/_sites');
+		shell_exec('php -S ' . $host . ' -t ' . $name . '/_sites');
 	}
 }
