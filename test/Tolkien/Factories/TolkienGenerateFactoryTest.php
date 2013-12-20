@@ -6,6 +6,7 @@ class TolkienGenerateFactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		//build Post
 		$generateFactory = new GenerateFactory( ROOT_DIR . 'config.yml', array(
+			'node' => 'post',
 			'type' => 'post',
 			'title' => 'Introduction of PHP 5.4',
 			'layout' => 'post',
@@ -17,6 +18,7 @@ class TolkienGenerateFactoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf('Tolkien\GeneratePost', $generatePost);
 
 		$generateFactory = new GenerateFactory( ROOT_DIR . 'config.yml', array(
+			'node' => 'page',
 			'type' => 'page',
 			'title' => 'Contact Us',
 			'layout' => 'page',

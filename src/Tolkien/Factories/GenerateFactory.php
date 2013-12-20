@@ -38,7 +38,7 @@ class GenerateFactory
 	 */
 	public function generate()
 	{
-		switch ($this->properties['type']) {
+		switch ($this->properties['node']) {
 			case 'post':
 				return new GeneratePost($this->prepareConfig($this->config), $this->properties);
 				break;

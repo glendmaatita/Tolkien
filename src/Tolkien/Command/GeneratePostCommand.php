@@ -29,7 +29,7 @@ class GeneratePostCommand extends Command
 				->addOption(
 					'categories', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Categories of Post. Separated by comma', array('category1')
 					)
-				>addOption(
+				->addOption(
 					'type', null, InputOption::VALUE_OPTIONAL, 'Fill with Draft if you want create Post Draft', 'post'
 					);
 	}
@@ -44,7 +44,7 @@ class GeneratePostCommand extends Command
 			$categories = explode(',', $input->getOption('categories'));
 
 		$properties = array(
-				'type' => 'post', 'title' => $input->getArgument('title'), 'layout' => $input->getOption('layout'), 'author' => $input->getOption('author'), 'type' => $input->getOption('type'), 'categories' => $categories, 'body' => 'Body of Content'
+			'node' => 'post', 'type' => $input->getOption('type'), 'title' => $input->getArgument('title'), 'layout' => $input->getOption('layout'), 'author' => $input->getOption('author'), 'categories' => $categories, 'body' => 'Body of Content'
 			);
 		$generate = Tolkien::generate($input->getArgument('name'), $properties);
 

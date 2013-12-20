@@ -22,7 +22,7 @@ class GeneratePageCommand extends Command
 				->addOption(
 					'layout', null, InputOption::VALUE_OPTIONAL, 'Layout for generated Page', 'post'
 					)
-				>addOption(
+				->addOption(
 					'type', null, InputOption::VALUE_OPTIONAL, 'Fill with Draft if you want create Page Draft', 'page'
 					);
 	}
@@ -31,7 +31,7 @@ class GeneratePageCommand extends Command
 	{
 		$output->writeln('<comment>Generating a Page .. </comment>');
 		$properties = array(
-			'type' => 'page', 'title' => $input->getArgument('title'), 'layout' => $input->getOption('layout'), 'body' => 'Body of Page', 'type' => $input->getOption('type'));
+			'node' => 'page', 'type' => $input->getOption('type'), 'title' => $input->getArgument('title'), 'layout' => $input->getOption('layout'), 'body' => 'Body of Page');
 		
 		$generate = Tolkien::generate($input->getArgument('name'), $properties);
 
