@@ -27,12 +27,25 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 		$page_3 = new GeneratePage( $config, $this->prepareProperties( 'Portofolio') );
 		$page_3->generate();
 
+		// draft
+		$page_4 = new GeneratePage( $config, $this->prepareProperties( 'Portofolio Ane', 'draft') );
+		$page_4->generate();
+
+		// with no draft
 		$buildPage = new BuildPage($config, $parser);
 		$buildPage->build();
 
 		$pages = $buildPage->getNodes();
 
 		$this->assertTrue( is_array($pages) );
+		$this->assertEquals( 3, count(($pages)) );
+
+		// with draft
+		$buildPage = new BuildPage($config, $parser, $with_draft = true);
+		$buildPage->build();
+
+		$pages = $buildPage->getNodes();
+		$this->assertEquals( 4, count(($pages)) );
 
 		$this->assertEquals($pages[1]->getTitle(), 'Contact (revised)');
 		$this->assertEquals($pages[1]->getFile(), 'contact-revised.markdown');
@@ -54,11 +67,11 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
     rmdir($dir);
 	}
 
-	public function prepareProperties($title)
+	public function prepareProperties($title, $type = 'page')
 	{
 		return array(
 			'title' => $title,
-			'type' => 'page',
+			'type' => $type,
 			'layout' => 'page',
 			'author' => array(
 				'name' => 'Your Name',

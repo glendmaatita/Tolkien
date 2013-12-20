@@ -156,7 +156,7 @@ class BuildPost implements BuildNode
 
 		// if type is draft, then continue loop. Not build draft post
 		if($header['type'] == 'draft' && !$this->with_draft)
-			continue;
+			return;
 
 		$body_excerpt = explode("[more]", $body);
 		if(count($body_excerpt) == '2')
@@ -229,6 +229,6 @@ class BuildPost implements BuildNode
 	 */
 	public function getNodes()
 	{
-		return $this->posts;
+		return array_filter($this->posts);
 	}
 }

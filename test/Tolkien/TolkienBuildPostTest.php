@@ -25,11 +25,23 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 		$post_4 = new GeneratePost( $config, $this->prepareProperties( "Latest Android Release Part 4 (revised)" ) );
 		$post_4->generate();
 
-		$buildPost = new BuildPost($config, $parser);
+		// draft
+		$post_5 = new GeneratePost( $config, $this->prepareProperties( "Draft - Latest Android Release Part 5", 'draft' ) );
+		$post_5->generate();		
+
+		// with no draft
+		$buildPost = new BuildPost($config, $parser, $with_draft = false);
 		$buildPost->build();
 		$posts = $buildPost->getNodes();
 
 		$this->assertTrue( is_array($posts) );
+		$this->assertEquals(4, count($posts));
+
+		// with draft
+		$buildPost = new BuildPost($config, $parser, $with_draft = true);
+		$buildPost->build();
+		$posts = $buildPost->getNodes();
+		$this->assertEquals(5, count($posts));
 
 		$name_separate = explode('-', Date('Y-m-d'));
 		$originalDate = $name_separate[0] . '-' . $name_separate[1] . '-' .$name_separate[2];
@@ -63,11 +75,11 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
     rmdir($dir);
 	}
 
-	public function prepareProperties($title)
+	public function prepareProperties($title, $type = 'post')
 	{
 		return array(
 			'title' => $title,
-			'type' => 'post',
+			'type' => $type,
 			'layout' => 'post',
 			'author' => array(
 				'name' => 'Your Name',

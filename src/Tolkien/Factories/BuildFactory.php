@@ -103,7 +103,7 @@ class BuildFactory
 	 */
 	public function getBuildPage()
 	{		
-		return new BuildPage($this->config, $this->getParser());
+		return new BuildPage($this->config, $this->getParser(), $this->with_draft);
 	}
 
 	/**
