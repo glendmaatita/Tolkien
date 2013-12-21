@@ -151,7 +151,7 @@ Tolkien has several variables that you can pass to your layout files (Twig templ
     site.pages          // Get all pages
     site.categories     // Get all posts's categories
     
-### Category Variables
+#### Category Variables
 
     category.url    // URL for category page. This page may contains a list of post of certain category
     category.name   // Category's name
