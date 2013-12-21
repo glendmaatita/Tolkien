@@ -13,7 +13,7 @@ The best way to install Tolkien is to use Composer to install it. Add this follo
 
     {
         "require": {
-            "tolkien/tolkien": "v0.5.*"
+            "tolkien/tolkien": "dev-master"
         }
     }
     
@@ -114,13 +114,13 @@ For another options and information run :
 #### Generate Page
 Page is just like Post, but without author, categories, and date section on its header. if we want to create a page for our **myblog** web, for example Contact page with ***page*** layout, we simply run this command below
 
-    vendor\bin\tolkien generate:page --layout=page myblog page "Contact Us"
+    vendor\bin\tolkien generate:page --layout=page myblog "Contact Us"
     
 The command above will create a file with format title.markdown inside **_pages** folder. Its content is same with Post, has two section (header and body) and you can add the body below the header. The body format is Markdown, but you can use HTML format with the same rule as Post. 
 
 For another options and information to generate page, run : 
 
-    vendor\bin\tolkien generate:post -h
+    vendor\bin\tolkien generate:page -h
 
 #### Compile 
 Compile is Tolkien's command for generate our static web page based on posts and pages file that we created before. The generated web page will be placed under **_sites** folder. Look at this compile command below
@@ -229,7 +229,7 @@ Check [Heston](http://github.com/glendmaatita/heston/) on Github for easy deploy
     vendor\bin\heston ftp://username:password@ftp.domain.tld:port myblog/_sites/ "_your_comment_"
     
 ## Other
-For documentation in Bahasa (Indonesian) Version, please refer to [My Blog](http://glend.beenarylab.com/2013/09/24/tolkien.html) 
+For documentation in Bahasa (Indonesian) Version, please refer to [Kodetalk](http://www.kodetalk.com/tolkien.html). Kodetalk's source code using Tolkien on [Github](http://github.com/KodeTalk/website)
 
 License
 ----
