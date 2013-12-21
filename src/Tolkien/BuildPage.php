@@ -178,6 +178,6 @@ class BuildPage implements BuildNode
 	 */
 	public function getNodes()
 	{
-		return array_filter($this->pages);
+		return array_values(array_filter($this->pages));
 	}
 }

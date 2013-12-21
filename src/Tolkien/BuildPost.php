@@ -229,6 +229,6 @@ class BuildPost implements BuildNode
 	 */
 	public function getNodes()
 	{
-		return array_filter($this->posts);
+		return array_values(array_filter($this->posts));
 	}
 }
