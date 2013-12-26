@@ -106,14 +106,7 @@ class TolkienBuildPaginationTest extends \PHPUnit_Framework_TestCase
 			'title' => $title,
 			'type' => 'post',
 			'layout' => 'post',
-			'author' => array(
-				'name' => 'Your Name',
-				'email' => 'Your Email',
-				'facebook' => 'Your Facebook',
-				'twitter' => 'Your Twitter',
-				'github' => 'Your Github',
-				'signature' => 'Your Signature',			
-				),
+			'author' => 'tolkien',
 			'categories' => array('category1'),
 			'body' => 'Body of Content'
 			);
