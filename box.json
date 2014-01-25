@@ -1,0 +1,14 @@
+{
+    "directories": "src",
+    "chmod": "0755",
+    "main": "bin/Tolkien/tolkien",
+    "finder": [
+        {
+            "name": "*.php",
+            "exclude": ["herrera-io", "Tests", "test", "phpunit"],
+            "in": "vendor"
+        }
+    ],
+    "output": "tolkien.phar",
+    "stub": true
+}
