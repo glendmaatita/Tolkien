@@ -58,11 +58,11 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 	{
 		foreach(glob("{$dir}/*") as $file)
     {
-        if(is_dir($file)) { 
-            $this->rrmdir($file);
-        } else {
-            unlink($file);
-        }
+    	if(is_dir($file)) {
+    		$this->rrmdir($file);
+    	} else {
+    		unlink($file);
+    	}
     }
     rmdir($dir);
 	}
