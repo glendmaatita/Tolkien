@@ -81,12 +81,16 @@ class Post extends Node
 	/**
 	 * Set Published Date. Generated when user create post file in _post/
 	 *
+	 * Using Date format from native PHP to generate date (see http://www.php.net/manual/en/function.date.php)
+	 *
+	 * @param string $dateFormat
+	 * @return void
 	 */
-	public function setPublishDate()
+	public function setPublishDate($dateFormat = 'F d, Y')
 	{
 		$name_separate = explode('-', $this->getFileName(), 4);
 		$originalDate = $name_separate[0] . '-' . $name_separate[1] . '-' .$name_separate[2];
-		$this->publishDate = date("F d, Y", strtotime($originalDate));
+		$this->publishDate = date($dateFormat, strtotime($originalDate));
 	}
 
 	/**
@@ -103,6 +107,7 @@ class Post extends Node
 	 * Set array of Categories to Post. Post can have some categories
 	 *
 	 * @param array(Model\Category) $categories
+	 * @return void
 	 */
 	public function setCategories($categories)
 	{
@@ -123,6 +128,7 @@ class Post extends Node
 	 * Set a Category to Post
 	 *
 	 * @param Model\Category $category
+	 * @return void
 	 */
 	public function setCategory($category)
 	{
@@ -166,9 +172,11 @@ class Post extends Node
 	 * :date, :month, :year -> taken from date section
 	 * :title -> title of file, taken from filename
 	 *
+	 * @param string $urlFormat
+	 * @param string $date
 	 * @return void
 	 */
-	public function setUrl($dateFormat, $date)
+	public function setUrl($urlFormat, $date)
 	{
 		// $this->url = '/' . implode('/', explode('-', $this->getFileName(), 4)) . '.html';
 
@@ -178,7 +186,7 @@ class Post extends Node
 		$title = explode('-', $this->getFileName(), 4);
 
 		// replacing variable in the comment above with proper value
-		$this->url = '/' . str_replace(array(':date', ':month', ':year', ':title'), array($day, $month, $year, $title[3] . '.html'), $dateFormat);
+		$this->url = '/' . str_replace(array(':date', ':month', ':year', ':title'), array($day, $month, $year, $title[3] . '.html'), $urlFormat);
 	}
 
 	/**
@@ -194,7 +202,8 @@ class Post extends Node
 	/**
 	 * Set Excerpt to Post
 	 *
-	 * @todo set excerpt
+	 * @param string $excerpt
+	 * @return void
 	 */
 	public function setExcerpt($excerpt)
 	{

@@ -64,6 +64,7 @@ class GeneratePost implements GenerateNode
 		$content .= "layout: " . $this->properties['layout'] . "\n";		
 		$content .= "title: " . $this->properties['title'] . "\n";
 		$content .= "date: " . Date('Y-m-d') . "\n";
+		$content .= "dateFormat: 'F d, Y' \n"; // default ex January 08, 2014
 		$content .= "url: :year/:month/:date/:title \n"; // default, cannot generated from cli
 		$content .= "author: ". $this->properties['author'] ." \n";
 		$content .= "categories: " . implode(',', $this->properties['categories']) . "\n";
