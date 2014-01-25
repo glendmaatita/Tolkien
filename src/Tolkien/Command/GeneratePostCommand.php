@@ -49,7 +49,8 @@ class GeneratePostCommand extends Command
 			'title' => $input->getArgument('title'), 
 			'layout' => $input->getOption('layout'), 
 			'author' => $input->getOption('author'), 
-			'categories' => $categories, 
+			'categories' => $categories,
+			'featuredImage' => ''
 			'body' => 'Body of Content'
 			);
 		$generate = Tolkien::generate($input->getArgument('name'), $properties);

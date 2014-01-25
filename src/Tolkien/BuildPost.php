@@ -165,7 +165,7 @@ class BuildPost implements BuildNode
 			$body = rtrim($body_excerpt[0]) . rtrim($body_excerpt[1]);
 		}
 
-		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $this->defineAuthor($header), $this->defineCategories($header) );
+		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $header['featuredImage'], $this->defineAuthor($header), $this->defineCategories($header) );
 
 		$post->setPublishDate();
 		$post->setUrl();

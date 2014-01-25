@@ -20,8 +20,8 @@ class TolkienBuildAuthorTest extends \PHPUnit_Framework_TestCase
 		$author = new Author($username = 'tolkien', $name = 'Glend Maatita', $email = 'glend@beenarylab.com', $facebook = 'Glend Maatita', $twitter = '@glend_maatita', $github = 'glendmaatita');
 
 
-		$posts[0] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', $author, $categories_1);
-		$posts[1] = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', $author, $categories_2);
+		$posts[0] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', '/assets/featuredimage.jpg', $author, $categories_1);
+		$posts[1] = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', '/assets/featuredimage.jpg', $author, $categories_2);
 
 		$buildAuthor = new BuildAuthor($config, $posts);
 		$buildAuthor->build();

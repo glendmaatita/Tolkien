@@ -28,6 +28,13 @@ class Post extends Node
 	private $categories = array();
 
 	/**
+	 * Featured image for Post
+	 *
+	 * @var String
+	 */
+	private $featuredImage;
+
+	/**
 	 * @var string
 	 */
 	private $excerpt;
@@ -41,13 +48,14 @@ class Post extends Node
 	 * @param Model\Author $author Author of Post
 	 * @param array(Model\Category) Post's Categories
 	 */
-	public function __construct($file, $title, $body, Author $author, $categories = array())
+	public function __construct($file, $title, $body, $featuredImage, Author $author, $categories = array())
 	{
 		$this->file = $file;
 		$this->title = $title;
 		$this->body = $body;
 		$this->author = $author;
 		$this->categories = $categories;
+		$this->featuredImage = $featuredImage;
 	}
 
 	/**
@@ -190,5 +198,26 @@ class Post extends Node
 	public function getExcerpt()
 	{
 		return $this->excerpt;
+	}
+
+	/**
+	 * Set Featured Image
+	 *
+	 * @param string $featuredImage
+	 * @return void
+	 */
+	public function setFeaturedImage($featuredImage)
+	{
+		$this->featuredImage = $featuredImage;
+	}
+
+	/**
+	 * Get featured image
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImage()
+	{
+		return $this->featuredImage;
 	}
 }
