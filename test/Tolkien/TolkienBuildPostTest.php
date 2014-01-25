@@ -82,6 +82,7 @@ class TolkienBuildPostTest extends \PHPUnit_Framework_TestCase
 			'type' => $type,
 			'layout' => 'post',
 			'author' => 'tolkien',
+			'url' => ':year/:month/:date/:title',
 			'categories' => array('category1'),
 			'featuredImage' => '',
 			'body' => 'Body of Content'

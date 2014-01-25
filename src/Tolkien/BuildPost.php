@@ -168,7 +168,7 @@ class BuildPost implements BuildNode
 		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $header['featuredImage'], $this->defineAuthor($header), $this->defineCategories($header) );
 
 		$post->setPublishDate();
-		$post->setUrl();
+		$post->setUrl($header['url'], $header['date']);
 		$post->setLayout($header['layout']);
 		$post->setPath($path);
 

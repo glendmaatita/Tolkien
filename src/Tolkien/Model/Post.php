@@ -161,13 +161,24 @@ class Post extends Node
 
 	/**
 	 * Set URL to Post
-	 * URL must be year/month/date/post_name.html
-	 * 
+	 *
+	 * URL format is set in post file, with such variable that can be used
+	 * :date, :month, :year -> taken from date section
+	 * :title -> title of file, taken from filename
+	 *
 	 * @return void
 	 */
-	public function setUrl()
+	public function setUrl($dateFormat, $date)
 	{
-		$this->url = '/' . implode('/', explode('-', $this->getFileName(), 4)) . '.html';
+		// $this->url = '/' . implode('/', explode('-', $this->getFileName(), 4)) . '.html';
+
+		$year = date('Y', strtotime($date));
+		$month = date('m', strtotime($date));
+		$day = date('d', strtotime($date));
+		$title = explode('-', $this->getFileName(), 4);
+
+		// replacing variable in the comment above with proper value
+		$this->url = '/' . str_replace(array(':date', ':month', ':year', ':title'), array($day, $month, $year, $title[3] . '.html'), $dateFormat);
 	}
 
 	/**

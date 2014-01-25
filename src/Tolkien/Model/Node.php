@@ -114,7 +114,7 @@ abstract class Node
 	 * Set URL for Node
 	 *
 	 */
-	abstract public function setUrl();
+	// abstract public function setUrl();
 
 	/**
 	 * Get URL of Node
