@@ -176,7 +176,7 @@ class Post extends Node
 	 * @param string $date
 	 * @return void
 	 */
-	public function setUrl($urlFormat, $date)
+	public function setUrl($date, $urlFormat = ':year/:month/:date/:title')
 	{
 		// $this->url = '/' . implode('/', explode('-', $this->getFileName(), 4)) . '.html';
 
