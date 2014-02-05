@@ -18,7 +18,11 @@ class CompileCommand extends Command
 					)
 				->addOption(
 					'with-draft', null, InputOption::VALUE_NONE, 'If set, draft posts & pages will be compiled'
-					);
+					)
+				->addOption(
+					'with-pagination', null, InputOption::VALUE_NONE, 'If set, pages will rendered using paginations variable'
+					)
+				;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
@@ -27,9 +31,14 @@ class CompileCommand extends Command
 			$with_draft = true;
 		else
 			$with_draft = false;
+
+		if($input->getOption('with-pagination'))
+			$with_pagination = true;
+		else
+			$with_pagination = false;		
 		
 		$output->writeln('<info>Compiling Site ... </info>');
-		Tolkien::compile($input->getArgument('name'), $with_draft);
+		Tolkien::compile($input->getArgument('name'), $with_draft, $with_pagination);
 		$output->writeln('<info>Successfully generate static web files. You can find them on <comment>_sites</comment> folder');
 	}
 }

@@ -23,17 +23,23 @@ class CompileSite
 	private $twig;
 
 	/**
+	 * @var Boolean $with_pagination
+	 */
+	private $with_pagination;
+
+	/**
 	 * Construct
 	 *
 	 * @param Tolkien\Model\Site $site
 	 * @param array $config
 	 * @param Twig_Environment $twig
 	 */
-	public function __construct($site, $config, $twig)
+	public function __construct($site, $config, $twig, $with_pagination = false)
 	{
 		$this->site = $site;
 		$this->config = $config;
 		$this->twig = $twig;
+		$this->with_pagination = $with_pagination;
 	}
 
 	/**
@@ -48,7 +54,8 @@ class CompileSite
 		$this->compilePages();
 		$this->compileCategories();
 		$this->compileAssets();
-		$this->compilePaginations();
+		// compile pagination if with pagination is true
+		if($this->with_pagination) $this->compilePaginations(); 
 		$this->compileAuthors();
 	}
 
@@ -73,7 +80,7 @@ class CompileSite
 	 * @return void
 	 */
 	public function compilePages()
-	{		
+	{
 		foreach ($this->site->getPages() as $page)
 		{			
 			$template = $this->twig->loadTemplate( $page->getLayout() . '.html.tpl');
@@ -91,11 +98,20 @@ class CompileSite
 	{
 		foreach ($this->site->getCategories() as $category) 
 		{
-			foreach ($category->getPaginations() as $cpagination) 
+			if($this->with_pagination)
+			{
+				foreach ($category->getPaginations() as $cpagination)
+				{
+					$template = $this->twig->loadTemplate( 'category.html.tpl' );
+					$content = $template->render(array('site' => $this->site, 'cpagination' => $cpagination));
+					$this->createFile($content, $cpagination);
+				}
+			}			
+			else
 			{
 				$template = $this->twig->loadTemplate( 'category.html.tpl' );
-				$content = $template->render(array('site' => $this->site, 'cpagination' => $cpagination));
-				$this->createFile($content, $cpagination);
+				$content = $template->render(array('site' => $this->site, 'category' => $category));
+				$this->createFile($content, $category);
 			}
 		}
 	}
