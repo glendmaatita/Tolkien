@@ -3,12 +3,16 @@
 use Tolkien\Model\Post;
 use Tolkien\Model\Author;
 use Tolkien\Model\Category;
+use Symfony\Component\Yaml\Parser;
 
 class TolkienBuildCategoryTest extends \PHPUnit_Framework_TestCase
 {
 
 	public function testBuildCategory()
 	{
+		$parser = new Parser();
+		$config = $parser->parse(file_get_contents( ROOT_DIR . 'config.yml') );
+
 		$categories_1 = array(new Category('News'), new Category('Tutorial') );
 		$categories_2 = array(new Category('nEwS'), new Category('My Tutorial') );
 
@@ -18,10 +22,12 @@ class TolkienBuildCategoryTest extends \PHPUnit_Framework_TestCase
 		$posts[0] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', '/assets/featured_image.png', $author, $categories_1);
 		$posts[1] = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', '/assets/featured_image.png', $author, $categories_2);
 
-		$buildCategory = new BuildCategory($posts);
+		$buildCategory = new BuildCategory($config, $posts);
 		$buildCategory->build();
 
 		$categories = $buildCategory->getNodes();
+		// check if categories has paginations
+		$this->assertTrue(is_array($categories['news']->getPaginations()));
 
 		$this->assertTrue(is_array($categories));
 		$this->assertEquals( count($categories), 3 );
