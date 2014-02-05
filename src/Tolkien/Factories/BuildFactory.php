@@ -125,7 +125,7 @@ class BuildFactory
 	{
 		$buildPost = $this->getBuildPost();
 		$buildPost->build();
-		return new BuildCategory($buildPost->getNodes());
+		return new BuildCategory($this->config, $buildPost->getNodes());
 	}
 
 	/**

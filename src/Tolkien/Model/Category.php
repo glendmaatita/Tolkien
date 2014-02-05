@@ -19,15 +19,21 @@ class Category
 	private $posts = array();
 
 	/**
+	 * @var array(Model\Pagination) Pagination
+	 */
+	private $paginations;
+
+	/**
 	 * Construct
 	 *
 	 * @param string $name
 	 * @param array(Tolkien\Model\Post) $posts
 	 */
-	public function __construct($name = '', $posts = array())
+	public function __construct($name = '', $posts = array(), $paginations = array())
 	{
 		$this->name = $name;
 		$this->posts = $posts;
+		$this->paginations = $paginations;
 		$this->setUrl();
 	}
 
@@ -40,7 +46,7 @@ class Category
 	{
 		$name = preg_replace("/[^a-zA-Z0-9]+/", " ", $this->getName());
 		$name = preg_replace('!\s+!', ' ', trim($name));
-		$this->url = '/categories/' . str_replace(" ", "-", strtolower($name)) . '.html';
+		$this->url = '/categories/' . $this->getFormattedName($name) . '.html';
 	}
 
 	/**
@@ -101,5 +107,37 @@ class Category
 	public function getName()
 	{
 		return $this->name;
+	}
+
+	/**
+	 * set site's paginations
+	 *
+	 * @param array(Model\Pagination)
+	 */
+	public function setPaginations($paginations)
+	{
+		$this->paginations = $paginations;
+	}
+
+	/**
+	 * Get all site's paginations
+	 *
+	 * @return array(Model\Pagination)
+	 */
+	public function getPaginations()
+	{
+		return $this->paginations;
+	}
+
+	/**
+	 * Get name properly for category's URL
+	 * Category with name 'PHP Notes' will have URl : php-notes
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	public function getFormattedName($name)
+	{
+		return str_replace(" ", "-", strtolower($name));
 	}
 }
