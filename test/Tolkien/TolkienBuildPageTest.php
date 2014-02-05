@@ -73,9 +73,6 @@ class TolkienBuildPageTest extends \PHPUnit_Framework_TestCase
 			'title' => $title,
 			'type' => $type,
 			'layout' => 'page',
-			'author' => 'tolkien',
-			'categories' => array('category1'),
-			'featuredImage' => '',
 			'body' => 'Body of Content'
 			);
 	}

@@ -103,7 +103,7 @@ class CompileSite
 				foreach ($category->getPaginations() as $cpagination)
 				{
 					$template = $this->twig->loadTemplate( 'category.html.tpl' );
-					$content = $template->render(array('site' => $this->site, 'cpagination' => $cpagination));
+					$content = $template->render(array('site' => $this->site, 'category' => $category, 'cpagination' => $cpagination));
 					$this->createFile($content, $cpagination);
 				}
 			}			

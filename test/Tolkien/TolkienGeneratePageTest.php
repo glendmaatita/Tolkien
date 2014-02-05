@@ -18,7 +18,7 @@ class TolkienGeneratePageTest extends \PHPUnit_Framework_TestCase
 		$parser = new Parser();
 		$config = $parser->parse(file_get_contents( ROOT_DIR . '/config.yml' ));
 
-		$page = new GeneratePage( $config, $this->prepareProperties( "About Us" ) );
+		$page = new GeneratePage( $config, $this->prepareProperties( "Index" ) );
 
 		$page->generate();
 
@@ -33,17 +33,8 @@ class TolkienGeneratePageTest extends \PHPUnit_Framework_TestCase
 	{
 		return array(
 			'title' => $title,
-			'type' => 'post',
-			'layout' => 'post',
-			'author' => array(
-				'name' => 'Your Name',
-				'email' => 'Your Email',
-				'facebook' => 'Your Facebook',
-				'twitter' => 'Your Twitter',
-				'github' => 'Your Github',
-				'signature' => 'Your Signature',			
-				),
-			'categories' => array('category1'),
+			'type' => 'page',
+			'layout' => 'index',
 			'body' => 'Body of Content'
 			);
 	}
