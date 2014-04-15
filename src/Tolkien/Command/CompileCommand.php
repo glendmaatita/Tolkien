@@ -22,7 +22,12 @@ class CompileCommand extends Command
 				->addOption(
 					'with-pagination', null, InputOption::VALUE_NONE, 'If set, pages will rendered using paginations variable'
 					)
-				;
+				->addOption(
+					'with-sitemap-send', null, InputOption::VALUE_NONE, 'If set, Tolkien will generate sitemap and send to search engines'
+					)
+				->addOption(
+					'with-sitemap', null, InputOption::VALUE_NONE, 'If set, Tolkien will generate sitemap of the web'
+					);
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
@@ -35,10 +40,21 @@ class CompileCommand extends Command
 		if($input->getOption('with-pagination'))
 			$with_pagination = true;
 		else
-			$with_pagination = false;		
+			$with_pagination = false;
+
+		$sitemap = false;
+		$send = false;
+
+		if($input->getOption('with-sitemap'))
+			$sitemap = true;
+
+		if($input->getOption('with-sitemap-send')){
+			$sitemap = true;
+			$send = true;
+		}
 		
 		$output->writeln('<info>Compiling Site ... </info>');
-		Tolkien::compile($input->getArgument('name'), $with_draft, $with_pagination);
+		Tolkien::compile($input->getArgument('name'), $with_draft, $with_pagination, $sitemap, $send);
 		$output->writeln('<info>Successfully generate static web files. You can find them on <comment>_sites</comment> folder');
 	}
 }
