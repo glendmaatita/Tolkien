@@ -48,7 +48,7 @@ class Post extends Node
 	 * @param Model\Author $author Author of Post
 	 * @param array(Model\Category) Post's Categories
 	 */
-	public function __construct($file, $title, $body, $featuredImage, Author $author, $categories = array())
+	public function __construct($file, $title, $body, $featuredImage, Author $author, $categories = array(), $keywords = '', $summary = '')
 	{
 		$this->file = $file;
 		$this->title = $title;
@@ -56,6 +56,11 @@ class Post extends Node
 		$this->author = $author;
 		$this->categories = $categories;
 		$this->featuredImage = $featuredImage;
+
+		// SEO
+		$this->keywords = $keywords;
+		$this->summary = $summary;
+
 	}
 
 	/**

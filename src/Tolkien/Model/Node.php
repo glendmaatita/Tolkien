@@ -36,6 +36,18 @@ abstract class Node
 	 */
 	protected $path;
 
+		/**
+	 * @var string
+	 * For SEO purpose, defined on meta tag
+	 */
+	protected $keywords;
+
+	/**
+	 * @var string
+	 * For SEO purpose, defined on meta tage
+	 */
+	protected $summary;
+
 	/**
 	 * Get File Name without extension
 	 * example : index.markdown -> index
@@ -164,5 +176,48 @@ abstract class Node
 	public function getPath()
 	{
 		return $this->path;
+	}
+
+
+	/**
+	 * Set Keywords
+	 *
+	 * @param string $keywords
+	 * @return void
+	 */
+	public function setKeywords($keywords)
+	{
+		$this->keywords = $keywords;
+	}
+
+	/**
+	 * Get keywords
+	 *
+	 * @return string
+	 */
+	public function getKeywords()
+	{
+		return $this->keywords;
+	}
+
+	/**
+	 * Set Summary
+	 *
+	 * @param string $summary
+	 * @return void
+	 */
+	public function setSummary($summary)
+	{
+		$this->summary = $summary;
+	}
+
+	/**
+	 * Get summary
+	 *
+	 * @return string
+	 */
+	public function getSummary()
+	{
+		return $this->summary;
 	}
 }

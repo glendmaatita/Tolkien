@@ -56,7 +56,7 @@ class BuildPost implements BuildNode
 	}	
 
 	/**
-	 * Find All file on asset dir and create array of Model\Post
+	 * Find All file on post's dir (_posts/) and create array of Model\Post
 	 *
 	 * @param string $dir
 	 * @return recursive
@@ -94,13 +94,7 @@ class BuildPost implements BuildNode
 	 * layout: __layout__ default is post (_layouts/post.html.tpl). Create your own layout ! 
 	 * title: __your_post_title__
 	 * date: __date__ generated. you should not change this
-	 * author:
-	 *   name: __your_name__
-	 *   email: __your_email__
-	 *   facebook: __your_facebook__
-	 *   twitter: __your_twitter__
-	 *   github: __your_github__
-	 *   signature: __signature__
+	 * author: __author_name__
 	 * categories: __categories__  Semicolon separated, example category_1, category_2, category_3
 	 * ---
  	 *
@@ -174,6 +168,10 @@ class BuildPost implements BuildNode
 
 		if(isset($excerpt))
 			$post->setExcerpt($this->setBody($file, $excerpt));
+
+		// set keywords & summary if exists
+		$post->setKeywords(isset($header['keywords']) ? $header['keywords'] : '');
+		$post->setSummary(isset($header['summary']) ? $header['summary'] : '');
 
 		return $post;
 	}

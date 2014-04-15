@@ -153,6 +153,11 @@ class BuildPage implements BuildNode
 		$page->setLayout($header['layout']);
 		$page->setPath($path);
 
+
+		// set keywords & summary if exists
+		$page->setKeywords(isset($header['keywords']) ? $header['keywords'] : '');
+		$page->setSummary(isset($header['summary']) ? $header['summary'] : '');
+
 		return $page;
 	}
 
