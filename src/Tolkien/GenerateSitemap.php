@@ -71,7 +71,8 @@ class GenerateSitemap {
 			$item->setLoc($this->config['config']['url'] . '/sitemap.image.xml');
 			$item->setLastMod(date(DATE_ATOM, strtotime(date('Y-m-d H:i:s'))) );
 			$sitemap->add($item);
-			$sitemap->write($this->config['dir']['site'] . '/sitemap.index.xml')
+
+			$this->write($sitemap, $this->config['dir']['site'] . '/sitemap.index.xml');
 
 		} catch(SitemapException $e) {
 			echo $e->getMessage();
@@ -90,12 +91,12 @@ class GenerateSitemap {
 		foreach ($pages as $page) 
 		{
 			$item = new UrlItem();
-			$item->setLoc($this->config['config']['url'] . '/' . $page->getUrl());
+			$item->setLoc($this->config['config']['url'] . $page->getUrl());
 			$item->setLastMod(date(DATE_ATOM, strtotime(date('Y-m-d H:i:s'))) );
 
-			$sitemap->add($time);
+			$sitemap->add($item);
 		}
-		$sitemap->write($this->config['dir']['site'] . '/sitemap.page.xml')
+		$this->write($sitemap, 'sitemap.page.xml');
 	}
 
 	/**
@@ -108,9 +109,10 @@ class GenerateSitemap {
 	{
 		$sitemap = new NewsSitemap();
 		foreach ($posts as $post) {
-			$item->setLoc($this->config['config']['url'] . '/' . $post->getUrl());
+			$item = new NewsItem;
+			$item->setLoc($this->config['config']['url'] . $post->getUrl());
 			$item->setTitle($post->getTitle());
-			$item->setPublicationDate($post->getPublishDate());
+			$item->setPublicationDate(date('Y-m-d', strtotime($post->getPublishDate())));
 			$item->setPublicationName('Blog of Kampus.co.id');
 			$item->setPublicationLanguage('id');
 
@@ -120,6 +122,7 @@ class GenerateSitemap {
 
 			// set categories as genres
 			$categories = array();
+			$categories[] = 'Blog';
 			foreach ($post->getCategories() as $category) {
 				$categories[] = $category->getName();
 			}
@@ -128,7 +131,7 @@ class GenerateSitemap {
 			// add to sitemap
 			$sitemap->add($item);
 		}
-		$sitemap->write($this->config['dir']['site'] . '/sitemap.post.xml')
+		$this->write($sitemap, 'sitemap.post.xml');
 	}
 
 	/**
@@ -142,12 +145,12 @@ class GenerateSitemap {
 		$sitemap = new Sitemap;
 		foreach ($categories as $category) {
 			$item = new UrlItem;
-			$item->setLoc($this->config['config']['url'] . '/' . $category->getUrl());
+			$item->setLoc($this->config['config']['url'] . $category->getUrl());
 			$item->setLastMod(date(DATE_ATOM, strtotime(date('Y-m-d H:i:s'))) );
 
 			$sitemap->add($item);
 		}
-		$sitemap->write($this->config['dir']['site'] . '/sitemap.category.xml')
+		$this->write($sitemap, 'sitemap.category.xml');
 	}
 
 	/**
@@ -169,7 +172,7 @@ class GenerateSitemap {
 				$sitemap->add($item, $this->config['config']['url']);
 			}
 		}
-		$sitemap->write($this->config['dir']['site'] . '/sitemap.image.xml')
+		$this->write($sitemap, 'sitemap.image.xml');
 	}
 
 	/**
@@ -179,7 +182,14 @@ class GenerateSitemap {
 	 */
 	public function send()
 	{
-		$status = SubmitSitemap::send('http://example.com/sitemap-index.xml');
+		$status = SubmitSitemap::send($this->config['config']['url'] . '/sitemap-index.xml');
 		return $status['google'] && $status['bing'];
+	}
+
+	public function write($sitemap, $name)
+	{
+		$files = $sitemap->build();
+		if(!empty($files))
+			$sitemap->write($this->config['dir']['site'], $name);
 	}
 }

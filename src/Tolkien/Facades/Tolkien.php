@@ -3,6 +3,7 @@
 use Tolkien\Factories\BuildFactory;
 use Tolkien\Factories\GenerateFactory;
 use Tolkien\CompileSite;
+use Tolkien\GenerateSitemap;
 use Symfony\Component\Yaml\Parser;
 
 /**
@@ -79,6 +80,13 @@ class Tolkien
 
 		$compiler = new CompileSite($site, $config, $twig, $with_pagination);
 		$compiler->compile();
+
+		// generate sitemap
+		$sitemap_generator = new GenerateSitemap($site, $config);
+		if($sitemap)
+			$sitemap_generator->generate();
+		if($send_sitemap)
+			$sitemap_generator->send(); // send to search engine 
 	}
 
 	/**
