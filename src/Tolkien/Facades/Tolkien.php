@@ -4,6 +4,7 @@ use Tolkien\Factories\BuildFactory;
 use Tolkien\Factories\GenerateFactory;
 use Tolkien\CompileSite;
 use Tolkien\GenerateSitemap;
+use Tolkien\GenerateRss;
 use Symfony\Component\Yaml\Parser;
 
 /**
@@ -65,7 +66,7 @@ class Tolkien
 	 * @param string $name
 	 * @return void
 	 */
-	public static function compile($name, $with_draft = false, $with_pagination = false, $sitemap = false, $send_sitemap = false)
+	public static function compile($name, $with_draft = false, $with_pagination = false, $sitemap = false, $send_sitemap = false, $rss = false)
 	{
 		$factory = new BuildFactory(self::config($name), 'site', $with_draft);
 		$buildSite = $factory->build();
@@ -87,6 +88,12 @@ class Tolkien
 			$sitemap_generator->generate();
 		if($send_sitemap)
 			$sitemap_generator->send(); // send to search engine 
+
+		if($rss)
+		{
+			$rss_generator = new GenerateRss($site, $config);
+			$rss_generator->generate();
+		}
 	}
 
 	/**
