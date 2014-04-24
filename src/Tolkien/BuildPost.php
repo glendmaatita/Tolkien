@@ -158,8 +158,8 @@ class BuildPost implements BuildNode
 			$excerpt = rtrim($body_excerpt[0]);
 			$body = rtrim($body_excerpt[0]) . rtrim($body_excerpt[1]);
 		}
-
-		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $header['featuredImage'], $this->defineAuthor($header), $this->defineCategories($header) );
+		
+		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $this->defineFeaturedImage($header['featuredImage']), $this->defineAuthor($header), $this->defineCategories($header) );
 
 		$post->setPublishDate($header['dateFormat']);
 		$post->setUrl($header['date'], $header['url']);
@@ -170,7 +170,7 @@ class BuildPost implements BuildNode
 			$post->setExcerpt($this->setBody($file, $excerpt));
 
 		// set keywords & summary if exists
-		$post->setKeywords(isset($header['keywords']) ? $header['keywords'] : '');
+		$post->setKeywords(isset($header['keywords']) ? explode(',', $header['keywords']) : '');
 		$post->setSummary(isset($header['summary']) ? $header['summary'] : '');
 
 		return $post;
@@ -218,6 +218,45 @@ class BuildPost implements BuildNode
 			$categories[] = new Category(trim($category));
 		}
 		return $categories;
+	}
+
+	/**
+	 * Create some version of featured image : Original size, large, medium, small
+	 * 
+	 * @param array
+	 * @return array
+	 */
+	public function defineFeaturedImage($featured)
+	{	
+		$featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => '');
+		$featuredImage['original'] = $featured['file'];
+
+		// create large size : resize then crop
+		if(isset($featured['large']))
+		{
+			$size = explode('x', $featured['large']);
+			$featuredImage['large'] = $this->restructureImage($featured['file'], $size, $featured['file'] . '_large');	
+		}		
+
+		// create medium size : resize then crop
+		if(isset($featured['large']))
+		{
+			$size = explode('x', $featured['medium']);
+			$featuredImage['medium'] = $this->restructureImage($featured['file'], $size, $featured['file'] . '_medium');
+		}
+
+		// create small size : resize then crop
+		if(isset($featured['large']))
+		{
+			$size = explode('x', $featured['small']);
+			$featuredImage['small'] = $this->restructureImage($featured['file'], $size, $featured['file'] . '_small');
+		}
+		return $featuredImage;
+	}
+
+	public function restructureImage($file, $size = array(), $name = '')
+	{
+		Image::make($this->config['dir']['asset'] . $featured['file'])->resize($size[0], $size[1])->crop($size[0], $size[1], 0, 0)->save($name);
 	}
 
 	/**

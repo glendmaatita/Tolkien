@@ -28,11 +28,32 @@ class Post extends Node
 	private $categories = array();
 
 	/**
-	 * Featured image for Post
+	 * Featured image for Post with original size
 	 *
 	 * @var String
 	 */
 	private $featuredImage;
+
+	/**
+	 * Featured image for Post with large size
+	 *
+	 * @var String
+	 */
+	private $featuredImageLarge;
+
+	/**
+	 * Featured image for Post with medium size
+	 *
+	 * @var String
+	 */
+	private $featuredImageMedium;
+
+	/**
+	 * Featured image for Post with small size
+	 *
+	 * @var String
+	 */
+	private $featuredImageSmall;
 
 	/**
 	 * @var string
@@ -48,14 +69,18 @@ class Post extends Node
 	 * @param Model\Author $author Author of Post
 	 * @param array(Model\Category) Post's Categories
 	 */
-	public function __construct($file, $title, $body, $featuredImage, Author $author, $categories = array(), $keywords = '', $summary = '')
+	public function __construct($file, $title, $body, $featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => ''), Author $author, $categories = array(), $keywords = array(), $summary = '')
 	{
 		$this->file = $file;
 		$this->title = $title;
 		$this->body = $body;
 		$this->author = $author;
 		$this->categories = $categories;
-		$this->featuredImage = $featuredImage;
+		
+		$this->featuredImage = $featuredImage['original'];
+		$this->featuredImageLarge = $featuredImage['large'];
+		$this->featuredImageMedium = $featuredImage['medium'];
+		$this->featuredImageSmall = $featuredImage['small'];
 
 		// SEO
 		$this->keywords = $keywords;
@@ -244,5 +269,68 @@ class Post extends Node
 	public function getFeaturedImage()
 	{
 		return $this->featuredImage;
+	}
+
+	/**
+	 * Set Featured Image large size
+	 *
+	 * @param string $featuredImageLarge
+	 * @return void
+	 */
+	public function setFeaturedImageLarge($featuredImageLarge)
+	{
+		$this->featuredImageLarge = $featuredImageLarge;
+	}
+
+	/**
+	 * Get featured image large size
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImageLarge()
+	{
+		return $this->featuredImageLarge;
+	}
+
+	/**
+	 * Set Featured Image medium size
+	 *
+	 * @param string $featuredImageMedium
+	 * @return void
+	 */
+	public function setFeaturedImageMedium($featuredImageMedium)
+	{
+		$this->featuredImageMedium = $featuredImageMedium;
+	}
+
+	/**
+	 * Get featured image medium size
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImageMedium()
+	{
+		return $this->featuredImageMedium;
+	}
+
+	/**
+	 * Set Featured Image small size
+	 *
+	 * @param string $featuredImageSmall
+	 * @return void
+	 */
+	public function setFeaturedImageSmall($featuredImageSmall)
+	{
+		$this->featuredImageSmall = $featuredImageSmall;
+	}
+
+	/**
+	 * Get featured image small size
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImageSmall()
+	{
+		return $this->featuredImageSmall;
 	}
 }

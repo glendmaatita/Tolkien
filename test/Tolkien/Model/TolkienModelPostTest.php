@@ -9,7 +9,7 @@ class TolkienModelPostTest extends \PHPUnit_Framework_TestCase
 
 		$categories = array(new Category($name = 'News'), new Category($name = 'Tutorial') );
 
-		$post = new Post($file = '2013-08-09-learn-kohana.markdown', $title = 'How to learn Kohana', $body = 'Example Body', $featuredImage = '', $author, $categories);
+		$post = new Post($file = '2013-08-09-learn-kohana.markdown', $title = 'How to learn Kohana', $body = 'Example Body', $featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => ''), $author, $categories);
 
 		$this->assertClassHasAttribute('file', 'Tolkien\Model\Post');
 		$this->assertClassHasAttribute('title', 'Tolkien\Model\Post');

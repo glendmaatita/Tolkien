@@ -155,7 +155,7 @@ class BuildPage implements BuildNode
 
 
 		// set keywords & summary if exists
-		$page->setKeywords(isset($header['keywords']) ? $header['keywords'] : '');
+		$page->setKeywords(isset($header['keywords']) ? explode(',', $header['keywords']) : '');
 		$page->setSummary(isset($header['summary']) ? $header['summary'] : '');
 
 		return $page;

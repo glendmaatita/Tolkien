@@ -36,10 +36,10 @@ class TolkienCompileSiteTest extends \PHPUnit_Framework_TestCase
 		$author = new Author('Glend Maatita', 'glend@beenarylab.com', 'Glend Maatita', '@glend_maatita', 'glendmaatita');
 		$categories = array(new Category('News'), new Category('Tutorial') );
 
-		$post_1 = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', '/assets/featured_image.png', $author, $categories);
+		$post_1 = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', array('original' => '/assets/featuredimage.jpg', 'large' => '', 'medium' => '', 'small' => ''), $author, $categories);
 		$post_1->setLayout('post');
 		$post_1->setUrl(':year/:month/:date/:title', '2013-08-09');
-		$post_2 = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', '/assets/featured_image.png', $author, $categories);
+		$post_2 = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', array('original' => '/assets/featuredimage.jpg', 'large' => '', 'medium' => '', 'small' => ''), $author, $categories);
 		$post_2->setLayout('post');
 		$post_2->setUrl(':year/:month/:date/:title', '2013-06-19');
 		$posts = array($post_1, $post_2);

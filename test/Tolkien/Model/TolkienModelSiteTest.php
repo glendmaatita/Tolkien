@@ -18,8 +18,8 @@ class TolkienModelSiteTest extends \PHPUnit_Framework_TestCase
 		$author = new Author('Glend Maatita', 'glend@beenarylab.com', 'Glend Maatita', '@glend_maatita', 'glendmaatita');
 		$categories = array(new Category('News'), new Category('Tutorial') );
 
-		$posts[] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', $featuredImage = '', $author, $categories);
-		$posts[] = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', $featuredImage = '', $author, $categories);
+		$posts[] = new Post('2013-08-09-learn-kohana.markdown', 'How to learn Kohana', 'Example Body', $featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => ''), $author, $categories);
+		$posts[] = new Post('2013-06-19-rails-tuts.markdown', 'Rails Tutorial', 'Example Body', $featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => ''), $author, $categories);
 
 		$paginations[] = new Pagination(1, 'http://example.org/', $posts, $posts[0], $posts[1]);
 		$paginations[] = new Pagination(1, 'http://example.org/', $posts, $posts[0], $posts[1]);

@@ -37,7 +37,7 @@ abstract class Node
 	protected $path;
 
 		/**
-	 * @var string
+	 * @var array
 	 * For SEO purpose, defined on meta tag
 	 */
 	protected $keywords;
