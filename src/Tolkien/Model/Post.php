@@ -210,9 +210,9 @@ class Post extends Node
 	{
 		// $this->url = '/' . implode('/', explode('-', $this->getFileName(), 4)) . '.html';
 
-		$year = date('Y', strtotime($date));
-		$month = date('m', strtotime($date));
-		$day = date('d', strtotime($date));
+		$year = date('Y', $date);
+		$month = date('m', $date);
+		$day = date('d', $date);
 		$title = explode('-', $this->getFileName(), 4);
 
 		// replacing variable in the comment above with proper value
