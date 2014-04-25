@@ -266,7 +266,8 @@ class BuildPost implements BuildNode
 		}
 
 		// create image with certain size. CROP first & then resize
-		Image::make($path)->crop($size[0], $size[1], 0, 0)->resize($size[0], $size[1])->save(dirname($path) . '/' . $file_save);
+		// Image::make($path)->crop($size[0], $size[1], 0, 0)->resize($size[0], $size[1])->save(dirname($path) . '/' . $file_save);
+		Image::make($path)->grab($size[0], $size[1])->save(dirname($path) . '/' . $file_save);
 		return $filename;
 	}
 
