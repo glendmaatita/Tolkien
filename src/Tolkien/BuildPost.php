@@ -5,6 +5,7 @@ use Tolkien\Model\Author;
 use Tolkien\Model\Category;
 use Michelf\Markdown;
 use Symfony\Component\Yaml\Parser;
+use Intervention\Image\Image;
 
 /**
  * Extract Meta data from post file under _posts/
@@ -162,7 +163,10 @@ class BuildPost implements BuildNode
 		$post = new Post( $file, $header['title'], $this->setBody($file, $body), $this->defineFeaturedImage($header['featuredImage']), $this->defineAuthor($header), $this->defineCategories($header) );
 
 		$post->setPublishDate($header['dateFormat']);
-		$post->setUrl($header['date'], $header['url']);
+		// set URL. if url format not defined, use default url format :year/:month/:day/:title
+		if(isset($header['url'])) $post->setUrl($header['date'], $header['url']);
+		else $post->setUrl($header['date']);
+		
 		$post->setLayout($header['layout']);
 		$post->setPath($path);
 
@@ -231,32 +235,39 @@ class BuildPost implements BuildNode
 		$featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => '');
 		$featuredImage['original'] = $featured['file'];
 
-		// create large size : resize then crop
-		if(isset($featured['large']))
-		{
-			$size = explode('x', $featured['large']);
-			$featuredImage['large'] = $this->restructureImage($featured['file'], $size, $featured['file'] . '_large');	
-		}		
-
-		// create medium size : resize then crop
-		if(isset($featured['large']))
-		{
-			$size = explode('x', $featured['medium']);
-			$featuredImage['medium'] = $this->restructureImage($featured['file'], $size, $featured['file'] . '_medium');
-		}
-
-		// create small size : resize then crop
-		if(isset($featured['large']))
-		{
-			$size = explode('x', $featured['small']);
-			$featuredImage['small'] = $this->restructureImage($featured['file'], $size, $featured['file'] . '_small');
+		foreach (array('large', 'medium', 'small') as $s) {
+			if(isset($featured[$s]))
+			{
+				$size = explode('x', $featured[$s]);
+				$featuredImage[$s] = $this->restructureImage($featured['file'], $size, $s);	
+			}
 		}
 		return $featuredImage;
 	}
 
-	public function restructureImage($file, $size = array(), $name = '')
+	/**
+	 * Create an image with certain size
+	 *
+	 * @param string $file
+	 * @param array $size
+	 * @type string $type
+	 *
+	 * @return string
+	 */
+	public function restructureImage($file = '', $size = array(), $type = 'large')
 	{
-		Image::make($this->config['dir']['asset'] . $featured['file'])->resize($size[0], $size[1])->crop($size[0], $size[1], 0, 0)->save($name);
+		$path = $this->config['dir']['asset'] . $file; // get absoulute path of the file
+		$file_save = $type . '_' . basename($file); // get filename to be save
+		$filename = str_replace(basename($file), $file_save, $file); // get path of saved file
+
+		// crate dir on absolute path if not exist
+		if (!is_dir( dirname($path) )) {			
+			mkdir(dirname($path), 0777, true);
+		}
+
+		// create image with certain size. CROP first & then resize
+		Image::make($path)->crop($size[0], $size[1], 0, 0)->resize($size[0], $size[1])->save(dirname($path) . '/' . $file_save);
+		return $filename;
 	}
 
 	/**
