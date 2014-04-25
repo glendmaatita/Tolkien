@@ -5,7 +5,6 @@ use Tolkien\Model\Author;
 use Tolkien\Model\Category;
 use Michelf\Markdown;
 use Symfony\Component\Yaml\Parser;
-use Intervention\Image\Image;
 
 /**
  * Extract Meta data from post file under _posts/
@@ -169,6 +168,7 @@ class BuildPost implements BuildNode
 		
 		$post->setLayout($header['layout']);
 		$post->setPath($path);
+		$post->setFeaturedImageSize($header['featuredImage']);
 
 		if(isset($excerpt))
 			$post->setExcerpt($this->setBody($file, $excerpt));
@@ -232,43 +232,17 @@ class BuildPost implements BuildNode
 	 */
 	public function defineFeaturedImage($featured)
 	{	
-		$featuredImage = array('original' => '', 'large' => '', 'medium' => '', 'small' => '');
+		$featuredImage = array();
 		$featuredImage['original'] = $featured['file'];
 
 		foreach (array('large', 'medium', 'small') as $s) {
 			if(isset($featured[$s]))
 			{
-				$size = explode('x', $featured[$s]);
-				$featuredImage[$s] = $this->restructureImage($featured['file'], $size, $s);	
+				$filename = str_replace(basename($featured['file']), $s . '_' . basename($featured['file']), $featured['file']); // get path of saved file
+				$featuredImage[$s] = $filename;
 			}
 		}
 		return $featuredImage;
-	}
-
-	/**
-	 * Create an image with certain size
-	 *
-	 * @param string $file
-	 * @param array $size
-	 * @type string $type
-	 *
-	 * @return string
-	 */
-	public function restructureImage($file = '', $size = array(), $type = 'large')
-	{
-		$path = $this->config['dir']['asset'] . $file; // get absoulute path of the file
-		$file_save = $type . '_' . basename($file); // get filename to be save
-		$filename = str_replace(basename($file), $file_save, $file); // get path of saved file
-
-		// crate dir on absolute path if not exist
-		if (!is_dir( dirname($path) )) {			
-			mkdir(dirname($path), 0777, true);
-		}
-
-		// create image with certain size. CROP first & then resize
-		// Image::make($path)->crop($size[0], $size[1], 0, 0)->resize($size[0], $size[1])->save(dirname($path) . '/' . $file_save);
-		Image::make($path)->grab($size[0], $size[1])->save(dirname($path) . '/' . $file_save);
-		return $filename;
 	}
 
 	/**

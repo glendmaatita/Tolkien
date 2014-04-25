@@ -1,5 +1,7 @@
 <?php namespace Tolkien; 
 
+use Intervention\Image\Image;
+
 /**
  * Generate static site from nodes
  * Use Command : tolkien compile
@@ -71,7 +73,59 @@ class CompileSite
 			$template = $this->twig->loadTemplate( $post->getLayout() . '.html.tpl');
 			$content = $template->render(array('site' => $this->site, 'post' => $post ));
 			$this->createFile($content, $post);
+
+			// generate featured image
+			$this->createFeaturedImage($post);
 		}		
+	}
+
+	/**
+	 * Generate featured image for each size
+	 *
+	 * @param Model\Post $post
+	 * @return void
+	 */
+	public function createFeaturedImage($post)
+	{
+		$path = $this->config['dir']['asset'] . $post->getFeaturedImage();
+		$save_path = $this->config['dir']['site'] . $post->getFeaturedImage();
+		// create dir on absolute path if not exist
+		if (!is_dir( dirname($save_path) )) {
+			mkdir(dirname($save_path), 0777, true);
+		}
+
+		// generate image
+		if(null != $post->getFeaturedImageLargeSize()) 
+		{
+			$size = explode('x', $post->getFeaturedImageLargeSize());
+			$this->grabFeaturedImage($path, $size, $save_path, $post->getFeaturedImageLarge());
+		}		
+
+		if(null != $post->getFeaturedImageMediumSize())
+		{
+			$size = explode('x', $post->getFeaturedImageMediumSize());
+			$this->grabFeaturedImage($path, $size, $save_path, $post->getFeaturedImageMedium());
+		}
+
+		if(null != $post->getFeaturedImageSmallSize()) 
+		{			
+			$size = explode('x', $post->getFeaturedImageSmallSize());
+			$this->grabFeaturedImage($path, $size, $save_path, $post->getFeaturedImageSmall());
+		}
+	}
+
+	/**
+	 * Grab image using Image Intevention
+	 *
+	 * @param string $path
+	 * @param array $size (height,width)
+	 * @param string $save_path
+	 * @param string $files_save
+	 * @return void
+	 */
+	public function grabFeaturedImage($path, $size, $save_path, $file_save)
+	{
+		Image::make($path)->grab($size[0], $size[1])->save($this->config['dir']['site'] . $file_save);
 	}
 
 	/**

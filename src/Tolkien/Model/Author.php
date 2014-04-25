@@ -50,6 +50,11 @@ class Author
 	private $url;
 
 	/**
+	 * @var string
+	 */
+	private $avatar;
+
+	/**
 	 * Construct. Name and email is mandatory
 	 *
 	 * @param string $username Author's Code Name
@@ -71,6 +76,7 @@ class Author
 		$this->github = $github;
 		$this->posts = $posts;
 		$this->setUrl();
+		$this->setAvatar();
 	}
 
 	/**
@@ -263,5 +269,26 @@ class Author
 	public function getUrl()
 	{
 		return $this->url;
+	}
+
+	/**
+	 * Set Avatar of the author using gravatar API
+	 *
+	 * @param string $email
+	 * @return string
+	 */
+	public function setAvatar($email)
+	{
+		$this->avatar = 'http://www.gravatar.com/avatar/' . trim(md5(strtolower($this->getEmail())));
+	}
+
+	/**
+	 * Get Avatar of the author using gravatar API
+	 *
+	 * @return string
+	 */
+	public function getAvatar()
+	{
+		return $this->avatar;
 	}
 }

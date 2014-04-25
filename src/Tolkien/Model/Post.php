@@ -56,6 +56,27 @@ class Post extends Node
 	private $featuredImageSmall;
 
 	/**
+	 * Large size of Featured image
+	 *
+	 * @var String
+	 */
+	private $featuredImageLargeSize;
+
+	/**
+	 * Medium size of featured image
+	 *
+	 * @var String
+	 */
+	private $featuredImageMediumSize;
+
+	/**
+	 * Small size of featured image
+	 *
+	 * @var String
+	 */
+	private $featuredImageSmallSize;
+
+	/**
 	 * @var string
 	 */
 	private $excerpt;
@@ -332,5 +353,92 @@ class Post extends Node
 	public function getFeaturedImageSmall()
 	{
 		return $this->featuredImageSmall;
+	}
+
+	/**
+	 * Set Featured Image type based on their size 
+	 *
+	 * @array $size
+	 * @return void
+	 */
+	public function setFeaturedImageSize($size)
+	{
+		if(isset($size['large']))
+		{
+			$this->setFeaturedImageLargeSize($size['large']);	
+		}
+
+		if(isset($size['medium']))
+		{
+			$this->setFeaturedImageMediumSize($size['medium']);
+		}
+
+		if(isset($size['small']))
+		{
+			$this->setFeaturedImageSmallSize($size['small']);	
+		}
+	}
+
+  /**
+	 * Set large size for featured image
+	 *
+	 * @param string $featuredImageLargeSize
+	 * @return void
+	 */
+	public function setFeaturedImageLargeSize($featuredImageLargeSize)
+	{
+		$this->featuredImageLargeSize = $featuredImageLargeSize;
+	}
+
+	/**
+	 * Get large size of featured image
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImageLargeSize()
+	{
+		return $this->featuredImageLargeSize;
+	}
+
+	/**
+	 * Set medium size for featured image
+	 *
+	 * @param string $featuredImageMediumSize
+	 * @return void
+	 */
+	public function setFeaturedImageMediumSize($featuredImageMediumSize)
+	{
+		$this->featuredImageMediumSize = $featuredImageMediumSize;
+	}
+
+	/**
+	 * Get medium size of featured image
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImageMediumSize()
+	{
+		return $this->featuredImageMediumSize;
+	}
+
+	/**
+	 * Set small size for featured image
+	 *
+	 * @param string $featuredImageSmallSize
+	 * @return void
+	 */
+	public function setFeaturedImageSmallSize($featuredImageSmallSize)
+	{
+		$this->featuredImageSmallSize = $featuredImageSmallSize;
+	}
+
+	/**
+	 * Get small size of featured image
+	 *
+	 * @return string
+	 */
+	public function getFeaturedImageSmallSize()
+	{
+		return $this->featuredImageSmallSize;
 	}
 }
