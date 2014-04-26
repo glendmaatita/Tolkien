@@ -76,7 +76,7 @@ class Author
 		$this->github = $github;
 		$this->posts = $posts;
 		$this->setUrl();
-		$this->setAvatar();
+		$this->setAvatar($this->getEmail());
 	}
 
 	/**
