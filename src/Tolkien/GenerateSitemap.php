@@ -182,7 +182,7 @@ class GenerateSitemap {
 	 */
 	public function send()
 	{
-		$status = SubmitSitemap::send($this->config['config']['url'] . '/sitemap-index.xml');
+		$status = SubmitSitemap::send($this->config['config']['url'] . '/sitemap.index.xml');
 		return $status['google'] && $status['bing'];
 	}
 
